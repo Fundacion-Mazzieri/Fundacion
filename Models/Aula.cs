@@ -14,7 +14,10 @@ public partial class Aula
 }
 public class hola { }
 public class espacio { }
-public class otraprueba { }
+public class otraprueba {
+    public string nombre = "gabriel";
+}
+
 
 
 
