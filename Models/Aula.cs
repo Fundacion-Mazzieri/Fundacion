@@ -16,6 +16,7 @@ public class hola { }
 public class espacio { }
 public class otraprueba {
     public string nombre = "gabriel";
+    public string estado = "subiendo la segunda vez soy gabriel";
 }
 
 
