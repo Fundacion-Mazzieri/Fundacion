@@ -13,5 +13,7 @@ public partial class Aula
 
 }
 public class hola { }
+public class espacio { }
+
 
 
