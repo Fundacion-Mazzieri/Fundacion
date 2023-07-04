@@ -7,7 +7,6 @@ public partial class Usuario
 {
     public int UsId { get; set; }
 
-
     public long UsDni { get; set; }
 
     public string UsApellido { get; set; } = null!;
