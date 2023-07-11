@@ -7,17 +7,13 @@ public partial class Aula
 {
     public int AuId { get; set; }
 
-    public byte[] AuDescripcion { get; set; } = null!;
+    public string AuDescripcion { get; set; } = null!;
 
     public virtual ICollection<Espacio> Espacios { get; set; } = new List<Espacio>();
 
 }
-public class hola { }
-public class espacio { }
-public class otraprueba {
-    public string nombre = "gabriel";
-    public string estado = "subiendo la segunda vez soy gabriel";
-}
+
+
 
 
 
