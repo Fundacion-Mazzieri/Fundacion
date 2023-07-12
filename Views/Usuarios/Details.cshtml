@@ -4,74 +4,85 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
     <h4>Usuario</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsDni)
+            @*@Html.DisplayNameFor(model => model.UsDni)*@
+            DNI
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsDni)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsApellido)
+            @*@Html.DisplayNameFor(model => model.UsApellido)*@
+            Apellido
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsApellido)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsNombre)
+            @*@Html.DisplayNameFor(model => model.UsNombre)*@
+            Nombre/s
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsNombre)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsDireccion)
+            @*@Html.DisplayNameFor(model => model.UsDireccion)*@
+            Dirección
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsDireccion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsLocalidad)
+            @*@Html.DisplayNameFor(model => model.UsLocalidad)*@
+            Localidad
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsLocalidad)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsProvincia)
+            @*@Html.DisplayNameFor(model => model.UsProvincia)*@
+            Provincia
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsProvincia)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsEmail)
+            @*@Html.DisplayNameFor(model => model.UsEmail)*@
+            Email
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsEmail)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsTelefono)
+            @*@Html.DisplayNameFor(model => model.UsTelefono)*@
+            Teléfono
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsTelefono)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsContrasena)
+            @*@Html.DisplayNameFor(model => model.UsContrasena)*@
+            Contraseña
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsContrasena)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsActivo)
+            @*@Html.DisplayNameFor(model => model.UsActivo)*@
+            Habilitado / Deshabilitado
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsActivo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ro)
+            @*@Html.DisplayNameFor(model => model.Ro)*@
+            Roles
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Ro.RoId)
@@ -79,6 +90,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.UsId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.UsId">Editar</a> |
+    <a asp-action="Index">Volver</a>
 </div>

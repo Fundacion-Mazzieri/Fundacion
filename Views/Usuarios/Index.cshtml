@@ -4,46 +4,45 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Índice</h1>
 
 <p>
-    <a asp-action="Create">Crear Nuevo Usuario</a>
+    <a asp-action="Create">Crear usuario</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UsDni)
+                @*@Html.DisplayNameFor(model => model.UsApellido)*@
+                Apellido
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsApellido)
+                @*@Html.DisplayNameFor(model => model.UsNombre)*@
+                Nombres
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsNombre)
+                @*@Html.DisplayNameFor(model => model.UsDireccion)*@
+                Dirección
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsDireccion)
+                @*@Html.DisplayNameFor(model => model.UsLocalidad)*@
+                Localidad
+            </th>            
+            <th>
+                @*@Html.DisplayNameFor(model => model.UsEmail)*@
+                Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsLocalidad)
+                @*@Html.DisplayNameFor(model => model.UsTelefono)*@
+                Teléfono
+            </th>            
+            <th>
+                @*@Html.DisplayNameFor(model => model.UsActivo)*@
+                Habilitado / Deshabilitado
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsProvincia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsTelefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsContrasena)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsActivo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ro)
+                @*@Html.DisplayNameFor(model => model.Ro)*@
+                Roles
             </th>
             <th></th>
         </tr>
@@ -51,9 +50,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsDni)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UsApellido)
             </td>
@@ -65,19 +61,13 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UsLocalidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsProvincia)
-            </td>
+            </td>           
             <td>
                 @Html.DisplayFor(modelItem => item.UsEmail)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UsTelefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsContrasena)
-            </td>
+            </td>            
             <td>
                 @Html.DisplayFor(modelItem => item.UsActivo)
             </td>
@@ -85,9 +75,9 @@
                 @Html.DisplayFor(modelItem => item.Ro.RoId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UsId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UsId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UsId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.UsId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.UsId">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.UsId">Eliminar</a>
             </td>
         </tr>
 }

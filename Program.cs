@@ -1,4 +1,4 @@
-using Fundacion.Models;
+using Fundacion.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

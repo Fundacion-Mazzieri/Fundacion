@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Fundacion.Data;
 using Fundacion.Models;
 
 namespace Fundacion.Controllers
@@ -154,14 +155,14 @@ namespace Fundacion.Controllers
             {
                 _context.Usuarios.Remove(usuario);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
         {
-          return (_context.Usuarios?.Any(e => e.UsId == id)).GetValueOrDefault();
+            return (_context.Usuarios?.Any(e => e.UsId == id)).GetValueOrDefault();
         }
     }
 }
