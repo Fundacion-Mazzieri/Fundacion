@@ -48,7 +48,7 @@ namespace Fundacion.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
-            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoId");
+            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoDenominacion");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace Fundacion.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoId", usuario.RoId);
+            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoDenominacion", usuario.RoId);
             return View(usuario);
         }
 
@@ -82,7 +82,7 @@ namespace Fundacion.Controllers
             {
                 return NotFound();
             }
-            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoId", usuario.RoId);
+            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoDenominacion", usuario.RoId);
             return View(usuario);
         }
 
@@ -118,7 +118,7 @@ namespace Fundacion.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoId", usuario.RoId);
+            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoDenominacion", usuario.RoId);
             return View(usuario);
         }
 
@@ -155,14 +155,14 @@ namespace Fundacion.Controllers
             {
                 _context.Usuarios.Remove(usuario);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
         {
-            return (_context.Usuarios?.Any(e => e.UsId == id)).GetValueOrDefault();
+          return (_context.Usuarios?.Any(e => e.UsId == id)).GetValueOrDefault();
         }
     }
 }

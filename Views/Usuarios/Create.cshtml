@@ -1,7 +1,7 @@
 ﻿@model Fundacion.Models.Usuario
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
 
 <h1>Crear</h1>
@@ -18,17 +18,12 @@
                 <span asp-validation-for="UsDni" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UsContrasena" class="control-label">Contraseña</label>
-                <input asp-for="UsContrasena" class="form-control" />
-                <span asp-validation-for="UsContrasena" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="UsApellido" class="control-label">Apellido</label>
                 <input asp-for="UsApellido" class="form-control" />
                 <span asp-validation-for="UsApellido" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UsNombre" class="control-label">Nombre/s</label>
+                <label asp-for="UsNombre" class="control-label">Nombres</label>
                 <input asp-for="UsNombre" class="form-control" />
                 <span asp-validation-for="UsNombre" class="text-danger"></span>
             </div>
@@ -56,18 +51,23 @@
                 <label asp-for="UsTelefono" class="control-label">Teléfono</label>
                 <input asp-for="UsTelefono" class="form-control" />
                 <span asp-validation-for="UsTelefono" class="text-danger"></span>
-            </div>            
+            </div>
             <div class="form-group">
-                <label asp-for="RoId" class="control-label">Roles</label>
+                <label asp-for="UsContrasena" class="control-label">Contraseña</label>
+                <input asp-for="UsContrasena" class="form-control" />
+                <span asp-validation-for="UsContrasena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoId" class="control-label">Rol</label>
                 <select asp-for="RoId" class ="form-control" asp-items="ViewBag.RoId"></select>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="UsActivo" />Habilitado/Deshabilitado
+                    <input class="form-check-input" asp-for="UsActivo" /> Activo
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>

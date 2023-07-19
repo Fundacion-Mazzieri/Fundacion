@@ -1,78 +1,78 @@
 ﻿@model Fundacion.Models.Usuario
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Borrar";
 }
 
-<h1>Delete</h1>
+<h1>Borrar</h1>
 
-<h3>¿Estás seguro que deseas eliminar esto?</h3>
+<h3>Está a punto de eliminar al siguiente usuario ¿Desea continuar?</h3>
 <div>
     <h4>Usuario</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsDni)
+            DNI
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsDni)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsApellido)
+            Apellido
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsApellido)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsNombre)
+            Nombres
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsNombre)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsDireccion)
+            Dirección
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsDireccion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsLocalidad)
+            Localidad
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsLocalidad)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsProvincia)
+            Provincia
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsProvincia)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsEmail)
+            Email
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsEmail)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsTelefono)
+            Teléfono
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsTelefono)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsContrasena)
+            Contraseña
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsContrasena)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsActivo)
+            Activo
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UsActivo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ro)
+            Rol
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Ro.RoId)
@@ -81,7 +81,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="UsId" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <input type="submit" value="Borrar" class="btn btn-danger" /> |
         <a asp-action="Index">Volver</a>
     </form>
 </div>
