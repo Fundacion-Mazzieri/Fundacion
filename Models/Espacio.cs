@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Fundacion.Models;
 
 public partial class Espacio
 {
+    [Key]
     public int EsId { get; set; }
 
     public string EsDescripcion { get; set; } = null!;
@@ -21,17 +23,19 @@ public partial class Espacio
 
     public int UsId { get; set; }
 
-    public string? EsActivo { get; set; }
+    //public string EsActivo { get; set; }
 
-    public int? CaId { get; set; }
+    public bool EsActivo { get; set; }
+
+    public int CaId { get; set; }
 
     public virtual ICollection<Asistencia> Asistencia { get; set; } = new List<Asistencia>();
 
-    public virtual Aula Au { get; set; } = null!;
+    public virtual Aula? Au { get; set; } = null!;
 
     public virtual Categoria? Ca { get; set; }
 
-    public virtual Turno Tu { get; set; } = null!;
+    public virtual Turno? Tu { get; set; } = null!;
 
-    public virtual Usuario Us { get; set; } = null!;
+    public virtual Usuario? Us { get; set; } = null!;
 }
