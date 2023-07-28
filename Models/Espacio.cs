@@ -24,6 +24,7 @@ public partial class Espacio
     public int UsId { get; set; }
 
     //public string EsActivo { get; set; }
+    //string por bool (bin en Base de datos)
 
     public bool EsActivo { get; set; }
 
