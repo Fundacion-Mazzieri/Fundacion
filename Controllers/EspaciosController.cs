@@ -26,7 +26,7 @@ namespace Fundacion.Controllers
             return View(await fundacionContext.ToListAsync());
         }
 
-        // GET: Espacios/Details/5
+        // GET: Espacios/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Espacios == null)
@@ -78,7 +78,7 @@ namespace Fundacion.Controllers
             return View(espacio);
         }
 
-        // GET: Espacios/Edit/5
+        // GET: Espacios/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Espacios == null)
@@ -98,7 +98,7 @@ namespace Fundacion.Controllers
             return View(espacio);
         }
 
-        // POST: Espacios/Edit/5
+        // POST: Espacios/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -137,7 +137,7 @@ namespace Fundacion.Controllers
             return View(espacio);
         }
 
-        // GET: Espacios/Delete/5
+        // GET: Espacios/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Espacios == null)
@@ -159,7 +159,7 @@ namespace Fundacion.Controllers
             return View(espacio);
         }
 
-        // POST: Espacios/Delete/5
+        // POST: Espacios/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
