@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Fundacion.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Listado de Categorías</h1>
+
+<p>
+    <a class="btn btn-success btn-sm" asp-action="Create">Agregar Categoría</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Valor/Hora
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaDescripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaValorHora)
+            </td>
+            <td>
+                <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.CaId">Modificar</a>
+                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.CaId">Detalles</a>
+                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.CaId">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
