@@ -39,7 +39,7 @@ public partial class Espacio
 
     public virtual Usuario? Us { get; set; } = null!;
 }
-=======
+
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
