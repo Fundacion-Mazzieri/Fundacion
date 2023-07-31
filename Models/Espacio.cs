@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -83,4 +82,3 @@ public partial class Espacio
 
     public virtual Usuario? Us { get; set; } = null!;
 }
->>>>>>> 07c077387da82587024c910f3a7b14b4f773f4cc
