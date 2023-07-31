@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Fundacion.Models.Espacio>
+
+@{
+    ViewData["Title"] = "Espacio";
+}
+
+<h1>Espacio</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo Espacio</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.EsDescripcion)*@
+                Descripcion
+            </th>
+            <th>
+                @*Html.DisplayNameFor(model => model.EsDia)*@
+                Espacio Dia
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.EsHora)*@
+                Espacio Hora
+            </th>
+            <th>
+                @*Html.DisplayNameFor(model => model.EsCantHs)*@
+                Cantidad Hora/s
+            </th>
+            <th>
+                @*Html.DisplayNameFor(model => model.EsActivo)*@
+                Activo
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Au)*@
+                Aula
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Ca)*@
+                Categoria
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Tu)*@
+                Turno
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Us)*@
+                Docente
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EsDescripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EsDia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EsHora)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EsCantHs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EsActivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Au.AuDescripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ca.CaDescripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tu.TuDescripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Us.UsNombre) @Html.DisplayFor(modelItem => item.Us.UsApellido)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EsId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.EsId">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EsId">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
