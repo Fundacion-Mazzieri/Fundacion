@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Fundacion.Models.Turno>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Turnos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success btn-sm">Agregar nuevo turno</a>
+</p>
+<table class="table">
+    <thead>
+       
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TuDescripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+
+        
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.TuId)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.TuDescripcion)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.TuId">Modificar</a> |
+                    <a asp-action="Details" class="btn btn-primary btn-sm" asp-route-id="@item.TuId">Detalles</a> |
+                    <a asp-action="Delete" class="btn btn-danger btn-sm" asp-route-id="@item.TuId">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
