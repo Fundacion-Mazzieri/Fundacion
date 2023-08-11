@@ -73,51 +73,51 @@ public partial class FundacionContext : DbContext
             entity.Property(e => e.CaValorHora).HasColumnName("caValorHora");
         });
 
-        modelBuilder.Entity<Espacio>(entity =>
-        {
-            entity.HasKey(e => e.EsId);
+        //modelBuilder.Entity<Espacio>(entity =>
+        //{
+        //    entity.HasKey(e => e.EsId);
 
-            entity.Property(e => e.EsId)
-                .ValueGeneratedNever()
-                .HasColumnName("esId");
-            entity.Property(e => e.AuId).HasColumnName("auId");
-            entity.Property(e => e.CaId).HasColumnName("caId");
-            entity.Property(e => e.EsActivo)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("esActivo");
-            entity.Property(e => e.EsCantHs).HasColumnName("esCantHs");
-            entity.Property(e => e.EsDescripcion)
-                .HasMaxLength(50)
-                .HasColumnName("esDescripcion");
-            entity.Property(e => e.EsDia)
-                .HasMaxLength(10)
-                .HasColumnName("esDia");
-            entity.Property(e => e.EsHora)
-                .HasMaxLength(10)
-                .HasColumnName("esHora");
-            entity.Property(e => e.TuId).HasColumnName("tuId");
-            entity.Property(e => e.UsId).HasColumnName("usId");
+        //    entity.Property(e => e.EsId)
+        //        .ValueGeneratedNever()
+        //        .HasColumnName("esId");
+        //    entity.Property(e => e.AuId).HasColumnName("auId");
+        //    entity.Property(e => e.CaId).HasColumnName("caId");
+        //    entity.Property(e => e.EsActivo)
+        //        .HasMaxLength(10)
+        //        .IsFixedLength()
+        //        .HasColumnName("esActivo");
+        //    entity.Property(e => e.EsCantHs).HasColumnName("esCantHs");
+        //    entity.Property(e => e.EsDescripcion)
+        //        .HasMaxLength(50)
+        //        .HasColumnName("esDescripcion");
+        //    entity.Property(e => e.EsDia)
+        //        .HasMaxLength(10)
+        //        .HasColumnName("esDia");
+        //    entity.Property(e => e.EsHora)
+        //        .HasMaxLength(10)
+        //        .HasColumnName("esHora");
+        //    entity.Property(e => e.TuId).HasColumnName("tuId");
+        //    entity.Property(e => e.UsId).HasColumnName("usId");
 
-            entity.HasOne(d => d.Au).WithMany(p => p.Espacios)
-                .HasForeignKey(d => d.AuId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Espacios_Aulas");
+        //    entity.HasOne(d => d.Au).WithMany(p => p.Espacios)
+        //        .HasForeignKey(d => d.AuId)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        //        .HasConstraintName("FK_Espacios_Aulas");
 
-            entity.HasOne(d => d.Ca).WithMany(p => p.Espacios)
-                .HasForeignKey(d => d.CaId)
-                .HasConstraintName("FK_Espacios_Categorias");
+        //    entity.HasOne(d => d.Ca).WithMany(p => p.Espacios)
+        //        .HasForeignKey(d => d.CaId)
+        //        .HasConstraintName("FK_Espacios_Categorias");
 
-            entity.HasOne(d => d.Tu).WithMany(p => p.Espacios)
-                .HasForeignKey(d => d.TuId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Espacios_Turnos");
+        //    entity.HasOne(d => d.Tu).WithMany(p => p.Espacios)
+        //        .HasForeignKey(d => d.TuId)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        //        .HasConstraintName("FK_Espacios_Turnos");
 
-            entity.HasOne(d => d.Us).WithMany(p => p.Espacios)
-                .HasForeignKey(d => d.UsId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Espacios_Usuarios");
-        });
+        //    entity.HasOne(d => d.Us).WithMany(p => p.Espacios)
+        //        .HasForeignKey(d => d.UsId)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        ////        .HasConstraintName("FK_Espacios_Usuarios");
+        //});
 
         modelBuilder.Entity<Role>(entity =>
         {
