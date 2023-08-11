@@ -15,6 +15,71 @@
             <input type="hidden" asp-for="UsId" />
             <div class="form-group">
                 <label asp-for="UsDni" class="control-label">DNI</label>
+                <input asp-for="UsDni" class="form-control" oninput="limitarDni(this)" required/>
+                <span asp-validation-for="UsDni" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsApellido" class="control-label">Apellido</label>
+                <input asp-for="UsApellido" class="form-control" oninput="limitarTexto(this)"/>
+                <span asp-validation-for="UsApellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsNombre" class="control-label">Nombres</label>
+                <input asp-for="UsNombre" class="form-control" oninput="limitarTexto(this)"/>
+                <span asp-validation-for="UsNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsDireccion" class="control-label">Dirección</label>
+                <input asp-for="UsDireccion" class="form-control" oninput="validarDomicilio(this)" />
+                <span asp-validation-for="UsDireccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsLocalidad" class="control-label">Localidad</label>
+                <input asp-for="UsLocalidad" class="form-control" oninput="limitarTexto(this)" />
+                <span asp-validation-for="UsLocalidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsProvincia" class="control-label">Provincia</label>
+                <input asp-for="UsProvincia" class="form-control" oninput="limitarTexto(this)" />
+                <span asp-validation-for="UsProvincia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsEmail" class="control-label">Email</label>
+                <input type="email" asp-for="UsEmail" class="form-control" oninput="validarEmail(this)" />
+                <span asp-validation-for="UsEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsTelefono" class="control-label">Teléfono</label>
+                <input asp-for="UsTelefono" class="form-control" oninput="validarTelefono(this)" />
+                <span asp-validation-for="UsTelefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsContrasena" class="control-label">Contraseña</label>
+                <input asp-for="UsContrasena" id="contrasena" type="password" class="form-control" maxlength="50" required />
+                <span asp-validation-for="UsContrasena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Reingresar contraseña</label>
+                <input id="reingresoContrasena" type="password" class="form-control" maxlength="50" oninput="validarReingreso(this)" required />
+                <span asp-validation-for="UsContrasena" class="text-danger"></span>
+            </div>          
+            <div class="form-group">
+                <label asp-for="RoId" class="control-label">Rol</label>
+                <select asp-for="RoId" class ="form-control" asp-items="ViewBag.RoId"></select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="UsActivo" /> Activo
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guargar" class="btn btn-primary" />
+            </div>
+@*
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UsId" />
+            <div class="form-group">
+                <label asp-for="UsDni" class="control-label">DNI</label>
                 <input asp-for="UsDni" class="form-control" />
                 <span asp-validation-for="UsDni" class="text-danger"></span>
             </div>
@@ -70,7 +135,7 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Guargar" class="btn btn-primary" />
-            </div>
+            </div>*@
         </form>
     </div>
 </div>
