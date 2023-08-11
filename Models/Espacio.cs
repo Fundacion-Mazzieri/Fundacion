@@ -15,8 +15,9 @@ public partial class Espacio
 
 
     //[Display(Name = "Descripcion")]
-    //[DataType(DataType.MultilineText, ErrorMessage ="Ingrese solo texto")]
-    [Required(ErrorMessage = "Debe ingresar una descripcion del espacio")]
+    [RegularExpression(@"^[a-zA-Z0-9Ññ\s]*$", ErrorMessage = "Caracter especial no aceptado. Complete con letras y/o números.")]
+    [StringLength(50)]
+    [Required(ErrorMessage = "Debe ingresar una descripcion del espacio.")]
     public string EsDescripcion { get; set; } = null!;
 
 
@@ -26,20 +27,21 @@ public partial class Espacio
     //[Display(Name = "Ingrese una fecha")]
     [DataType (DataType.Date)]
     [DisplayFormat (DataFormatString ="{0:YYYY-MM-dd}")]
-    [Required(ErrorMessage = "Debe ingresar una fecha correcta")]
+    [Required(ErrorMessage = "Debe ingresar una fecha correcta.")]
     public string EsDia { get; set; } = null!;
 
 
     //[Display(Name = "Ingrese una hora")]
     [DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = "{00:00}")]
-    [Required(ErrorMessage = "Debes ingresar una hora correcta")]
+    [Required(ErrorMessage = "Debes ingresar una hora correcta.")]
     public string EsHora { get; set; } = null!;
 
 
     //[Display(Name = "Duracion del espacio en minutos")]
-    [Range(maximum: 59, minimum: 01, ErrorMessage ="La duracion del espacio tiene que ser entre 1 y 59 minutos")]
-    [Required(ErrorMessage = "Debes ingresar los minutos de duracion del espacio")]
+    [RegularExpression(@"^[1-9\s]+[0\s]*$", ErrorMessage = "Debes ingresar solo números. Valor 0 no aceptado al inicio.")]
+    [Range(maximum: 59, minimum: 1, ErrorMessage ="La duracion del espacio tiene que ser entre 1 y 59 minutos.")]
+    [Required(ErrorMessage = "Debes ingresar los minutos de duracion del espacio.")]
     public double EsCantHs { get; set; }
 
 
