@@ -15,7 +15,7 @@ public partial class Espacio
 
 
     //[Display(Name = "Descripcion")]
-    [RegularExpression(@"^[a-zA-Z0-9Ññ\s]*$", ErrorMessage = "Caracter especial no aceptado. Complete con letras y/o números.")]
+    [RegularExpression(@"^[A-Za-záéíóúÁÉÍÓÚüÜñÑ0-9\s]+[A-Za-záéíóúÁÉÍÓÚüÜñÑ0-9\s]*$", ErrorMessage = "Caracter especial no aceptado. Complete con letras y/o números.")]
     [StringLength(50)]
     [Required(ErrorMessage = "Debe ingresar una descripcion del espacio.")]
     public string EsDescripcion { get; set; } = null!;
