@@ -1,0 +1,45 @@
+﻿@model Fundacion.Models.Asistencia
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h1>Detalle:</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @* @Html.DisplayNameFor(model => model.AsIngreso)*@
+            Ingreso:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AsIngreso)
+        </dd>
+        <dt class="col-sm-2">
+            @*@Html.DisplayNameFor(model => model.AsEgreso)*@
+            Egreso:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AsEgreso)
+        </dd>
+        <dt class="col-sm-2">
+            @*@Html.DisplayNameFor(model => model.AsPresent)*@
+            Presente:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AsPresent)
+        </dd>
+        <dt class="col-sm-2">
+            @*@Html.DisplayNameFor(model => model.Es)*@
+            Espacio:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Es.EsDescripcion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.AsiId">Editar</a> |
+    <a asp-action="Index">Volver</a>
+</div>
