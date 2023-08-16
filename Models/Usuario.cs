@@ -10,7 +10,7 @@ public partial class Usuario
 {
     public int UsId { get; set; }
     [RegularExpression(@"^[1-9][0-9]*$", ErrorMessage = "Sólo se permiten números de DNI válidos.")]
-    [Display(Name = "Dni")]    
+    [Display(Name = "DNI")]    
     [Range(1000000,99999999, ErrorMessage = "Debe ingresar los 7-8 dígitos del DNI.")]
     [Required(ErrorMessage = "Debe ingresar un número de DNI válido (8 dígitos).")]        
     public long UsDni { get; set; }
@@ -20,12 +20,12 @@ public partial class Usuario
     [Required(ErrorMessage = "Debe ingresar un Apellido")]
     public string UsApellido { get; set; } = null!;
     [RegularExpression(@"^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s]*$", ErrorMessage = "Ingrese un nombre válido.")]
-    [Display(Name = "Nombre")]
+    [Display(Name = "Nombres")]
     [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres.")]
     [Required(ErrorMessage = "Debe ingresar un Nombre.")]
     public string UsNombre { get; set; } = null!;
     [RegularExpression(@"^[A-Za-záéíóúÁÉÍÓÚüÜñÑ0-9\s°/:;,.\-_\+()]+$", ErrorMessage = "Ingrese una dirección válida.")]
-    [Display(Name = "Direccion")]
+    [Display(Name = "Dirección")]
     [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres.")]
     public string? UsDireccion { get; set; }
     [RegularExpression(@"^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s]*$", ErrorMessage ="Ingrese una localidad válida.")]
@@ -41,14 +41,10 @@ public partial class Usuario
     [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres.")]
     public string? UsEmail { get; set; }
     [RegularExpression(@"^[0-9]{10}$", ErrorMessage = "Ingrese un número telefónico válido de 10 dígitos.")]
-    [Display(Name = "Telefono")]
+    [Display(Name = "Teléfono")]
+    
     [Range(1000000000, 9999999999, ErrorMessage = "Ingrese un número telefónico válido sin espacios ni guiones y sin 0 ni 15.")]
-    public long? UsTelefono { get; set; }
-    //[RegularExpression(@"^[0-9]*$", ErrorMessage = "Sólo se permiten números de teléfono válidos.")]
-    //[Display(Name = "Telefono")]
-    //[StringLength(10, ErrorMessage = "No se permiten más de 10 caracteres válidos del número telefónico.")]
-    //[Range(1000000000,9999999999,ErrorMessage = "Ingrese un número telefónico sin espacios ni guiones y sin 0 ni 15.")]
-    //public long? UsTelefono { get; set; }
+    public long? UsTelefono { get; set; }    
     [Display(Name = "Contraseña")]
     [PasswordPropertyText(true)]
     [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d']).+$", ErrorMessage = "La contraseña debe tener al menos una minúscula, una mayúscula, un número y un símbolo.")]
