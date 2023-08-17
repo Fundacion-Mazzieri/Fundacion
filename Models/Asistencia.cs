@@ -13,8 +13,7 @@ public partial class Asistencia
     [DataType(DataType.DateTime)]    
     [Required(ErrorMessage = "Debe ingresar una fecha y hora de ingreso.")]
     public DateTime? AsIngreso { get; set; }
-    [DataType(DataType.DateTime)]
-    [Required(ErrorMessage = "Debe ingresar una fecha y hora de egreso.")]
+    [DataType(DataType.DateTime)]    
     public DateTime? AsEgreso { get; set; }
 
     public bool AsPresent { get; set; }
