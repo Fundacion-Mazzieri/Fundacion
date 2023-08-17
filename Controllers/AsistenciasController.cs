@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using Fundacion.Data;
 using Fundacion.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace Fundacion.Controllers
 {
     public class AsistenciasController : Controller
     {
         private readonly FundacionContext _context;
+        private readonly IConfiguration _configuration;
 
-        public AsistenciasController(FundacionContext context)
+        public AsistenciasController(FundacionContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: Asistencias
@@ -48,7 +51,9 @@ namespace Fundacion.Controllers
 
         // GET: Asistencias/Create
         public IActionResult Create()
-        {
+        {            
+            ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
+            ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
             ViewData["EsId"] = new SelectList(_context.Set<Espacio>(), "EsId", "EsDescripcion");
             return View();
         }
@@ -59,7 +64,7 @@ namespace Fundacion.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AsiId,EsId,AsIngreso,AsEgreso,AsPresent")] Asistencia asistencia)
-        {
+        {            
             if (ModelState.IsValid)
             {
                 _context.Add(asistencia);
@@ -73,6 +78,8 @@ namespace Fundacion.Controllers
         // GET: Asistencias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
+            ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
             if (id == null || _context.Asistencias == null)
             {
                 return NotFound();
