@@ -47,7 +47,7 @@ verificarBtn.addEventListener('click', () => {
                 const longitud = position.coords.longitude;
 
                 //const ubicacionActual = document.getElementById('ubicacionActual');
-                ubicacionMsg.innerHTML = `Ubicación actual: Latitud ${latitud}, Longitud ${longitud}`;
+                //ubicacionMsg.innerHTML = `Ubicación actual: Latitud ${latitud}, Longitud ${longitud}`;
 
                 //const resultado = document.getElementById('resultado');
                 const estaDentroDelRadio = ubicacionDentroDelRadio(latitud, longitud);
@@ -58,7 +58,7 @@ verificarBtn.addEventListener('click', () => {
 
                 if (estaDentroDelRadio) {
                     ubicacionMsg.classList.add('text-danger')
-                    ubicacionMsg.innerHTML = 'Estás dentro de Fundación Mazzieri.';
+                    ubicacionMsg.innerHTML = 'Estás dentro de Fundación Mazzieri';
                     ubicacionMsg.classList.remove('text-danger')
                     selectEspacio.disabled = false;
                     inputIngreso.disabled = false;
@@ -68,7 +68,7 @@ verificarBtn.addEventListener('click', () => {
                     /*marcarSalidaBtn.disabled = false;*/
                 }
                 else {                    
-                    ubicacionMsg.innerHTML += 'Estas lejos de Fundación Mazzieri'
+                    ubicacionMsg.innerHTML += 'Estas demasiado lejos de Fundación Mazzieri!'
                 }
             },
             (error) => {
