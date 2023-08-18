@@ -1,0 +1,49 @@
+﻿@model Fundacion.Models.Asistencia
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear</h1>
+
+<h4>Asistencia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+            <div class="form-group">
+                <label asp-for="EsId" class="control-label">Espacio</label>
+                <select asp-for="EsId" class="form-control" asp-items="ViewBag.EsId"></select>
+            </div>            
+            <div class="form-group">
+                <label asp-for="AsIngreso" class="control-label">Ingreso</label>
+                <input asp-for="AsIngreso" class="form-control"/>
+                <span asp-validation-for="AsIngreso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AsEgreso" class="control-label">Egreso</label>
+                <input asp-for="AsEgreso" class="form-control"/>
+                <span asp-validation-for="AsEgreso" class="text-danger"></span>
+            </div>            
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AsPresent"/> @*@Html.DisplayNameFor(model => model.AsPresent)*@ <p>Presente</p>                    
+                </label>                
+            </div>            
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }   
+}

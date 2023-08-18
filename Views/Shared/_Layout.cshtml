@@ -47,6 +47,9 @@
                         <li class="nav-item login">
                             <a class="nav-link text-black " asp-area="" asp-controller="Inicio" asp-action="Index">Iniciar Sesion</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark visually-hidden" asp-area="" asp-controller="Asistencias" asp-action="Index">Asistencias</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -66,6 +69,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/Geo.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
