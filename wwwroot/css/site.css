@@ -15,4 +15,16 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: ghostwhite;
+}
+
+.img-container{
+    width:auto;
+}
+.img-container img{
+    width:100%;
+}
+
+h2,h1 {
+    font-family: Mukta Mahee,sans-serif;
 }
