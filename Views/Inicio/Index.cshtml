@@ -30,6 +30,9 @@
         height:500px;
         margin-top:20px;
     }
+    h3{
+        cursor:pointer;
+    }
     .row{
         display:grid;
         grid-template-columns:1fr 1fr;
@@ -43,7 +46,9 @@
         width: 100%;
         flex-direction: column; 
         justify-content: center;
-        background-color: #ece8e8;
+        background-color:#d8d8d45c;
+        border-radius:6px;
+        
     }
 
    .col.col1 {
@@ -53,5 +58,7 @@
 
     .col:hover {
         transform: scale(1.05);
+        background-color: #ece8e8;
+        transition:linear 0.2s;
     }
 </style>
