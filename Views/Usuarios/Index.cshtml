@@ -73,9 +73,9 @@
                 @Html.DisplayFor(modelItem => item.Ro.RoDenominacion)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UsId">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.UsId">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.UsId">Borrar</a>
+                    <a class="btn btn-warning btn-sm mb-1" asp-action="Edit" asp-route-id="@item.UsId">Editar</a>
+                    <a class="btn btn-primary btn-sm mb-1" asp-action="Details" asp-route-id="@item.UsId">Detalle</a>
+                    <a class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.UsId">Borrar</a>
             </td>
         </tr>
 }
