@@ -68,7 +68,7 @@ verificarBtn.addEventListener('click', () => {
                     /*marcarSalidaBtn.disabled = false;*/
                 }
                 else {                    
-                    ubicacionMsg.innerHTML += 'Estas demasiado lejos de Fundación Mazzieri!'
+                    ubicacionMsg.innerHTML = 'Estas demasiado lejos de Fundación Mazzieri!'
                 }
             },
             (error) => {

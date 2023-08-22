@@ -51,10 +51,10 @@ namespace Fundacion.Controllers
 
         // GET: Asistencias/Create
         public IActionResult Create()
-        {            
+        {
             ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
             ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
-            ViewData["EsId"] = new SelectList(_context.Set<Espacio>(), "EsId", "EsDescripcion");
+            ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion");
             return View();
         }
 
@@ -64,14 +64,16 @@ namespace Fundacion.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AsiId,EsId,AsIngreso,AsEgreso,AsPresent")] Asistencia asistencia)
-        {            
+        {
+            ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
+            ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
             if (ModelState.IsValid)
             {
                 _context.Add(asistencia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EsId"] = new SelectList(_context.Set<Espacio>(), "EsId", "EsDescripcion", asistencia.EsId);
+            ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
             return View(asistencia);
         }
 
@@ -90,7 +92,7 @@ namespace Fundacion.Controllers
             {
                 return NotFound();
             }
-            ViewData["EsId"] = new SelectList(_context.Set<Espacio>(), "EsId", "EsDescripcion", asistencia.EsId);
+            ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
             return View(asistencia);
         }
 
@@ -101,6 +103,8 @@ namespace Fundacion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AsiId,EsId,AsIngreso,AsEgreso,AsPresent")] Asistencia asistencia)
         {
+            ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
+            ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
             if (id != asistencia.AsiId)
             {
                 return NotFound();
@@ -126,7 +130,7 @@ namespace Fundacion.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EsId"] = new SelectList(_context.Set<Espacio>(), "EsId", "EsDescripcion", asistencia.EsId);
+            ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
             return View(asistencia);
         }
 
