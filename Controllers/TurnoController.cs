@@ -60,6 +60,7 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(turno);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

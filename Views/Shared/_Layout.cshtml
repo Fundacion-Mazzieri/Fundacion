@@ -7,41 +7,48 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Fundacion.styles.css" asp-append-version="true" />
+    
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary bg-transparent border-bottom border-body">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Fundacion</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://fundacionmazzieri.com.ar/wp-content/uploads/2019/04/fundacion-mazzieri-1.jpg" width="60"/></a>
+                <h2>Fundacion Mazzieri</h2>
+                <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                
+                <div class="navbar-collapse collapse d-sm-inline-flex ">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end nav-underline ">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-black visually-hidden" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                            <a class="nav-link text-black visually-hidden" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Aulas" asp-action="Index">Aulas</a>
+                            <a class="nav-link text-black visually-hidden" asp-area="" asp-controller="Aulas" asp-action="Index">Aulas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                            <a class="nav-link text-black visually-hidden" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categorias" asp-action="Index">Categorias</a>
+                            <a class="nav-link text-black visually-hidden" asp-area="" asp-controller="Categorias" asp-action="Index">Categorias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Espacios" asp-action="Index">Espacios</a>
+                            <a class="nav-link text-blackblack visually-hidden" asp-area="" asp-controller="Espacios" asp-action="Index">Espacios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Turno" asp-action="Index">Turno</a>
+                            <a class="nav-link text-black visually-hidden " asp-area="" asp-controller="Turno" asp-action="Index">Turnos</a>
+                        </li>
+                        <li class="nav-item login">
+                            <a class="nav-link text-black " asp-area="" asp-controller="Login" asp-action="Index">Iniciar Sesion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Asistencias" asp-action="Index">Asistencias</a>
+                            <a class="nav-link text-dark visually-hidden" asp-area="" asp-controller="Asistencias" asp-action="Index">Asistencias</a>
                         </li>
                     </ul>
                 </div>
