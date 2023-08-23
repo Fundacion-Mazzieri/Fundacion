@@ -61,6 +61,9 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Encriptar la contraseña antes de guardarla
+                usuario.UsContrasena = Encrypt.GetMD5(usuario.UsContrasena);
+
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -100,6 +103,8 @@ namespace Fundacion.Controllers
 
             if (ModelState.IsValid)
             {
+                // Encriptar la contraseña antes de guardarla
+                usuario.UsContrasena = Encrypt.GetMD5(usuario.UsContrasena);
                 try
                 {
                     _context.Update(usuario);
