@@ -6,6 +6,7 @@
 }
 <head>
 
+    <link rel="stylesheet" href="~/css/inicio/styles.css" />
 </head>
 
 <body>
@@ -25,33 +26,3 @@
 
 </body>
 
-<style>
-    .container-grid{
-        height:500px;
-        margin-top:20px;
-    }
-    .row{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-        height: 100%;
-        grid-gap:20px;
-    }
-
-    .col{
-        display: flex;
-        width: 100%;
-        flex-direction: column; 
-        justify-content: center;
-        background-color: #ece8e8;
-    }
-
-   .col.col1 {
-            grid-column-start: 1;
-            grid-column-end: 3;
-        }
-
-    .col:hover {
-        transform: scale(1.05);
-    }
-</style>
