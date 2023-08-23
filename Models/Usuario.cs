@@ -8,6 +8,7 @@ namespace Fundacion.Models;
 
 public partial class Usuario
 {
+    [Key]
     public int UsId { get; set; }
     [RegularExpression(@"^[1-9][0-9]*$", ErrorMessage = "Sólo se permiten números de DNI válidos.")]
     [Display(Name = "DNI")]    
