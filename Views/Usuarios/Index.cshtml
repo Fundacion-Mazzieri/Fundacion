@@ -3,6 +3,44 @@
 @{
     ViewData["Title"] = "Usuarios";
 }
+<head>
+    <link rel="stylesheet" href="~/css/btn-volver/styles.css" />
+</head>
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Volver</button>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Navegacion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+
+        <a asp-area="" asp-controller="Asistencias" asp-action="Index">
+            <div class="col col1"><h3>Asistencias</h3><img src="./assets/inicio/lista-de-verificacion.png" /></div>
+        </a>
+        <a  asp-area="" asp-controller="Turno" asp-action="Index">
+            <div class="col"><h3>Turnos</h3><img src="./assets/inicio/turnos.png" width="64" /></div>
+        </a>
+        <a asp-area="" asp-controller="Categorias" asp-action="Index">
+            <div class="col"> <h3>Categorias</h3> <img src="./assets/inicio/aplicacion.png" /></div>
+        </a>
+        <a asp-area="" asp-controller="Espacios" asp-action="Index">
+            <div class="col"> <h3>Espacios</h3>  <img src="./assets/inicio/ruptura.png" /></div>
+        </a>
+        <a asp-area="" asp-controller="Roles" asp-action="Index">
+            <div class="col"> <h3>Roles</h3> <img src="./assets/inicio/roles.png" /></div>
+        </a>
+        <a asp-area="" asp-controller="Aulas" asp-action="Index">
+            <div class="col"><h3>Aulas</h3>  <img src="./assets/inicio/aula.png" /></div>
+        </a>
+        <a asp-area="" asp-controller="Usuarios" asp-action="Index" class="visually-hidden">
+            <div class="col"> <h3>Usuarios</h3>  <img src="./assets/inicio/grupo.png" /></div>
+        </a>
+    </div>
+</div>
+
 
 <h1>Usuarios</h1>
 
@@ -81,3 +119,24 @@
 }
     </tbody>
 </table>
+
+<style>
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    h3 {
+        display: flex;
+        font-size: 22px;
+        text-align: start;
+        align-content: center;
+        align-items: center;
+    }
+
+    .col {
+        display: flex;
+        margin-bottom: 20px;
+        justify-content: space-between;
+    }
+</style>
