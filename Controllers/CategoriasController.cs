@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Fundacion.Data;
 using Fundacion.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fundacion.Controllers
 {
+    [Authorize]
     public class CategoriasController : Controller
     {
         private readonly FundacionContext _context;
