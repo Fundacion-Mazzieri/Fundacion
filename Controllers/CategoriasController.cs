@@ -62,6 +62,12 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Verificar si ya existe una categoría con la misma descripción
+                if (_context.Categorias.Any(c => c.CaDescripcion == categoria.CaDescripcion))
+                {
+                    ModelState.AddModelError("CaDescripcion", "Ya existe una categoría con esta descripción.");
+                    return View(categoria);
+                }
                 _context.Add(categoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

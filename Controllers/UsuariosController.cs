@@ -63,6 +63,12 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Verificar si ya existe este usuario
+                if (_context.Usuarios.Any(c => c.UsDni == usuario.UsDni))
+                {
+                    ModelState.AddModelError("UsDni", "Ya existe este usuario.");
+                    return View(usuario);
+                }
                 // Encriptar la contraseña antes de guardarla
                 usuario.UsContrasena = Encrypt.GetMD5(usuario.UsContrasena);
 
