@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Fundacion.Models.Aula>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Aula";
 }
 
 <head>
@@ -42,10 +42,10 @@
     </div>
 </div>
 
-<h1>Index</h1>
+<h1>Aulas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nueva aula</a>
 </p>
 <table class="table">
     <thead>
@@ -63,9 +63,9 @@
                 @Html.DisplayFor(modelItem => item.AuDescripcion)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AuId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AuId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AuId">Delete</a>
+                <a  class="btn btn-warning btn-sm mb-1" asp-action="Edit" asp-route-id="@item.AuId">Editar</a>
+                <a  class="btn btn-primary btn-sm mb-1" asp-action="Details" asp-route-id="@item.AuId">Detalle</a>
+                <a  class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.AuId">Borrar</a>
             </td>
         </tr>
 }

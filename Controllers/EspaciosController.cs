@@ -56,7 +56,7 @@ namespace Fundacion.Controllers
             ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion");
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion");
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion");
-            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsApellido");
+            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsDni");
             return View();
         }
 
@@ -76,7 +76,7 @@ namespace Fundacion.Controllers
             ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion", espacio.AuId);
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion", espacio.TuId);
-            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsApellido", espacio.UsId);
+            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsDni", espacio.UsId);
             return View(espacio);
         }
 
@@ -96,7 +96,7 @@ namespace Fundacion.Controllers
             ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion", espacio.AuId);
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion", espacio.TuId);
-            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsNombre", espacio.UsId);
+            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsDni", espacio.UsId);
             return View(espacio);
         }
 
@@ -135,7 +135,7 @@ namespace Fundacion.Controllers
             ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion", espacio.AuId);
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion", espacio.TuId);
-            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsNombre", espacio.UsId);
+            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsDni", espacio.UsId);
             return View(espacio);
         }
 
