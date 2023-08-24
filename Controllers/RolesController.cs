@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Fundacion.Models
 {
-    [Authorize]
+    [Authorize(Roles = "Super Admin, Admin")]
     public class RolesController : Controller
     {
         private readonly FundacionContext _context;

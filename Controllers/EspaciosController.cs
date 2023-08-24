@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Fundacion.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Super Admin, Admin")]
     public class EspaciosController : Controller
     {
         private readonly FundacionContext _context;

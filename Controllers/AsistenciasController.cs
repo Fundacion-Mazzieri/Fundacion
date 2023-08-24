@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Fundacion.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Super Admin,Admin,Usuario")]
     public class AsistenciasController : Controller
     {
         private readonly FundacionContext _context;

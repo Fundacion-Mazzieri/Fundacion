@@ -29,19 +29,24 @@ namespace Fundacion.Controllers
             var usuario = _context.Usuarios.Where(item => item.UsDni == usuarioDTO.UsDni /* && item.UsContrasena == clave*/).FirstOrDefault();
             var roles = _context.Usuarios.Include(u => u.Ro).Where(item => item.UsDni == usuarioDTO.UsDni)
                .FirstOrDefault();
-            usuarioDTO.rol = roles.Ro.RoDenominacion;
+            
+            Console.WriteLine(usuarioDTO.rol);
             if (usuario != null)
             {
+                usuarioDTO.rol = roles.Ro.RoDenominacion;
                 var claims = new List<Claim>
                 {
                     new Claim("DNI", usuarioDTO.UsDni.ToString()),
+                    new Claim("Nombre", usuario.UsNombre.ToString()),
+                    new Claim(ClaimTypes.Role, usuarioDTO.rol)
                     //new Claim("Clave",clave)
 
                 };
-                foreach (var rol in usuarioDTO.rol)
-                {
-                    claims.Add(new Claim(ClaimTypes.Role, rol.ToString()));
-                }
+                //foreach (var rol in usuarioDTO.rol)
+                //{
+                //    claims.Add(new Claim(ClaimTypes.Role, rol.ToString()));
+                //}
+                //claims.Add(new Claim(ClaimTypes.Role, usuarioDTO.rol));
                 var claimsIdentity= new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity));
