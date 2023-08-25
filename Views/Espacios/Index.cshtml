@@ -45,7 +45,7 @@
 <h1>Espacios</h1>
 
 <p>
-    <a asp-action="Create">Crear nuevo Espacio</a>
+    <a class="btn btn-secondary btn-sm" asp-action="Create">Crear nuevo Espacio</a>
 </p>
 <table class="table">
     <thead>
@@ -121,9 +121,9 @@
                     @Html.DisplayFor(modelItem => item.Us.UsNombre) @Html.DisplayFor(modelItem => item.Us.UsApellido)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.EsId">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.EsId">Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.EsId">Eliminar</a>
+                    <a class="btn btn-warning btn-sm mb-1" asp-action="Edit" asp-route-id="@item.EsId">Editar</a> |
+                    <a class="btn btn-primary btn-sm mb-1" asp-action="Details" asp-route-id="@item.EsId">Detalles</a> |
+                    <a class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.EsId">Eliminar</a>
                 </td>
             </tr>
         }
