@@ -6,7 +6,7 @@
 
 <h1>Eliminar</h1>
 
-<h3>Deseas eliminar el turno del usuario @Html.DisplayFor(modelItem => Model.TuId)?</h3>
+<h3>Deseas eliminar el turno @Html.DisplayFor(modelItem => Model.TuDescripcion)?</h3>
 <div>
     
     <hr />
@@ -21,7 +21,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="TuId" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index" class="btn btn-primary">Cancelar</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger"/>
+        <a asp-action="Index" class="btn btn-primary">Volver</a>
     </form>
 </div>

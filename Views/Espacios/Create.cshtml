@@ -59,15 +59,14 @@
                 <select asp-for="CaId" class="form-control" asp-items="ViewBag.CaId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
+                <input type="submit" value="Aceptar" class="btn btn-outline-primary" style="margin-top:20px" />
+                <a asp-action="Index" class="btn btn-outline-danger" style="margin-top:20px">Cancelar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Volver</a>
-</div>
+
 
 @section Scripts {
     @{
