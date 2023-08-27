@@ -1,9 +1,12 @@
-﻿using Fundacion.Models;
+﻿using Fundacion.Data.DTO;
+using Fundacion.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Fundacion.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,7 +18,8 @@ namespace Fundacion.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            UsuarioDTO usuario = new UsuarioDTO();
+            return View(usuario);
         }
 
         public IActionResult Privacy()

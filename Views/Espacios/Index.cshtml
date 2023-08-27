@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Fundacion.Models.Espacio>
 
 @{
-    ViewData["Title"] = "Espacio";
+    ViewData["Title"] = "Espacios";
 }
 
 <head>
@@ -56,15 +56,15 @@
             </th>
             <th>
                 @*Html.DisplayNameFor(model => model.EsDia)*@
-                Espacio Dia
+                Dia
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.EsHora)*@
-                Espacio Hora
+                Hora
             </th>
             <th>
                 @*Html.DisplayNameFor(model => model.EsCantHs)*@
-                Cantidad Hora/s
+                Duracion
             </th>
             <th>
                 @*Html.DisplayNameFor(model => model.EsActivo)*@
@@ -103,7 +103,7 @@
                     @Html.DisplayFor(modelItem => item.EsHora)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EsCantHs)
+                    @Html.DisplayFor(modelItem => item.EsCantHs) Min.
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EsActivo)

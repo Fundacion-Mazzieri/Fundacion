@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Fundacion.Data.DTO.UsuarioDTO;
 @{
     ViewData["Title"] = "Inicio Page";
 }
@@ -10,7 +8,11 @@
 </head>
 
 <body>
-
+    <br />
+    <h4>Nombre: @Model.UsNombre</h4> 
+    <h4>Rol: @Model.rol</h4>
+    <br />
+    <div class="btn"> <a asp-area="" asp-controller="Login" asp-action="Salir"><h3>Cerrar Sesión</h3></a></div>
     <div class="container-grid text-center">
         <div class="row row-cols-2">
             <div class="col col1"><h3>Asistencias</h3><a class="nav-link text-dark" asp-area="" asp-controller="Asistencias" asp-action="Index"><img src="./assets/inicio/lista-de-verificacion.png" /></a></div>
@@ -20,7 +22,13 @@
             <div class="col"> <h3>Roles</h3> <a asp-area="" asp-controller="Roles" asp-action="Index"><img src="./assets/inicio/roles.png" /></a></div>
             <div class="col"><h3>Aulas</h3> <a asp-area="" asp-controller="Aulas" asp-action="Index"> <img src="./assets/inicio/aula.png" /></a></div>
             <div class="col"> <h3>Usuarios</h3> <a asp-area="" asp-controller="Usuarios" asp-action="Index"> <img src="./assets/inicio/grupo.png" /></a></div>
-            
+            @*<div class="col col1"> <a asp-area="" asp-controller="Login" asp-action="Salir"><h3>Cerrar Sesión</h3></a></div>*@
+            @*@if (Model.Autenticado)
+            {
+                <li class="nav-item login">
+                    <a class="nav-link text-black " asp-area="" asp-controller="Login" asp-action="Index">Iniciar Sesion</a>
+                </li>
+            }*@
         </div>
     </div>
 

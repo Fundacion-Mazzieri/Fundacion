@@ -1,6 +1,7 @@
 ﻿//using AspNetCore;
 using Fundacion.Data;
 using Fundacion.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fundacion.Controllers
 {
+    [Authorize]
     public class UserAsistenciasController : Controller
     {
         private readonly FundacionContext _context;

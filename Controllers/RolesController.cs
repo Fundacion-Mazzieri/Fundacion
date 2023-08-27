@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Fundacion.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fundacion.Models
 {
+    [Authorize(Roles = "Super Admin, Admin")]
     public class RolesController : Controller
     {
         private readonly FundacionContext _context;

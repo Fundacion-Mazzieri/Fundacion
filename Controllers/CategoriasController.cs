@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Fundacion.Data;
 using Fundacion.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fundacion.Controllers
 {
+    [Authorize(Roles = "Super Admin, Admin")]
     public class CategoriasController : Controller
     {
         private readonly FundacionContext _context;
@@ -60,6 +62,12 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Verificar si ya existe una categoría con la misma descripción
+                if (_context.Categorias.Any(c => c.CaDescripcion == categoria.CaDescripcion))
+                {
+                    ModelState.AddModelError("CaDescripcion", "Ya existe una categoría con esta descripción.");
+                    return View(categoria);
+                }
                 _context.Add(categoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

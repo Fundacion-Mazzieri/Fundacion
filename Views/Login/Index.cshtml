@@ -1,4 +1,4 @@
-﻿@model Fundacion.Models.Login
+﻿@model Fundacion.Data.DTO.UsuarioDTO;
 @{
     ViewData["Title"] = "Ingreso";
     Layout = null;
@@ -16,11 +16,11 @@
 
     </div>
     <div class="form-group form-group-text">
-        <input type="text" placeholder="Ingrese su correo electronico" value="" asp-for="Correo" class="btn btn-primary input-text" />
+        <input type="text" placeholder="Ingrese su codigo" value="" asp-for="UsDni" class="btn btn-primary input-text" required />
     </div>
     <div class="form-group form-group-text">
-        <input type="text" placeholder="Ingrese su clave" value="" asp-for="Clave" class="btn btn-primary input-text" />
-        <span asp-validation-for="Clave" class="text-danger"></span>
+        <input type="password" placeholder="Ingrese su clave" value="" asp-for="UsContrasena" class="btn btn-primary input-text" required />
+        <span asp-validation-for="UsContrasena" class="text-danger"></span>
     </div>
    
     <div class="form-group form-group-submit">
@@ -71,7 +71,7 @@
         margin: auto;
         border-radius: 5px;
         padding: 20px;
-        border-radius: 5px 30px 30px;
+        border-radius: 30px 30px 30px;
        
         margin-top: 0;
         top: 5%;
