@@ -55,23 +55,15 @@
        
         <tr>
             <th>
-                ID
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TuDescripcion)
+                @*@Html.DisplayNameFor(model => model.TuDescripcion)*@
+                Descripcion
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-
-        
         <tr>
-            <td>
-                    @Html.DisplayFor(modelItem => item.TuId)
-            </td>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.TuDescripcion)
             </td>
