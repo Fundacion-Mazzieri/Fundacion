@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/css/btn-volver/styles.css" />
 </head>
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Volver</button>
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" >Volver</button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
@@ -40,16 +40,17 @@
         </a>
     </div>
 </div>
-
+<h1>Listado de Roles</h1>
 
 <p>
-    <a asp-action="Create">Crear nuevo</a>
+    <a class="btn btn-success btn-sm" asp-action="Create">Agregar nuevo Rol</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RoDenominacion)
+               @* @Html.DisplayNameFor(model => model.RoDenominacion)*@
+               Roles
             </th>
             <th></th>
         </tr>
@@ -61,9 +62,9 @@
                 @Html.DisplayFor(modelItem => item.RoDenominacion)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.RoId">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.RoId">Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.RoId">Eliminar</a>
+                    <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.RoId">Modificar</a> |
+                    <a asp-action="Details" class="btn btn-primary btn-sm mb-1" asp-route-id="@item.RoId">Detalles</a> |
+                    <a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.RoId">Eliminar</a>
             </td>
         </tr>
 }

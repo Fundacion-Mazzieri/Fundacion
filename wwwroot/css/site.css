@@ -28,3 +28,14 @@ body {
 h2,h1 {
     font-family: Mukta Mahee,sans-serif;
 }
+
+.login {
+    border-radius: 10px;
+    background-color: #dcd24e;
+    visibility: visible;
+}
+
+.login:hover {
+        background-color: #9b9540
+
+}

@@ -20,7 +20,7 @@
         <a asp-area="" asp-controller="Asistencias" asp-action="Index" class="visually-hidden">
             <div class="col col1"><h3>Asistencias</h3><img src="./assets/inicio/lista-de-verificacion.png" c /></div>
         </a>
-        <a class="visually-hidden" asp-area="" asp-controller="Turno" asp-action="Index">
+        <a asp-area="" asp-controller="Turno" asp-action="Index">
             <div class="col"><h3>Turnos</h3><img src="./assets/inicio/turnos.png" width="64" /></div>
         </a>
         <a asp-area="" asp-controller="Categorias" asp-action="Index">
@@ -38,16 +38,14 @@
         <a asp-area="" asp-controller="Usuarios" asp-action="Index">
             <div class="col"> <h3>Usuarios</h3>  <img src="./assets/inicio/grupo.png" /></div>
         </a>
-        <a asp-area="" asp-controller="Usuarios" asp-action="Index">
-            <div class="col"> <h3>Usuarios</h3>  <img src="./assets/inicio/grupo.png" /></div>
-        </a>
+        
     </div>
 </div>
 
-<h1>Asistencia</h1>
+<h1>Listado de Asistencia</h1>
 
 <p>
-    <a class="btn btn-secondary btn-sm" asp-action="Create">Crear Nueva Asistencia</a>
+    <a class="btn btn-success btn-sm" asp-action="Create">Crear Nueva Asistencia</a>
 </p>
 <table class="table">
     <thead>
@@ -88,9 +86,9 @@
                     @Html.DisplayFor(modelItem => item.Es.EsDescripcion)
                 </td>
                 <td>
-                    <a class="btn btn-warning btn-sm mb-1" asp-action="Edit" asp-route-id="@item.AsiId">Editar</a>
-                    <a class="btn btn-primary btn-sm mb-1" asp-action="Details" asp-route-id="@item.AsiId">Detalles</a>
-                    <a class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.AsiId">Eliminar</a>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.AsiId">Modificar</a> |
+                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.AsiId">Detalles</a> |
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.AsiId">Eliminar</a> |
                 </td>
             </tr>
         }

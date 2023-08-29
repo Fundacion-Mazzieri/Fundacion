@@ -45,7 +45,7 @@
 <h1>Usuarios</h1>
 
 <p>
-    <a asp-action="Create">Nuevo</a>
+    <a asp-action="Create" class="btn btn-success btn-sm">Agregar nuevo Usuario</a>
 </p>
 <table class="table">
     <thead>
@@ -111,9 +111,9 @@
                 @Html.DisplayFor(modelItem => item.Ro.RoDenominacion)
             </td>
             <td>
-                    <a class="btn btn-warning btn-sm mb-1" asp-action="Edit" asp-route-id="@item.UsId">Editar</a>
-                    <a class="btn btn-primary btn-sm mb-1" asp-action="Details" asp-route-id="@item.UsId">Detalle</a>
-                    <a class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.UsId">Borrar</a>
+                    <a class="btn btn-warning btn-sm mb-1" asp-action="Edit" asp-route-id="@item.UsId">Modificar</a>
+                    <a class="btn btn-primary btn-sm mb-1" asp-action="Details" asp-route-id="@item.UsId">Detalles</a>
+                    <a class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.UsId">Eliminar</a>
             </td>
         </tr>
 }

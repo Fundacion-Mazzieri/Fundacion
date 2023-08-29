@@ -42,20 +42,21 @@
 </div>
 
 
-<h1>Turnos</h1>
+<h1>Listados de Turnos</h1>
 
 
 
 
 <p>
-    <a asp-action="Create" class="btn btn-success btn-sm">Agregar nuevo turno</a>
+    <a asp-action="Create" class="btn btn-success btn-sm">Crear nuevo turno</a>
 </p>
 <table class="table">
     <thead>
        
         <tr>
             <th>
-                ID
+                @*@Html.DisplayNameFor(model => model.TuDescripcion)*@
+                Descripcion
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TuDescripcion)
@@ -65,13 +66,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-
-        
         <tr>
-            <td>
-                    @Html.DisplayFor(modelItem => item.TuId)
-            </td>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.TuDescripcion)
             </td>
