@@ -55,7 +55,17 @@ namespace Fundacion.Controllers
         {
             ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
             ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
-            ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion");
+
+
+            //ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion");
+
+            ViewData["EsId"] = new SelectList(
+                _context.Set<Espacio>()
+                .Where(espacio => espacio.Us.RoId == 2)
+                .Select(espacio => new
+                {
+                    espacio.EsId, EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Au.AuDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.EsDia} {espacio.EsHora} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"}),
+                "EsId", "EsDescripcion");
             return View();
         }
 
