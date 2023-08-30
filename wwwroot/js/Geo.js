@@ -29,18 +29,19 @@ function toRad(grados) {
 }
 
 // Obtener referencias a los botones/checklist
-const presenteCheck = document.getElementById('presenteCheck');
 const verificarBtn = document.getElementById('verificarBtn');
 const selectEspacio = document.getElementById('selectEspacio')
+const presenteCheck = document.getElementById('presenteCheck')
 const inputIngreso = document.getElementById('inputIngreso');
-const inputSalida = document.getElementById('inputSalida');
+//const inputSalida = document.getElementById('inputSalida');
 const ubicacionMsg = document.getElementById('ubicacionMsg');
 const cargarBtn = document.getElementById('cargarBtn');
+const finalizarBtn = document.getElementById('finalizarBtn')
 
 // Función para manejar el clic en el botón "Marcar asistencia"
 verificarBtn.addEventListener('click', () => {
     // Obtener las coordenadas de la ubicación actual del usuario
-    if (navigator.geolocation) {
+    if (navigator.geolocation && inputIngreso) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const latitud = position.coords.latitude;
@@ -55,20 +56,32 @@ verificarBtn.addEventListener('click', () => {
                 //// Mostrar la distancia al radio
                 //const distanciaAlRadio = calcularDistanciaEnMetros(latitud, longitud, centroLatitud, centroLongitud);
                 //resultado.innerHTML = `Estás a ${distanciaAlRadio.toFixed(2)} metros de tu lugar de trabajo`;
+                                
+                const ingresoFecha = new Date(inputIngreso.value);
+                const tiempoLimite = new Date(ingresoFecha.getTime() + 30 * 60 * 1000); // Sumar 30 minutos
 
                 if (estaDentroDelRadio) {
                     ubicacionMsg.classList.add('text-danger')
                     ubicacionMsg.innerHTML = 'Estás dentro de Fundación Mazzieri';
                     ubicacionMsg.classList.remove('text-danger')
-                    selectEspacio.disabled = false;
-                    inputIngreso.disabled = false;
-                    inputSalida.disabled = false;
-                    presenteCheck.disabled = false;
+                    selectEspacio.disabled = false
                     cargarBtn.disabled = false;
+                    // Comprobar si se encuentra en el rango de 30 minutos mínimos desde su ingreso.
+                    if (new Date() >= tiempoLimite) {
+                        finalizarBtn.disabled = false;                        
+                        if (cargarBtn == null) {
+                            presenteCheck.disabled = false;
+                            presenteCheck.checked = true;
+                            finalizarBtn.disabled = false;
+                            selectEspacio.disabled = true
+                        } else {
+                            selectEspacio.disabled = true
+                        }                       
                     /*marcarSalidaBtn.disabled = false;*/
+                    }                    
                 }
                 else {                    
-                    ubicacionMsg.innerHTML = 'Estas demasiado lejos de Fundación Mazzieri!'
+                    ubicacionMsg.innerHTML = 'Estas demasiado lejos de Fundacion Mazzieri!';
                 }
             },
             (error) => {
@@ -78,7 +91,7 @@ verificarBtn.addEventListener('click', () => {
         );
     } else {
         //ubicacionActual.innerHTML = '';
-        ubicacionMsg.innerHTML = 'La geolocalización no está disponible en este navegador.';
+        ubicacionMsg.innerHTML = 'Error de Verificación, recuerdo que no puede finalizar hasta tanto no hayan pasado 30 minutos desde el ingreso.';
     }
 });
 

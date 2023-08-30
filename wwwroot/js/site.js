@@ -79,3 +79,52 @@ function validarEmail(input) {
     var cleanedValue = valor.replace(/[^\w\s.@-]/g, '');
     input.value = cleanedValue;
 }
+function actualizarDatos() {
+    $.ajax({
+        url: '@Url.Action("GetLatestData", "Asistencias")', // Cambia la URL a tu acción que obtiene los datos actualizados
+        success: function (data) {
+            $('#ubicacionMsg').text(data.ubicacionMsg);
+            setTimeout(actualizarDatos, 60000); // 60000 ms = 1 minuto
+        },
+        error: function () {
+            console.log('Error al obtener datos actualizados');
+        }
+    });
+}
+$(document).ready(function () {
+    actualizarDatos();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const verificarBtn = document.getElementById('verificarBtn');
+    const cargarBtn = document.getElementById('cargarBtn');
+    const inputSalida = document.getElementById('inputSalida');
+
+    verificarBtn.addEventListener('click', async () => {
+        // Aquí iría tu lógica de verificación de ubicación
+
+        // Luego de la verificación
+        cargarBtn.disabled = false; // Habilitar el botón de Iniciar
+        setTimeout(() => {
+            inputSalida.disabled = false; // Habilitar el campo de Egreso
+        }, 30 * 60 * 1000); // 30 minutos en milisegundos
+    });
+
+    cargarBtn.addEventListener('click', () => {
+        // Aquí podrías realizar cualquier lógica de validación adicional antes de enviar el formulario
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const inputEgreso = document.getElementById("inputSalida");
+    const finalizarBtn = document.getElementById("finalizarBtn");
+
+    inputEgreso.addEventListener("input", function () {
+        if ((new Date(inputEgreso.value) - new Date(asistencia.AsIngreso)) >= 30 * 60 * 1000) {
+            finalizarBtn.removeAttribute("disabled");
+        } else {
+            finalizarBtn.setAttribute("disabled", "disabled");
+        }
+    });
+});
+

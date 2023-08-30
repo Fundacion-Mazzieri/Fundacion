@@ -9,6 +9,7 @@ using Fundacion.Data;
 using Fundacion.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
+using System.Configuration;
 
 namespace Fundacion.Controllers
 {
@@ -22,12 +23,15 @@ namespace Fundacion.Controllers
         {
             _context = context;
             _configuration = configuration;
-        }
-
+        }       
         // GET: Asistencias
         public async Task<IActionResult> Index()
         {
-            var fundacionContext = _context.Asistencias.Include(a => a.Es);
+            var fundacionContext = _context.Asistencias
+                .Include(a => a.Es)
+                .Include(a => a.Es.Au)
+                .Include(a => a.Es.Tu)
+                .Include(a => a.Es.Us);
             return View(await fundacionContext.ToListAsync());
         }
 
@@ -55,40 +59,57 @@ namespace Fundacion.Controllers
         {
             ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
             ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
-
-
-            //ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion");
-
+            ViewData["AsIngreso"] = DateTime.Now;
             ViewData["EsId"] = new SelectList(
                 _context.Set<Espacio>()
                 .Where(espacio => espacio.Us.RoId == 2)
                 .Select(espacio => new
                 {
-                    espacio.EsId, EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Au.AuDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.EsDia} {espacio.EsHora} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"}),
+                    espacio.EsId,
+                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Au.AuDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.EsDia} {espacio.EsHora} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                }),
                 "EsId", "EsDescripcion");
             return View();
         }
+        //public IActionResult Create()
+        //{
+        //    ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
+        //    ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
+
+        //    // Establecer valores de AsIngreso y AsEgreso
+        //    
+        //    ViewData["AsEgreso"] = DateTime.Now;
+        //    //ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion");
+
+        //    ViewData["EsId"] = new SelectList(
+        //        _context.Set<Espacio>()
+        //        .Where(espacio => espacio.Us.RoId == 2)
+        //        .Select(espacio => new
+        //        {
+        //            espacio.EsId, EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Au.AuDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.EsDia} {espacio.EsHora} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"}),
+        //        "EsId", "EsDescripcion");
+        //    return View();
+        //}
 
         // POST: Asistencias/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AsiId,EsId,AsIngreso,AsEgreso,AsPresent")] Asistencia asistencia)
+        [ValidateAntiForgeryToken]        
+        public async Task<IActionResult> Create([Bind("EsId,AsIngreso")] Asistencia asistencia)
         {
-            ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
-            ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
             if (ModelState.IsValid)
             {
+                asistencia.AsIngreso = DateTime.Now; // Establece el tiempo de inicio
                 _context.Add(asistencia);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = asistencia.AsiId });
             }
+
             ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
             return View(asistencia);
         }
 
-        // GET: Asistencias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
@@ -103,19 +124,29 @@ namespace Fundacion.Controllers
             {
                 return NotFound();
             }
-            ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
+
+            // Si la asistencia ya tiene tiempo de egreso, redirigir a la página de detalles
+            if (asistencia.AsEgreso != null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewData["EsId"] = new SelectList(
+                _context.Set<Espacio>()
+                .Where(espacio => espacio.Us.RoId == 2)
+                .Select(espacio => new
+                {
+                    espacio.EsId,
+                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Au.AuDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.EsDia} {espacio.EsHora} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                }),
+                "EsId", "EsDescripcion");
             return View(asistencia);
         }
 
-        // POST: Asistencias/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AsiId,EsId,AsIngreso,AsEgreso,AsPresent")] Asistencia asistencia)
         {
-            ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
-            ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
             if (id != asistencia.AsiId)
             {
                 return NotFound();
@@ -123,27 +154,16 @@ namespace Fundacion.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(asistencia);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AsistenciaExists(asistencia.AsiId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                asistencia.AsEgreso = DateTime.Now; // Establece el tiempo de egreso
+                _context.Update(asistencia);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
             return View(asistencia);
         }
+
 
         // GET: Asistencias/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -186,6 +206,12 @@ namespace Fundacion.Controllers
         private bool AsistenciaExists(int id)
         {
             return (_context.Asistencias?.Any(e => e.AsiId == id)).GetValueOrDefault();
+        }
+        public async Task<IActionResult> ActivarEgreso()
+        {
+            await Task.Delay(TimeSpan.FromMinutes(30)); // Esperar 30 minutos
+            ViewBag.ActivarEgreso = true;
+            return RedirectToAction(nameof(Create));
         }
     }
 }
