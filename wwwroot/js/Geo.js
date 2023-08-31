@@ -30,13 +30,11 @@ function toRad(grados) {
 
 // Obtener referencias a los botones/checklist
 const verificarBtn = document.getElementById('verificarBtn');
-const selectEspacio = document.getElementById('selectEspacio')
-const presenteCheck = document.getElementById('presenteCheck')
+const selectEspacio = document.getElementById('selectEspacio');
+const presenteCheck = document.getElementById('presenteCheck');
 const inputIngreso = document.getElementById('inputIngreso');
-//const inputSalida = document.getElementById('inputSalida');
 const ubicacionMsg = document.getElementById('ubicacionMsg');
 const cargarBtn = document.getElementById('cargarBtn');
-const finalizarBtn = document.getElementById('finalizarBtn')
 
 // Función para manejar el clic en el botón "Marcar asistencia"
 verificarBtn.addEventListener('click', () => {
@@ -61,31 +59,30 @@ verificarBtn.addEventListener('click', () => {
                 const tiempoLimite = new Date(ingresoFecha.getTime() + 30 * 60 * 1000); // Sumar 30 minutos
 
                 if (estaDentroDelRadio) {
-                    ubicacionMsg.classList.add('text-danger')
-                    ubicacionMsg.innerHTML = 'Estás dentro de Fundación Mazzieri';
-                    ubicacionMsg.classList.remove('text-danger')
-                    selectEspacio.disabled = false
-                    cargarBtn.disabled = false;
-                    // Comprobar si se encuentra en el rango de 30 minutos mínimos desde su ingreso.
-                    if (new Date() >= tiempoLimite) {
-                        finalizarBtn.disabled = false;                        
-                        if (cargarBtn == null) {
-                            presenteCheck.disabled = false;
-                            presenteCheck.checked = true;
-                            finalizarBtn.disabled = false;
-                            selectEspacio.disabled = true
-                        } else {
-                            selectEspacio.disabled = true
-                        }                       
-                    /*marcarSalidaBtn.disabled = false;*/
+                    ubicacionMsg.classList.add('text-danger');
+                    ubicacionMsg.innerHTML = 'Estás dentro de Fundación Mazzieri.';
+                    ubicacionMsg.classList.remove('text-danger');
+                    if (selectEspacio) {
+                        selectEspacio.disabled = false;
                     }                    
+                    if (cargarBtn.value == "Iniciar") {                        
+                        cargarBtn.disabled = false;
+                    }                    
+                    if (cargarBtn.value == "Finalizar") {                        
+                        // Comprobar si se encuentra en el rango de 30 minutos mínimos desde su ingreso.
+                        if (new Date() >= tiempoLimite) {
+                            presenteCheck.checked = true;
+                            cargarBtn.disabled = false;                            
+                        } else {
+                            ubicacionMsg.innerHTML += "\n\nPero aún no han pasado el tiempo mínimo para finalizar."
+                        }
+                    } 
                 }
                 else {                    
                     ubicacionMsg.innerHTML = 'Estas demasiado lejos de Fundacion Mazzieri!';
                 }
             },
-            (error) => {
-                //ubicacionActual.innerHTML = '';
+            (error) => {                
                 ubicacionMsg.innerHTML = `Error al obtener la ubicación: ${error.message}`;
             }
         );
