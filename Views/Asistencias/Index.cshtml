@@ -45,7 +45,7 @@
 <h1>Listado de Asistencia</h1>
 
 <p>
-    <a class="btn btn-success btn-sm" asp-action="Create">Crear Nueva Asistencia</a>
+    <a class="btn btn-success btn-sm" asp-action="Create">Cargar Nueva Asistencia</a>
 </p>
 <table class="table">
     <thead>
@@ -83,12 +83,22 @@
                     @Html.DisplayFor(modelItem => item.AsPresent)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Es.EsDescripcion)
+                    @Html.DisplayFor(modelItem => item.Es.EsDescripcion) - 
+                    @Html.DisplayFor(modelItem => item.Es.Au.AuDescripcion) - 
+                    @Html.DisplayFor(modelItem => item.Es.Tu.TuDescripcion) -
+                    (@Html.DisplayFor(modelItem => item.Es.Us.UsDni)) 
+                    @Html.DisplayFor(modelItem => item.Es.Us.UsApellido),
+                    @Html.DisplayFor(modelItem => item.Es.Us.UsNombre)
                 </td>
                 <td>
-                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.AsiId">Modificar</a> |
-                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.AsiId">Detalles</a> |
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.AsiId">Eliminar</a> |
+                    @if (item.AsEgreso != null)
+                    {
+                        <span class="btn btn-secondary btn-sm disabled">Finalizado</span>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger btn-sm" asp-action="Edit" asp-route-id="@item.AsiId">Finalizar</a>
+                    }                    
                 </td>
             </tr>
         }

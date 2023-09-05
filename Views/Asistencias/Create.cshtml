@@ -1,10 +1,10 @@
 ﻿@model Fundacion.Models.Asistencia
 
 @{
-    ViewData["Title"] = "Crear";
+    ViewData["Title"] = "Iniciar";
 }
 
-<h1>Crear</h1>
+<h1>Iniciar</h1>
 
 <h4>Asistencia</h4>
 <hr />
@@ -13,12 +13,14 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group p-2">
-                <input class="btn btn-success" value="Verificar ubicación" id="verificarBtn" />
+                <input class="btn btn-success" value="Verificar" id="verificarBtn" />
                 <p id="ubicacionMsg"></p>
             </div>
             <!-- Agrego latitud y longitud  con estos elementos ocultos-->
             <input type="hidden" id="centroLatitud" data-latitud="@ViewBag.CentroLatitud" />
             <input type="hidden" id="centroLongitud" data-longitud="@ViewBag.CentroLongitud" />
+            <p id="ubicacionMsg" class="text-danger"></p>
+            <p id="resultado" class="text-danger"></p>
             <!--------------------------------------------------------------------------------->
             <div class="form-group">
                 <label asp-for="EsId" class="control-label">Espacio</label>
@@ -26,28 +28,32 @@
             </div>
             <div class="form-group">
                 <label asp-for="AsIngreso" class="control-label">Ingreso</label>
-                <input asp-for="AsIngreso" class="form-control" id="inputIngreso" disabled />
+                <input asp-for="AsIngreso" class="form-control" id="inputIngreso" readonly
+                       value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")"
+                       placeholder="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")" />
                 <span asp-validation-for="AsIngreso" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @* <div class="form-group" hidden>
                 <label asp-for="AsEgreso" class="control-label">Egreso</label>
-                <input asp-for="AsEgreso" class="form-control" id="inputSalida" disabled />
+                <input asp-for="AsEgreso" class="form-control" id="inputSalida" disabled
+                       value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")"
+                       placeholder="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")" />
                 <span asp-validation-for="AsEgreso" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
+            </div> 
+             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="AsPresent" id="presenteCheck" disabled /> @*@Html.DisplayNameFor(model => model.AsPresent)*@ <p>Presente</p>
-                </label>
-            </div>
+                    <input class="form-check-input" asp-for="AsPresent" id="presenteCheck" disabled /> @Html.DisplayNameFor(model => model.AsPresent) <p>Presente</p>
+                 </label> 
+             </div>  *@
             <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-outline-primary" id="cargarBtn" disabled style="margin-top:20px" />
+                <input type="submit" value="Iniciar" class="btn btn-outline-primary" id="cargarBtn" style="margin-top:20px" disabled/>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-outline-danger" style="margin-top:20px">Cancelar</a>
+    <a asp-action="Index" class="btn btn-outline-danger" style="margin-top:20px">Volver</a>
 </div>
 
 @section Scripts {
