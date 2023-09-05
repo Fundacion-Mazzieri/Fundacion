@@ -66,6 +66,7 @@ namespace Fundacion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AsiId,EsId,AsIngreso,AsEgreso,AsPresent")] Asistencia asistencia)
         {
+            var prueba = 0;
             ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
             ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
             if (ModelState.IsValid)
