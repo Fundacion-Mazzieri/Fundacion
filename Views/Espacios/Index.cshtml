@@ -55,24 +55,8 @@
                 Descripcion
             </th>
             <th>
-                @*Html.DisplayNameFor(model => model.EsDia)*@
-                Dia
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.EsHora)*@
-                Hora
-            </th>
-            <th>
-                @*Html.DisplayNameFor(model => model.EsCantHs)*@
-                Duracion
-            </th>
-            <th>
                 @*Html.DisplayNameFor(model => model.EsActivo)*@
                 Activo
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.Au)*@
-                Aula
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.Ca)*@
@@ -97,19 +81,7 @@
                     @Html.DisplayFor(modelItem => item.EsDescripcion)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EsDia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EsHora)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EsCantHs) Min.
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.EsActivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Au.AuDescripcion)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Ca.CaDescripcion)
@@ -121,6 +93,7 @@
                     @Html.DisplayFor(modelItem => item.Us.UsNombre) @Html.DisplayFor(modelItem => item.Us.UsApellido)
                 </td>
                 <td>
+                    <a asp-action="Create" class="btn btn-link btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Subespacios" asp-action="Index">Asignaturas</a> |
                     <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.EsId">Modificar</a> |
                     <a asp-action="Details" class="btn btn-primary btn-sm mb-1" asp-route-id="@item.EsId">Detalles</a> |
                     <a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.EsId">Eliminar</a>

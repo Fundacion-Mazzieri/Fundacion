@@ -13,12 +13,5 @@ public partial class Aula
     [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres.")]
     public string AuDescripcion { get; set; } = null!;
 
-    public virtual ICollection<Espacio> Espacios { get; set; } = new List<Espacio>();
-
+    public virtual ICollection<Subespacio> Subespacios { get; set; } = new List<Subespacio>();
 }
-
-
-
-
-
-

@@ -29,7 +29,8 @@ namespace Fundacion.Controllers
         {
             var fundacionContext = _context.Asistencias
                 .Include(a => a.Es)
-                .Include(a => a.Es.Au)
+                .Include(a => a.Su)
+                .Include(a => a.Su.Au)
                 .Include(a => a.Es.Tu)
                 .Include(a => a.Es.Us);
             return View(await fundacionContext.ToListAsync());
@@ -66,7 +67,17 @@ namespace Fundacion.Controllers
                 .Select(espacio => new
                 {
                     espacio.EsId,
-                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Au.AuDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.EsDia} {espacio.EsHora} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                }),
+                "EsId", "EsDescripcion");
+            
+            ViewData["SeId"] = new SelectList(
+                _context.Set<Subespacio>()
+                .Where(subespacio => subespacio.Es.Us.RoId == 2)
+                .Select(subespacio => new
+                {
+                    subespacio.SeId,
+                    SeDescripcion = $"{subespacio.Au.AuDescripcion} - {subespacio.SeDia} {subespacio.SeHora} - {subespacio.SeCantHs})"
                 }),
                 "EsId", "EsDescripcion");
             return View();
@@ -136,7 +147,17 @@ namespace Fundacion.Controllers
                 .Select(espacio => new
                 {
                     espacio.EsId,
-                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Au.AuDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.EsDia} {espacio.EsHora} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                }),
+                "EsId", "EsDescripcion");
+            
+            ViewData["SeId"] = new SelectList(
+                _context.Set<Subespacio>()
+                .Where(subespacio => subespacio.Es.Us.RoId == 2)
+                .Select(subespacio => new
+                {
+                    subespacio.SeId,
+                    SeDescripcion = $"{subespacio.Au.AuDescripcion} - {subespacio.SeDia} {subespacio.SeHora} - {subespacio.SeCantHs})"
                 }),
                 "EsId", "EsDescripcion");
             return View(asistencia);

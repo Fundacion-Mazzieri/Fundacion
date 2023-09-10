@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Fundacion.Models.Subespacio>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SeDia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeHora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeCantHs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Au)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Es)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeDia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeHora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeCantHs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Au.AuId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Es.EsId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SeId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SeId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

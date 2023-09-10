@@ -24,7 +24,7 @@ namespace Fundacion.Controllers
         // GET: Espacios
         public async Task<IActionResult> Index()
         {
-            var fundacionContext = _context.Espacios.Include(e => e.Au).Include(e => e.Ca).Include(e => e.Tu).Include(e => e.Us);
+            var fundacionContext = _context.Espacios.Include(e => e.Ca).Include(e => e.Tu).Include(e => e.Us);
             return View(await fundacionContext.ToListAsync());
         }
 
@@ -37,7 +37,6 @@ namespace Fundacion.Controllers
             }
 
             var espacio = await _context.Espacios
-                .Include(e => e.Au)
                 .Include(e => e.Ca)
                 .Include(e => e.Tu)
                 .Include(e => e.Us)
@@ -56,7 +55,14 @@ namespace Fundacion.Controllers
             ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion");
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion");
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion");
-            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsDni");
+            ViewData["UsId"] = new SelectList(
+                _context.Set<Usuario>()
+                .Where(usuario => usuario.RoId == 2)
+                .Select(usuario => new
+                {
+                    usuario.UsId, UsDni = $"({usuario.UsDni}) {usuario.UsApellido}, {usuario.UsNombre}"
+                }),
+                "UsId", "UsDni");
             return View();
         }
 
@@ -65,7 +71,7 @@ namespace Fundacion.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EsId,EsDescripcion,AuId,EsDia,EsHora,EsCantHs,TuId,UsId,EsActivo,CaId")] Espacio espacio)
+        public async Task<IActionResult> Create([Bind("EsId,EsDescripcion,TuId,UsId,EsActivo,CaId")] Espacio espacio)
         {
             if (ModelState.IsValid)
             {
@@ -73,10 +79,17 @@ namespace Fundacion.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion", espacio.AuId);
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion", espacio.TuId);
-            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsDni", espacio.UsId);
+            ViewData["UsId"] = new SelectList(
+                _context.Set<Usuario>()
+                .Where(usuario => usuario.RoId == 2)
+                .Select(usuario => new
+                {
+                    usuario.UsId,
+                    UsDni = $"({usuario.UsDni}) {usuario.UsApellido}, {usuario.UsNombre}"
+                }),
+                "UsId", "UsDni");
             return View(espacio);
         }
 
@@ -93,10 +106,17 @@ namespace Fundacion.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion", espacio.AuId);
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion", espacio.TuId);
-            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsDni", espacio.UsId);
+            ViewData["UsId"] = new SelectList(
+                _context.Set<Usuario>()
+                .Where(usuario => usuario.RoId == 2)
+                .Select(usuario => new
+                {
+                    usuario.UsId,
+                    UsDni = $"({usuario.UsDni}) {usuario.UsApellido}, {usuario.UsNombre}"
+                }),
+                "UsId", "UsDni");
             return View(espacio);
         }
 
@@ -105,7 +125,7 @@ namespace Fundacion.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EsId,EsDescripcion,AuId,EsDia,EsHora,EsCantHs,TuId,UsId,EsActivo,CaId")] Espacio espacio)
+        public async Task<IActionResult> Edit(int id, [Bind("EsId,EsDescripcion,TuId,UsId,EsActivo,CaId")] Espacio espacio)
         {
             if (id != espacio.EsId)
             {
@@ -132,10 +152,17 @@ namespace Fundacion.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion", espacio.AuId);
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion", espacio.TuId);
-            ViewData["UsId"] = new SelectList(_context.Usuarios, "UsId", "UsDni", espacio.UsId);
+            ViewData["UsId"] = new SelectList(
+                _context.Set<Usuario>()
+                .Where(usuario => usuario.RoId == 2)
+                .Select(usuario => new
+                {
+                    usuario.UsId,
+                    UsDni = $"({usuario.UsDni}) {usuario.UsApellido}, {usuario.UsNombre}"
+                }),
+                "UsId", "UsDni");
             return View(espacio);
         }
 
@@ -148,7 +175,6 @@ namespace Fundacion.Controllers
             }
 
             var espacio = await _context.Espacios
-                .Include(e => e.Au)
                 .Include(e => e.Ca)
                 .Include(e => e.Tu)
                 .Include(e => e.Us)
