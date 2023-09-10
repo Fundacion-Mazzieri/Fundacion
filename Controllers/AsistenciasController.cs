@@ -130,7 +130,6 @@ namespace Fundacion.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-
             ViewData["EsId"] = new SelectList(
                 _context.Set<Espacio>()
                 .Where(espacio => espacio.Us.RoId == 2)
