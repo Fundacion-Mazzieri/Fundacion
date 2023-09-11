@@ -99,6 +99,17 @@ namespace Fundacion.Controllers
             return RedirectToAction("CreateByIdEspacio", "Subespacios", new { id = id });
         }
 
+        public IActionResult RedirectToDetailsByEsId(int? esId)
+        {
+            if (esId == null)
+            {
+                return NotFound();
+            }
+
+            // Redirige a la acción Details del controlador de Subespacios
+            return RedirectToAction("Details", "Subespacios", new { esId });
+        }
+
         // GET: Espacios/Edit
         public async Task<IActionResult> Edit(int? id)
         {
