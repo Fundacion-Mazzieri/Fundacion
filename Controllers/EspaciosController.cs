@@ -93,6 +93,12 @@ namespace Fundacion.Controllers
             return View(espacio);
         }
 
+        public IActionResult RedirectToCreateByIdEspacio(int id)
+        {
+            // Redirige al método "CreateByIdEspacio" del controlador "Subespacios" con el ID como parámetro.
+            return RedirectToAction("CreateByIdEspacio", "Subespacios", new { id = id });
+        }
+
         // GET: Espacios/Edit
         public async Task<IActionResult> Edit(int? id)
         {

@@ -71,6 +71,31 @@ namespace Fundacion.Controllers
             ViewData["EsId"] = new SelectList(_context.Espacios, "EsId", "EsDescripcion", subespacio.EsId);
             return View(subespacio);
         }
+        // GET: Subespacios/CreateByIdEspacio
+        public IActionResult CreateByIdEspacio(int? id)
+        {
+            ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion");
+            ViewData["EsId"] = new SelectList(_context.Espacios.Where(espacio => espacio.EsId == id), "EsId", "EsDescripcion");
+            return View();
+        }
+
+        // POST: Subespacios/CreateByIdEspacio
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateByIdEspacio(int id,[Bind("SeId,EsId,AuId,SeDia,SeHora,SeCantHs")] Subespacio subespacio)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(subespacio);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(CreateByIdEspacio));
+            }
+            ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion", subespacio.AuId);
+            ViewData["EsId"] = new SelectList(_context.Espacios.Where(espacio => espacio.EsId == id), "EsId", "EsDescripcion", subespacio.EsId);
+            return View(subespacio);
+        }
 
         // GET: Subespacios/Edit/5
         public async Task<IActionResult> Edit(int? id)

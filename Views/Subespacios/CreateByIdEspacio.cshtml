@@ -1,0 +1,82 @@
+﻿@model Fundacion.Models.Subespacio
+
+@{
+    ViewData["Title"] = "Cargar asignación de espacio";
+}
+
+<h1>Carga de asignación de espacio</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateByIdEspacio">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EsId" class="control-label"></label>
+                <select asp-for="EsId" class ="form-control" asp-items="ViewBag.EsId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuId" class="control-label"></label>
+                <select asp-for="AuId" class ="form-control" asp-items="ViewBag.AuId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeDia" class="control-label"></label><br />                
+
+                @* <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-1-outlined" value="Lunes" autocomplete="off">
+                <label class="btn btn-outline-primary m-1" for="btn-check-1-outlined">Lunes</label> *@
+
+                <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-1-outlined" value="Lunes" autocomplete="off">
+                <label class="btn btn-outline-primary m-1" for="btn-check-1-outlined">Lunes</label>
+                <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-2-outlined" value="Martes" autocomplete="off">
+                <label class="btn btn-outline-primary m-1" for="btn-check-2-outlined">Martes</label>
+                <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-3-outlined" value="Miércoles" autocomplete="off">
+                <label class="btn btn-outline-primary m-1" for="btn-check-3-outlined">Miércoles</label>
+                <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-4-outlined" value="Jueves" autocomplete="off">
+                <label class="btn btn-outline-primary m-1" for="btn-check-4-outlined">Jueves</label>
+                <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-5-outlined" value="Viernes" autocomplete="off">
+                <label class="btn btn-outline-primary m-1" for="btn-check-5-outlined">Viernes</label>
+                <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-6-outlined" value="Sábado" autocomplete="off">
+                <label class="btn btn-outline-primary m-1" for="btn-check-6-outlined">Sábado</label>
+
+                <input asp-for="SeDia" class="form-control" id="seDia" style="display: none;" />
+
+                @* <input asp-for="SeDia" class="form-control" /> *@
+                <span asp-validation-for="SeDia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeHora" class="control-label"></label>
+                <input asp-for="SeHora" type="time" class="form-control" />
+                <span asp-validation-for="SeHora" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeCantHs" class="control-label"></label>
+                <select asp-for="SeCantHs" class="form-control">
+                    <option value="1">01:00</option>
+                    <option value="1.5">01:30</option>
+                    <option value="2">02:00</option>
+                    <option value="2.5">02:30</option>
+                    <option value="3">03:00</option>
+                    <option value="3.5">03:30</option>
+                    <option value="4">04:00</option>
+                    <option value="4.5">04:30</option>
+                    <option value="5">05:00</option>
+                    <option value="5.5">05:30</option>
+                    <option value="6">06:00</option>
+                </select>               
+                <span asp-validation-for="SeCantHs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cargar" class="btn btn-primary" />
+            </div>
+            <div>
+                <a asp-action="Index" asp-controller="Espacios" class="btn btn-outline-danger" style="margin-top:20px">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

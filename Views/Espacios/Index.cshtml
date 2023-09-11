@@ -92,8 +92,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Us.UsNombre) @Html.DisplayFor(modelItem => item.Us.UsApellido)
                 </td>
-                <td>
-                    <a asp-action="Create" class="btn btn-link btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Subespacios" asp-action="Index">Asignaturas</a> |
+                <td>                    
+                    <a asp-action="RedirectToCreateByIdEspacio" class="btn btn-link btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Espacios">Asignaturas</a> |
                     <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.EsId">Modificar</a> |
                     <a asp-action="Details" class="btn btn-primary btn-sm mb-1" asp-route-id="@item.EsId">Detalles</a> |
                     <a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.EsId">Eliminar</a>

@@ -133,7 +133,9 @@ public partial class FundacionContext : DbContext
             entity.Property(e => e.SeDia)
                 .HasMaxLength(50)
                 .HasColumnName("seDia");
-            entity.Property(e => e.SeHora).HasColumnName("seHora");
+            entity.Property(e => e.SeHora)
+                .HasMaxLength(10)
+                .HasColumnName("seHora");
 
             entity.HasOne(d => d.Au).WithMany(p => p.Subespacios)
                 .HasForeignKey(d => d.AuId)

@@ -128,3 +128,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll('.dias-checkbox');
+    const seDiaInput = document.getElementById('seDia');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const selectedDays = Array.from(checkboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+
+            seDiaInput.value = selectedDays.join(', ');
+        });
+    });
+});
