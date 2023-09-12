@@ -26,6 +26,16 @@ namespace Fundacion.Controllers
             return View(await fundacionContext.ToListAsync());
         }
 
+        // GET: Subespacios
+        public async Task<IActionResult> IndexById(int? EsId)
+        {
+            var fundacionContext = _context.Subespacios
+                .Include(s => s.Au)
+                .Include(s => s.Es)
+                .Where(s => s.EsId == EsId);
+            return View(await fundacionContext.ToListAsync());
+        }
+
         // GET: Subespacios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -38,6 +48,7 @@ namespace Fundacion.Controllers
                 .Include(s => s.Au)
                 .Include(s => s.Es)
                 .FirstOrDefaultAsync(m => m.SeId == id);
+
             if (subespacio == null)
             {
                 return NotFound();
