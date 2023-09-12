@@ -55,7 +55,7 @@ namespace Fundacion.Controllers
 
         // GET: Asistencias/Create
         public IActionResult Create()
-        {
+        {            
             ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
             ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
             ViewData["AsIngreso"] = DateTime.Now;
@@ -107,6 +107,8 @@ namespace Fundacion.Controllers
         [ValidateAntiForgeryToken]        
         public async Task<IActionResult> Create([Bind("EsId,AsIngreso")] Asistencia asistencia)
         {
+            var asistencias = await _context.Asistencias.FindAsync();
+            var cantHsRedondeo = (asistencias.AsIngreso - asistencias.AsEgreso);
             if (ModelState.IsValid)
             {
                 asistencia.AsIngreso = DateTime.Now; // Establece el tiempo de inicio
