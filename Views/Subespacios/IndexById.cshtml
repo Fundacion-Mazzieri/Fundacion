@@ -17,7 +17,6 @@
     </div>
     <div class="offcanvas-body">
 
-
         <a asp-area="" asp-controller="Asistencias" asp-action="Index">
             <div class="col col1"><h3>Asistencias</h3><img src="./assets/inicio/lista-de-verificacion.png" /></div>
         </a>
@@ -44,16 +43,12 @@
 
 <h1>Espacio de Asignaciones</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-success btn-sm">Cargar Nueva Asignación</a>
+<p>    
     <a asp-action="Index" class="btn btn-danger btn-sm" asp-controller="Espacios">Volver a espacios</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Es.EsId)
-            </th>
+        <tr>            
             <th>
                 @Html.DisplayNameFor(model => model.SeDia)
             </th>
@@ -64,20 +59,14 @@
                 @Html.DisplayNameFor(model => model.SeCantHs)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Au)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Es)
-            </th>
+                @Html.DisplayNameFor(model => model.AuId)
+            </th>            
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Es.EsId)
-            </td>
+        <tr>            
             <td>
                 @Html.DisplayFor(modelItem => item.SeDia)
             </td>
@@ -88,18 +77,12 @@
                 @Html.DisplayFor(modelItem => item.SeCantHs)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Au.AuId)
-            </td>
+                @Html.DisplayFor(modelItem => item.Au.AuDescripcion)
+            </td>            
             <td>
-                @Html.DisplayFor(modelItem => item.Es.EsId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SeId">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.SeId">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.SeId">Borrar</a>
+                <a class="btn btn-danger btn-sm mb-1 asp-action="Delete" asp-route-id="@item.SeId">Borrar</a>
             </td>
         </tr>
 }
-|
     </tbody>
 </table>

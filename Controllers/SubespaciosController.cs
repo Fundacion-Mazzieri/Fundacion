@@ -27,7 +27,7 @@ namespace Fundacion.Controllers
         }
 
         // GET: Subespacios
-        public async Task<IActionResult> IndexById(int? EsId)
+        public async Task<IActionResult> IndexById(int EsId)
         {
             var fundacionContext = _context.Subespacios
                 .Include(s => s.Au)
@@ -36,8 +36,14 @@ namespace Fundacion.Controllers
             return View(await fundacionContext.ToListAsync());
         }
 
+        public IActionResult RedirectToIndexEspacio()
+        {
+            // Redirige al método "CreateByIdEspacio" del controlador "Subespacios" con el ID como parámetro.
+            return RedirectToAction("Index", "Espacios");
+        }
+
         // GET: Subespacios/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null || _context.Subespacios == null)
             {
@@ -156,7 +162,7 @@ namespace Fundacion.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("IndexById", new { EsId = subespacio.EsId });
             }
             ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion", subespacio.AuId);
             ViewData["EsId"] = new SelectList(_context.Espacios, "EsId", "EsDescripcion", subespacio.EsId);
@@ -199,7 +205,7 @@ namespace Fundacion.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("IndexById", new { EsId = subespacio.EsId });
         }
 
         private bool SubespacioExists(int id)

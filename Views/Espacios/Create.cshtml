@@ -16,26 +16,7 @@
                 <label asp-for="EsDescripcion" class="control-label">Descripcion</label>
                 <input asp-for="EsDescripcion" class="form-control" />
                 <span asp-validation-for="EsDescripcion" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="AuId" class="control-label">Aula</label>
-                <select asp-for="AuId" class="form-control" asp-items="ViewBag.AuId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="EsDia" class="control-label">Espacio Dia</label>
-                <input asp-for="EsDia" class="form-control" />
-                <span asp-validation-for="EsDia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EsHora" class="control-label">Espacio Hora</label>
-                <input asp-for="EsHora" class="form-control" />
-                <span asp-validation-for="EsHora" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EsCantHs" class="control-label">Duracion del espacio en minuto/s</label>
-                <input asp-for="EsCantHs" class="form-control" />
-                <span asp-validation-for="EsCantHs" class="text-danger"></span>
-            </div>*@
+            </div>            
             <div class="form-group">
                 <label asp-for="TuId" class="control-label">Turno</label>
                 <select asp-for="TuId" class="form-control" asp-items="ViewBag.TuId"></select>
@@ -43,15 +24,10 @@
             <div class="form-group">
                 <label asp-for="UsId" class="control-label">Usuario</label>
                 <select asp-for="UsId" class="form-control" asp-items="ViewBag.UsId"></select>
-            </div>
-            @*<div class="form-group">
-            <label asp-for="EsActivo" class="control-label">Activo</label>
-            <input asp-for="EsActivo" class="form-control" />
-            <span asp-validation-for="EsActivo" class="text-danger"></span>
-            </div>*@
+            </div>            
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="EsActivo" /> @*@Html.DisplayNameFor(model => model.UsActivo)*@ <p>Activo</p>
+                    <input class="form-check-input" asp-for="EsActivo" /><p>Activo</p>
                 </label>
             </div>
             <div class="form-group">

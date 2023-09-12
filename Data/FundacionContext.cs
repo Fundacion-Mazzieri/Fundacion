@@ -127,9 +127,9 @@ public partial class FundacionContext : DbContext
             entity.Property(e => e.AuId).HasColumnName("auId");
             entity.Property(e => e.EsId).HasColumnName("esId");
             entity.Property(e => e.SeCantHs)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("seCantHs");
+            .HasMaxLength(10)
+            .IsFixedLength()
+            .HasColumnName("seCantHs");
             entity.Property(e => e.SeDia)
                 .HasMaxLength(50)
                 .HasColumnName("seDia");

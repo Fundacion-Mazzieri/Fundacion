@@ -20,11 +20,7 @@
                 <select asp-for="AuId" class ="form-control" asp-items="ViewBag.AuId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="SeDia" class="control-label"></label><br />                
-
-                @* <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-1-outlined" value="Lunes" autocomplete="off">
-                <label class="btn btn-outline-primary m-1" for="btn-check-1-outlined">Lunes</label> *@
-
+                <label asp-for="SeDia" class="control-label"></label><br />
                 <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-1-outlined" value="Lunes" autocomplete="off">
                 <label class="btn btn-outline-primary m-1" for="btn-check-1-outlined">Lunes</label>
                 <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-2-outlined" value="Martes" autocomplete="off">
@@ -37,10 +33,7 @@
                 <label class="btn btn-outline-primary m-1" for="btn-check-5-outlined">Viernes</label>
                 <input type="checkbox" class="btn-check dias-checkbox" id="btn-check-6-outlined" value="Sábado" autocomplete="off">
                 <label class="btn btn-outline-primary m-1" for="btn-check-6-outlined">Sábado</label>
-
-                <input asp-for="SeDia" class="form-control" id="seDia" style="display: none;" />
-
-                @* <input asp-for="SeDia" class="form-control" /> *@
+                <input asp-for="SeDia" class="form-control" id="seDia" hidden/>
                 <span asp-validation-for="SeDia" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,25 +44,25 @@
             <div class="form-group">
                 <label asp-for="SeCantHs" class="control-label"></label>
                 <select asp-for="SeCantHs" class="form-control">
-                    <option value="1">01:00</option>
+                    <option value="1.0">01:00</option>
                     <option value="1.5">01:30</option>
-                    <option value="2">02:00</option>
+                    <option value="2.0">02:00</option>
                     <option value="2.5">02:30</option>
-                    <option value="3">03:00</option>
+                    <option value="3.0">03:00</option>
                     <option value="3.5">03:30</option>
-                    <option value="4">04:00</option>
+                    <option value="4.0">04:00</option>
                     <option value="4.5">04:30</option>
-                    <option value="5">05:00</option>
+                    <option value="5.0">05:00</option>
                     <option value="5.5">05:30</option>
-                    <option value="6">06:00</option>
+                    <option value="6.0">06:00</option>
                 </select>               
                 <span asp-validation-for="SeCantHs" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Cargar" class="btn btn-primary" />
+                <input type="submit" value="Agregar asignatura" class="btn btn-primary" />
             </div>
             <div>
-                <a asp-action="Index" asp-controller="Espacios" class="btn btn-outline-danger" style="margin-top:20px">Volver</a>
+                <a asp-action="Index" asp-controller="Espacios" class="btn btn-outline-danger" style="margin-top:20px">Finalizar</a>
             </div>
         </form>
     </div>

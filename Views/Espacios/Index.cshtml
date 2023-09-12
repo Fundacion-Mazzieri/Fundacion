@@ -71,6 +71,7 @@
                 Docente
             </th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -93,11 +94,13 @@
                     @Html.DisplayFor(modelItem => item.Us.UsNombre) @Html.DisplayFor(modelItem => item.Us.UsApellido)
                 </td>
                 <td>                    
-                    <a asp-action="RedirectToCreateByIdEspacio" class="btn btn-link btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Espacios">Asignar</a> |
-                    <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.EsId">Modificar</a> |
-                    <a asp-action="RedirectToDetailsByEsId" class="btn btn-primary btn-sm mb-1" asp-route-esId="@item.EsId" asp-controller="Espacios">Detalles</a> |
-
-                    <a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.EsId">Eliminar</a>
+                    <a asp-action="RedirectToCreateByIdEspacio" class="btn btn-outline-primary btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Espacios">Asignar días</a>
+                    <a asp-action="RedirectToDetailsByEsId" class="btn btn-primary btn-sm mb-1" asp-route-esId="@item.EsId" asp-controller="Espacios">Detalle</a>
+                    
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.EsId">Modificar espacio</a>
+                    <a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.EsId">Eliminar espacio</a>
                 </td>
             </tr>
         }
