@@ -29,10 +29,8 @@ namespace Fundacion.Controllers
         {
             var fundacionContext = _context.Asistencias
                 .Include(a => a.Es)
-                .Include(a => a.Su)
-                .Include(a => a.Su.Au)
-                .Include(a => a.Es.Tu)
-                .Include(a => a.Es.Us);
+                .Include(a => a.Es.Us)
+                .Include(a => a.Es.Ca);
             return View(await fundacionContext.ToListAsync());
         }
 

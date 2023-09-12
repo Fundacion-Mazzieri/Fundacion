@@ -24,7 +24,10 @@ namespace Fundacion.Controllers
         // GET: Espacios
         public async Task<IActionResult> Index()
         {
-            var fundacionContext = _context.Espacios.Include(e => e.Ca).Include(e => e.Tu).Include(e => e.Us);
+            var fundacionContext = _context.Espacios
+                .Include(e => e.Ca)
+                .Include(e => e.Tu)
+                .Include(e => e.Us);
             return View(await fundacionContext.ToListAsync());
         }
 

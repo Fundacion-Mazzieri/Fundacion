@@ -59,31 +59,14 @@
                 <span asp-validation-for="SeCantHs" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Agregar asignatura" class="btn btn-primary" />
+                <input type="submit" value="Agregar asignatura" class="btn btn-primary m-1" />
             </div>
             <div>
-                <a asp-action="Index" asp-controller="Espacios" class="btn btn-outline-danger" style="margin-top:20px">Finalizar</a>
+                <a asp-action="Index" asp-controller="Espacios" class="btn btn-outline-danger m-1" style="margin-top:20px">Finalizar</a>
             </div>
         </form>
     </div>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const checkboxes = document.querySelectorAll('.dias-checkbox');
-        const seDiaInput = document.getElementById('seDia');
-
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function () {
-                const selectedDays = Array.from(checkboxes)
-                    .filter(checkbox => checkbox.checked)
-                    .map(checkbox => checkbox.value);
-
-                seDiaInput.value = selectedDays.join(', ');
-            });
-        });
-    });
-</script>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

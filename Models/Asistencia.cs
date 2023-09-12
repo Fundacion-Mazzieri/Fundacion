@@ -18,5 +18,4 @@ public partial class Asistencia
     public double AsCantHsRedondeo { get; set; }
 
     public virtual Espacio Es { get; set; } = null!;
-    public virtual Subespacio Su { get; set; } = null!;
 }
