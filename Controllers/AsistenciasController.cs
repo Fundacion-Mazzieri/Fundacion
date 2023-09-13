@@ -29,6 +29,7 @@ namespace Fundacion.Controllers
         {
             var fundacionContext = _context.Asistencias
                 .Include(a => a.Es)
+                .Include(a => a.Es.Tu)
                 .Include(a => a.Es.Us)
                 .Include(a => a.Es.Ca);
             return View(await fundacionContext.ToListAsync());
@@ -67,17 +68,7 @@ namespace Fundacion.Controllers
                     espacio.EsId,
                     EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
                 }),
-                "EsId", "EsDescripcion");
-            
-            ViewData["SeId"] = new SelectList(
-                _context.Set<Subespacio>()
-                .Where(subespacio => subespacio.Es.Us.RoId == 2)
-                .Select(subespacio => new
-                {
-                    subespacio.SeId,
-                    SeDescripcion = $"{subespacio.Au.AuDescripcion} - {subespacio.SeDia} {subespacio.SeHora} - {subespacio.SeCantHs})"
-                }),
-                "EsId", "EsDescripcion");
+                "EsId", "EsDescripcion");            
             return View();
         }
         //public IActionResult Create()
@@ -106,18 +97,25 @@ namespace Fundacion.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]        
         public async Task<IActionResult> Create([Bind("EsId,AsIngreso")] Asistencia asistencia)
-        {
-            var asistencias = await _context.Asistencias.FindAsync();
-            var cantHsRedondeo = (asistencias.AsIngreso - asistencias.AsEgreso);
+        {            
             if (ModelState.IsValid)
             {
                 asistencia.AsIngreso = DateTime.Now; // Establece el tiempo de inicio
+                asistencia.AsEgreso = asistencia.AsIngreso;
                 _context.Add(asistencia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = asistencia.AsiId });
             }
 
-            ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
+            ViewData["EsId"] = new SelectList(
+                _context.Set<Espacio>()
+                .Where(espacio => espacio.Us.RoId == 2)
+                .Select(espacio => new
+                {
+                    espacio.EsId,
+                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                }),
+                "EsId", "EsDescripcion");
             return View(asistencia);
         }
 
@@ -128,19 +126,19 @@ namespace Fundacion.Controllers
             if (id == null || _context.Asistencias == null)
             {
                 return NotFound();
-            }
-
-            var asistencia = await _context.Asistencias.FindAsync(id);
+            }          
+            
+            var asistencia = await _context.Asistencias
+                .Include(a => a.Es)
+                .Include(a => a.Es.Tu)
+                .Include(a => a.Es.Us)
+                .Include(a => a.Es.Ca)
+                .FirstOrDefaultAsync(m => m.AsiId == id);
             if (asistencia == null)
             {
                 return NotFound();
             }
-
-            // Si la asistencia ya tiene tiempo de egreso, redirigir a la página de detalles
-            if (asistencia.AsEgreso != null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
+            
             ViewData["EsId"] = new SelectList(
                 _context.Set<Espacio>()
                 .Where(espacio => espacio.Us.RoId == 2)
@@ -149,38 +147,48 @@ namespace Fundacion.Controllers
                     espacio.EsId,
                     EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
                 }),
-                "EsId", "EsDescripcion");
-            
-            ViewData["SeId"] = new SelectList(
-                _context.Set<Subespacio>()
-                .Where(subespacio => subespacio.Es.Us.RoId == 2)
-                .Select(subespacio => new
-                {
-                    subespacio.SeId,
-                    SeDescripcion = $"{subespacio.Au.AuDescripcion} - {subespacio.SeDia} {subespacio.SeHora} - {subespacio.SeCantHs})"
-                }),
-                "EsId", "EsDescripcion");
+                "EsId", "EsDescripcion");           
             return View(asistencia);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AsiId,EsId,AsIngreso,AsEgreso,AsPresent")] Asistencia asistencia)
+        public async Task<IActionResult> Edit(int? id, [Bind("AsiId,EsId,AsEgreso,AsPresent")] Asistencia asistencia)
         {
             if (id != asistencia.AsiId)
             {
                 return NotFound();
-            }
-
+            }            
             if (ModelState.IsValid)
             {
-                asistencia.AsEgreso = DateTime.Now; // Establece el tiempo de egreso
+                asistencia.AsEgreso = DateTime.Now; // Establece el tiempo de finalización
+                if (asistencia.AsEgreso > asistencia.AsIngreso)
+                {
+                    // Calcula la diferencia de tiempo entre AsEgreso y AsIngreso
+                    TimeSpan tiempoTranscurrido = asistencia.AsEgreso - asistencia.AsIngreso;
+                    // Convierte la diferencia en minutos
+                    double minutos = tiempoTranscurrido.TotalMinutes;
+                    // Redondea la diferencia al entero más cercano considerando que 50 minutos o más se cuentan como una hora
+                    int horasTrabajadas = (int)Math.Round(minutos / 60.0, MidpointRounding.AwayFromZero);
+
+                    // Actualiza AsEgreso restando las horas trabajadas a AsIngreso
+                    asistencia.AsEgreso = asistencia.AsIngreso.AddHours(horasTrabajadas);
+                }
                 _context.Update(asistencia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
+            //ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
+            ViewData["EsId"] = new SelectList(
+                _context.Set<Espacio>()
+                .Where(espacio => espacio.Us.RoId == 2)
+                .Select(espacio => new
+                {
+                    espacio.EsId,
+                    EsDescripcion = $"{espacio.EsDescripcion} - Turno: {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                }),
+                "EsId", "EsDescripcion");
             return View(asistencia);
         }
 

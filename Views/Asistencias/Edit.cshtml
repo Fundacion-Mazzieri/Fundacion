@@ -6,13 +6,13 @@
 
 <h1>Finalizar</h1>
 
-<h4>Asistencia del espacio @Html.DisplayFor(model => model.Es.EsDescripcion)</h4>
-<hr />
+<h4>Asistencia del espacio:</h4>
+<h4></h4>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group p-2">
+            @* <div class="form-group p-2">
                 <input class="btn btn-success" value="Verificar" id="verificarBtn" />
                 <p id="ubicacionMsg"></p>
                 <p id="resultado" class="text-danger"></p>
@@ -21,11 +21,12 @@
             <input type="hidden" id="centroLatitud" data-latitud="@ViewBag.CentroLatitud" />
             <input type="hidden" id="centroLongitud" data-longitud="@ViewBag.CentroLongitud" />            
             
-            <!--------------------------------------------------------------------------------->
+            <!---------------------------------------------------------------------------------> *@
             <input type="hidden" asp-for="AsiId" />
             <div class="form-group">
                 <label asp-for="EsId" class="control-label">Espacio</label>
-                <select asp-for="EsId" class="form-control" asp-items="ViewBag.EsId" id="selectEspacio" disabled></select>
+                <select asp-for="EsId" class="form-control" asp-items="ViewBag.EsId" hidden></select>
+                <select asp-for="EsId" class="form-control" asp-items="ViewBag.EsId" disabled></select>
             </div>
             <div class="form-group" hidden>
                 <label asp-for="AsIngreso" class="control-label">Ingreso</label>
@@ -41,12 +42,12 @@
             </div>            
             <div class="form-group form-check" hidden>
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="AsPresent" id="presenteCheck"/> Presente
+                    <input class="form-check-input" asp-for="AsPresent" id="presenteCheck" checked/> Presente
                 </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Iniciar" class="btn btn-outline-primary" id="cargarBtn" style="margin-top:20px" hidden />
-                <input type="submit" value="Finalizar" class="btn btn-outline-primary" id="finalizarBtn" style="margin-top:20px" disabled />
+                <input type="submit" value="Finalizar" class="btn btn-outline-primary" id="finalizarBtn" style="margin-top:20px"/>
             </div>
             @* <div class="form-group">
                 <input type="submit" value="Aceptar" class="btn btn-primary" id="cargarBtn" disabled />
@@ -59,7 +60,6 @@
 <div>
     <a asp-action="Index" class="btn btn-outline-danger" style="margin-top:20px">Volver</a>
 </div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

@@ -50,21 +50,20 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @* @Html.DisplayNameFor(model => model.AsIngreso)*@
-                Ingreso
+            <th>Fecha -
+                @Html.DisplayNameFor(model => model.AsIngreso)                
             </th>
             <th>
-                @* @Html.DisplayNameFor(model => model.AsEgreso)*@
-                Egreso
+                @Html.DisplayNameFor(model => model.AsEgreso)                
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.AsPresent)*@
-                Presente
+                @Html.DisplayNameFor(model => model.AsPresent)                
             </th>
             <th>
-                @* @Html.DisplayNameFor(model => model.Es)*@
-                Espacio
+                @Html.DisplayNameFor(model => model.Es)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AsCantHsRedondeo)
             </th>
             <th></th>
         </tr>
@@ -72,12 +71,19 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr>                
                 <td>
                     @Html.DisplayFor(modelItem => item.AsIngreso)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AsEgreso)
+                    @if (item.AsEgreso > item.AsIngreso)
+                    {
+                        @Html.DisplayFor(modelItem => item.AsEgreso)
+                    }
+                    else
+                    {
+                        <p class=""><em>Pendiente</em></p>
+                    }                    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AsPresent)
@@ -90,12 +96,15 @@
                     @Html.DisplayFor(modelItem => item.Es.Us.UsNombre)
                 </td>
                 <td>
-                    @if (item.AsEgreso != null)
+                    @Html.DisplayFor(modelItem => item.AsCantHsRedondeo)
+                </td>
+                <td>
+                    @if (item.AsEgreso > item.AsIngreso)
                     {
                         <span class="btn btn-secondary btn-sm disabled">Finalizado</span>
                     }
                     else
-                    {
+                    {                        
                         <a class="btn btn-danger btn-sm" asp-action="Edit" asp-route-id="@item.AsiId">Finalizar</a>
                     }                    
                 </td>

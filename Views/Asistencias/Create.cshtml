@@ -24,13 +24,13 @@
             <!---------------------------------------------------------------------------------> *@
             <div class="form-group">
                 <label asp-for="EsId" class="control-label">Espacio</label>
-                <select asp-for="EsId" class="form-control" asp-items="ViewBag.EsId" id="selectEspacio" disabled></select>
+                <select asp-for="EsId" class="form-control" asp-items="ViewBag.EsId" id="selectEspacio"></select>
             </div>
             <div class="form-group">
                 <label asp-for="AsIngreso" class="control-label">Ingreso</label>
                 <input asp-for="AsIngreso" class="form-control" id="inputIngreso" readonly
-                       value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")"
-                       placeholder="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")" />
+                       value="@DateTime.Now.ToString("HH:mm")"
+                       placeholder="@DateTime.Now.ToString("HH:mm")" />
                 <span asp-validation-for="AsIngreso" class="text-danger"></span>
             </div>
             @* <div class="form-group" hidden>
