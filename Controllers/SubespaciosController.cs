@@ -10,6 +10,7 @@ using Fundacion.Models;
 
 namespace Fundacion.Controllers
 {
+    [Authorize(Roles = "Super Admin, Admin")]
     public class SubespaciosController : Controller
     {
         private readonly FundacionContext _context;
