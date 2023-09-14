@@ -25,8 +25,8 @@ namespace Fundacion.Controllers
         [HttpPost]
         public async Task<IActionResult> Ingresar(UsuarioDTO usuarioDTO)
         {
-            //var clave = Encrypt.GetMD5(usuarioDTO.UsContrasena.ToString());
-            var usuario = _context.Usuarios.Where(item => item.UsDni == usuarioDTO.UsDni /* && item.UsContrasena == clave*/).FirstOrDefault();
+            var clave = Encrypt.GetMD5(usuarioDTO.UsContrasena.ToString());
+            var usuario = _context.Usuarios.Where(item => item.UsDni == usuarioDTO.UsDni && item.UsContrasena == clave).FirstOrDefault();
             var roles = _context.Usuarios.Include(u => u.Ro).Where(item => item.UsDni == usuarioDTO.UsDni)
                .FirstOrDefault();
             
