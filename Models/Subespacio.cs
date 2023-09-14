@@ -18,7 +18,7 @@ public partial class Subespacio
     [Display(Name = "Hora")]    
     public TimeSpan? SeHora { get; set; }
     [Display(Name = "Cantidad de Horas")]
-    public string SeCantHs { get; set; } = null!;
+    public double SeCantHs { get; set; }
 
     public virtual Aula? Au { get; set; }
 
