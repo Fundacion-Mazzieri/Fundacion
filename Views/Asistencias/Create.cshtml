@@ -29,8 +29,8 @@
             <div class="form-group">
                 <label asp-for="AsIngreso" class="control-label">Ingreso</label>
                 <input asp-for="AsIngreso" class="form-control" id="inputIngreso" readonly
-                       value="@DateTime.Now.ToString("HH:mm")"
-                       placeholder="@DateTime.Now.ToString("HH:mm")" />
+                       value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")"
+                       placeholder="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")" />
                 <span asp-validation-for="AsIngreso" class="text-danger"></span>
             </div>
             @* <div class="form-group" hidden>

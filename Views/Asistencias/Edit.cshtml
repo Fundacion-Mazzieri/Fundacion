@@ -30,7 +30,7 @@
             </div>
             <div class="form-group" hidden>
                 <label asp-for="AsIngreso" class="control-label">Ingreso</label>
-                <input asp-for="AsIngreso" class="form-control" id="inputIngreso"/>
+                <input asp-for="AsIngreso" class="form-control" id="inputIngreso" value="@Model.AsIngreso.ToString("yyyy-MM-dd HH:mm")" />
                 <span asp-validation-for="AsIngreso" class="text-danger"></span>
             </div>
             <div class="form-group">
