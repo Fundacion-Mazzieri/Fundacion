@@ -51,24 +51,20 @@
     <thead>
         <tr>
             <th>
-                @*@Html.DisplayNameFor(model => model.EsDescripcion)*@
-                Descripcion
+                @Html.DisplayNameFor(model => model.EsDescripcion)
             </th>
             <th>
-                @*Html.DisplayNameFor(model => model.EsActivo)*@
-                Activo
+                @Html.DisplayNameFor(model => model.EsActivo)
+                
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Ca)*@
-                Categoria
+                @Html.DisplayNameFor(model => model.Ca)                
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Tu)*@
-                Turno
+                @Html.DisplayNameFor(model => model.Tu)                
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Us)*@
-                Docente
+                @Html.DisplayNameFor(model => model.Us)                
             </th>
             <th></th>
             <th></th>
@@ -91,7 +87,7 @@
                     @Html.DisplayFor(modelItem => item.Tu.TuDescripcion)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Us.UsNombre) @Html.DisplayFor(modelItem => item.Us.UsApellido)
+                    (@Html.DisplayFor(modelItem => item.Us.UsDni)) @Html.DisplayFor(modelItem => item.Us.UsApellido), @Html.DisplayFor(modelItem => item.Us.UsNombre)
                 </td>
                 <td>                    
                     <a asp-action="RedirectToCreateByIdEspacio" class="btn btn-outline-primary btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Espacios">Asignar días</a>
