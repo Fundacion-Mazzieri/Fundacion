@@ -78,8 +78,8 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Comprobar si el espacio ya existe por Descripción
-                bool espacioExiste = await _context.Espacios.AnyAsync(e => e.EsDescripcion == espacio.EsDescripcion);
+                // Comprobar si el espacio ya existe
+                bool espacioExiste = await _context.Espacios.AnyAsync(e => e.EsDescripcion == espacio.EsDescripcion && e.TuId == espacio.TuId && e.UsId == espacio.UsId);
 
                 if (!espacioExiste)
                 {
@@ -164,37 +164,26 @@ namespace Fundacion.Controllers
 
             if (ModelState.IsValid)
             {
-                // Comprobar si el espacio ya existe por Descripción
-                bool espacioExiste = await _context.Espacios.AnyAsync(e => e.EsDescripcion == espacio.EsDescripcion);
+                // Comprobar si el espacio ya existe
+                bool espacioExiste = await _context.Espacios.AnyAsync(e => e.EsDescripcion == espacio.EsDescripcion && e.TuId == espacio.TuId && e.UsId == espacio.UsId);
 
                 if (!espacioExiste)
                 {
-                    _context.Add(espacio);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    try
+                    {
+                        _context.Update(espacio);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    catch
+                    {
+                        ModelState.AddModelError("EsDescripcion", "El espacio no pudo modificarse.");
+                    }                    
                 }
                 else
                 {
-                    ModelState.AddModelError("EsDescripcion", "Ya existe un espacio con ese nombre.");
-                }
-
-                try
-                {
-                    _context.Update(espacio);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EspacioExists(espacio.EsId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                    ModelState.AddModelError("EsDescripcion", "Ya existe el espacio.");
+                }                
             }
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion", espacio.TuId);
