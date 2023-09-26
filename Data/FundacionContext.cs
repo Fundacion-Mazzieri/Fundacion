@@ -24,6 +24,10 @@ public partial class FundacionContext : DbContext
 
     public virtual DbSet<Espacio> Espacios { get; set; }
 
+    public virtual DbSet<Localidad> Localidades { get; set; }
+
+    public virtual DbSet<Provincia> Provincias { get; set; }
+
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Subespacio> Subespacios { get; set; }
@@ -109,6 +113,29 @@ public partial class FundacionContext : DbContext
                 .HasConstraintName("FK_Espacios_Usuarios");
         });
 
+        modelBuilder.Entity<Localidad>(entity =>
+        {
+            entity.HasKey(e => e.LcId);
+
+            entity.Property(e => e.PvId).HasColumnName("pvId");
+            entity.Property(e => e.LcId).HasColumnName("lcId");
+            entity.Property(e => e.LcDescripcion)
+                .HasColumnName("lcDescripcion");
+
+            entity.HasOne(d => d.Pv).WithMany(p => p.Localidades)
+                .HasForeignKey(d => d.PvId)
+                .HasConstraintName("FK_Localidades_Provincias");
+        });
+
+        modelBuilder.Entity<Provincia>(entity =>
+        {
+            entity.HasKey(e => e.PvId);
+
+            entity.Property(e => e.PvId).HasColumnName("pvId");
+            entity.Property(e => e.PvDescripcion)                
+                .HasColumnName("pvDescripcion");
+        });
+
         modelBuilder.Entity<Role>(entity =>
         {
             entity.HasKey(e => e.RoId);
@@ -165,6 +192,9 @@ public partial class FundacionContext : DbContext
             entity.Property(e => e.UsApellido)
                 .HasMaxLength(50)
                 .HasColumnName("usApellido");
+            entity.Property(e => e.UsNombre)
+                .HasMaxLength(50)
+                .HasColumnName("usNombre");
             entity.Property(e => e.UsContrasena)
                 .HasMaxLength(50)
                 .HasColumnName("usContrasena");
@@ -175,21 +205,26 @@ public partial class FundacionContext : DbContext
             entity.Property(e => e.UsEmail)
                 .HasMaxLength(50)
                 .HasColumnName("usEmail");
-            entity.Property(e => e.UsLocalidad)
-                .HasMaxLength(50)
-                .HasColumnName("usLocalidad");
-            entity.Property(e => e.UsNombre)
-                .HasMaxLength(50)
-                .HasColumnName("usNombre");
-            entity.Property(e => e.UsProvincia)
-                .HasMaxLength(50)
-                .HasColumnName("usProvincia");
+
+            entity.Property(e => e.UsLocalidad).HasColumnName("usLocalidad");            
+            entity.Property(e => e.UsProvincia).HasColumnName("usProvincia");
+
             entity.Property(e => e.UsTelefono).HasColumnName("usTelefono");
 
             entity.HasOne(d => d.Ro).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.RoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Usuarios_Roles");
+
+            entity.HasOne(d => d.Lc).WithMany(p => p.Usuarios)
+                .HasForeignKey(d => d.UsLocalidad)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Usuarios_Localidades");
+
+            entity.HasOne(d => d.Pv).WithMany(p => p.Usuarios)
+                .HasForeignKey(d => d.UsProvincia)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Usuarios_Provincias");
         });
 
         OnModelCreatingPartial(modelBuilder);

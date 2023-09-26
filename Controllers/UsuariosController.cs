@@ -25,7 +25,9 @@ namespace Fundacion.Controllers
         [Authorize(Roles = "Super Admin, Admin, Usuario")]
         public async Task<IActionResult> Index()
         {
-            var fundacionContext = _context.Usuarios.Include(u => u.Ro);
+            var fundacionContext = _context.Usuarios
+                .Include(u => u.Ro)
+                .Include(u => u.Lc);
             return View(await fundacionContext.ToListAsync());
         }
 
@@ -40,6 +42,8 @@ namespace Fundacion.Controllers
 
             var usuario = await _context.Usuarios
                 .Include(u => u.Ro)
+                .Include(u => u.Pv)
+                .Include(u => u.Lc)
                 .FirstOrDefaultAsync(m => m.UsId == id);
             if (usuario == null)
             {
@@ -54,6 +58,9 @@ namespace Fundacion.Controllers
         public IActionResult Create()
         {
             ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoDenominacion");
+            ViewData["UsProvincia"] = new SelectList(_context.Provincias, "PvId", "PvDescripcion");
+            ViewData["UsLocalidad"] = new SelectList(_context.Localidades, "LcId", "LcDescripcion");
+
             return View();
         }
 
@@ -80,7 +87,16 @@ namespace Fundacion.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoDenominacion", usuario.RoId);
+            ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoDenominacion", usuario.RoId);            
+            ViewData["UsProvincia"] = new SelectList(_context.Provincias, "PvId", "PvDescripcion", usuario.UsProvincia);
+
+            //ViewData["UsLocalidad"] = new SelectList(_context.Localidades, "LcId", "LcDescripcion", usuario.UsLocalidad);
+
+            ViewData["UsLocalidad"] = new SelectList(
+                _context.Set<Localidad>()
+                .Where(localidad => localidad.PvId == usuario.UsProvincia),
+                "LcId", "LcDescripcion", usuario.UsLocalidad);
+
             return View(usuario);
         }
 
@@ -138,6 +154,8 @@ namespace Fundacion.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoDenominacion", usuario.RoId);
+            ViewData["UsLocalidad"] = new SelectList(_context.Localidades, "LcId", "LcDescripcion", usuario.UsLocalidad);
+            ViewData["UsProvincia"] = new SelectList(_context.Provincias, "PvId", "PvDescripcion", usuario.UsProvincia);
             return View(usuario);
         }
 
@@ -153,6 +171,8 @@ namespace Fundacion.Controllers
 
             var usuario = await _context.Usuarios
                 .Include(u => u.Ro)
+                .Include(u => u.Pv)
+                .Include(u => u.Lc)
                 .FirstOrDefaultAsync(m => m.UsId == id);
             if (usuario == null)
             {
@@ -185,6 +205,17 @@ namespace Fundacion.Controllers
         private bool UsuarioExists(int id)
         {
           return (_context.Usuarios?.Any(e => e.UsId == id)).GetValueOrDefault();
+        }
+        [HttpGet]
+        public IActionResult GetLocalidadesByProvincia(int provinciaId)
+        {
+            // Consulta para cargar las localidades en función de la provinciaId
+            var localidades = _context.Localidades
+                .Where(l => l.PvId == provinciaId)
+                .Select(l => new { value = l.LcId, text = l.LcDescripcion })
+                .ToList();
+
+            return Json(localidades);
         }
     }
 }
