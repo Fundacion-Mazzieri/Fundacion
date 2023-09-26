@@ -23,6 +23,6 @@ public partial class Asistencia
     public bool AsPresent { get; set; }
     [Display(Name = "Horas trabajadas")]
     public double AsCantHsRedondeo { get; set; }
-
+    [Display(Name = "Espacio")]
     public virtual Espacio? Es { get; set; }
 }
