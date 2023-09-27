@@ -15,8 +15,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-
-
         <a asp-area="" asp-controller="Asistencias" asp-action="Index" class="visually-hidden">
             <div class="col col1"><h3>Asistencias</h3><img src="./assets/inicio/lista-de-verificacion.png" c /></div>
         </a>
@@ -45,12 +43,14 @@
 <h1>Listado de Asistencia</h1>
 
 <p>
-    <a class="btn btn-success btn-sm" asp-action="Create">Cargar Nueva Asistencia</a>
+    <a class="btn btn-success btn-sm m-1" asp-action="Create">Cargar Nueva Asistencia</a>
+    <a class="btn btn-success btn-sm m-1" asp-controller="Reporte" asp-action="Index">Reportes</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>Fecha -
+            <th>
                 @Html.DisplayNameFor(model => model.AsIngreso)                
             </th>
             <th>
