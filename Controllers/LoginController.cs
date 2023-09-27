@@ -38,6 +38,7 @@ namespace Fundacion.Controllers
                 {
                     new Claim("DNI", usuarioDTO.UsDni.ToString()),
                     new Claim("Nombre", usuario.UsNombre.ToString()),
+                    new Claim("Apellido", usuario.UsApellido.ToString()),
                     new Claim("ROL", usuarioDTO.rol),
                     new Claim(ClaimTypes.Role, usuarioDTO.rol)
                     //new Claim("Clave",clave)
