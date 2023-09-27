@@ -75,7 +75,7 @@ namespace Fundacion.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ExportToExcel()
+        public async Task<IActionResult> ExportToExcel(int? mes)
         {            
             // En AsistenciasController
             var DNI = User.FindFirstValue("DNI");
@@ -102,6 +102,11 @@ namespace Fundacion.Controllers
             {
                 // Filtrar las asistencias por el ID del usuario actual
                 asistenciasQuery = asistenciasQuery.Where(a => a.Es.Us.UsDni == dni);
+            }
+
+            if (mes.HasValue)
+            {
+                asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == mes);
             }
 
             var asistencias = await asistenciasQuery.ToListAsync();
