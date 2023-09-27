@@ -49,7 +49,7 @@
         @using (Html.BeginForm("ExportToExcel", "Reporte", FormMethod.Post))
         {
             <div class="form-group">                
-                <select class="form-control form-control-sm" id="mes" name="mes">
+                <select class="form-control form-control-sm m-1" id="mes" name="mes">
                     <option value="1">Enero</option>
                     <option value="2">Febrero</option>
                     <option value="3">Marzo</option>
@@ -62,12 +62,10 @@
                     <option value="10">Octubre</option>
                     <option value="11">Noviembre</option>
                     <option value="12">Diciembre</option>
-                </select>                
+                </select>
+                <button class="btn btn-success btn-sm m-1" type="submit">Exportar por mes Excel</button>
             </div>
         }
-    </div>
-    <div class="col-auto">
-        <button class="btn btn-success btn-sm" type="submit">Exportar por mes Excel</button>
     </div>
 </div>
 <br />
