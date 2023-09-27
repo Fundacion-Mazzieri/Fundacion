@@ -42,28 +42,36 @@
 </div>
 
 <br />
-<h4>Reporte de Asistencia</h4>
-<p>
-    @using (Html.BeginForm("ExportToExcel", "Reporte", FormMethod.Post))
-    {
-        <label for="mes">Selecciona un mes:</label>
-        <select id="mes" name="mes">
-            <option value="1">Enero</option>
-            <option value="2">Febrero</option>
-            <option value="3">Marzo</option>
-            <option value="4">Abril</option>
-            <option value="5">Mayo</option>
-            <option value="6">Junio</option>
-            <option value="7">Julio</option>
-            <option value="8">Agosto</option>
-            <option value="9">Septiembre</option>
-            <option value="10">Octubre</option>
-            <option value="11">Noviembre</option>
-            <option value="12">Dicienbre</option>
-        </select>
-        <input class="btn btn-success btn-sm m-1" type="submit" value="Exportar por mes" />
-    }
-</p>
+<h1>Asistencia</h1>
+<h5>Reporte Mensual</h5>
+<div class="row">    
+    <div class="col-2">        
+        @using (Html.BeginForm("ExportToExcel", "Reporte", FormMethod.Post))
+        {
+            <div class="form-group">                
+                <select class="form-control form-control-sm" id="mes" name="mes">
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>                
+            </div>
+        }
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-success btn-sm" type="submit">Exportar por mes Excel</button>
+    </div>
+</div>
+<br />
+<h5>Reporte Completo</h5>
 <table class="table">
     <thead>
         <tr>
@@ -102,6 +110,6 @@
 <p>
     @using (Html.BeginForm("ExportToExcel", "Reporte", FormMethod.Post))
     {
-        <input class="btn btn-success btn-sm m-1" type="submit" value="Exportar Todo" />
+        <input class="btn btn-success btn-sm m-1" type="submit" value="Exportar Todo Excel" />
     }
 </p>
