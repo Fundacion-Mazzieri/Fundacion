@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Fundacion.Data;
 using Fundacion.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.ObjectPool;
 
 namespace Fundacion.Controllers
 {
@@ -105,8 +106,10 @@ namespace Fundacion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateByIdEspacio(int id,[Bind("SeId,EsId,AuId,SeDia,SeHora,SeCantHs")] Subespacio subespacio)
         {
+            double cantidadHoras = subespacio.SeCantHs/10.0;
             if (ModelState.IsValid)
             {
+                subespacio.SeCantHs = cantidadHoras;
                 _context.Add(subespacio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(CreateByIdEspacio));

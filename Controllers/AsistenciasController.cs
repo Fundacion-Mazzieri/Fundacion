@@ -153,30 +153,44 @@ namespace Fundacion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("AsiId,EsId,AsEgreso,AsPresent")] Asistencia asistencia)
+        public async Task<IActionResult> Edit(int? id, [Bind("AsiId,EsId,AsIngreso,AsEgreso,AsPresent")] Asistencia asistencia)
         {
             if (id != asistencia.AsiId)
             {
                 return NotFound();
             }            
             if (ModelState.IsValid)
-            {
+            {                
                 asistencia.AsEgreso = DateTime.Now; // Establece el tiempo de finalización
                 if (asistencia.AsEgreso > asistencia.AsIngreso)
                 {
-                    // Calcula la diferencia de tiempo entre AsEgreso y AsIngreso
+                    // Calcula la diferencia de tiempo entre AsEgreso y AsIngreso   
                     TimeSpan tiempoTranscurrido = asistencia.AsEgreso - asistencia.AsIngreso;
                     // Convierte la diferencia en minutos
                     double minutos = tiempoTranscurrido.TotalMinutes;
                     // Redondea la diferencia al entero más cercano considerando que 50 minutos o más se cuentan como una hora
                     int horasTrabajadas = (int)Math.Round(minutos / 60.0, MidpointRounding.AwayFromZero);
-
-                    // Actualiza AsEgreso restando las horas trabajadas a AsIngreso
-                    asistencia.AsEgreso = asistencia.AsIngreso.AddHours(horasTrabajadas);
+                    // Agrego la cantidad de horas trabajadas a AsCantHsRedondeo
+                    asistencia.AsCantHsRedondeo = horasTrabajadas;
                 }
-                _context.Update(asistencia);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    _context.Update(asistencia);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AsistenciaExists(asistencia.AsiId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
+
             }
 
             //ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);

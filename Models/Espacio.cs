@@ -16,7 +16,7 @@ public partial class Espacio
     [Display(Name = "Turno")]
     [Required(ErrorMessage = "Debe elegir un turno")]
     public int TuId { get; set; }
-    [Display(Name = "Usuario")]
+    [Display(Name = "Docente")]
     [Required(ErrorMessage = "Debe elegir un usuario")]
     public int UsId { get; set; }
     [Display(Name = "Estado")]
@@ -26,12 +26,12 @@ public partial class Espacio
     public int CaId { get; set; }
 
     public virtual ICollection<Asistencia> Asistencia { get; set; } = new List<Asistencia>();
-
+    [Display(Name = "Categoría")]
     public virtual Categoria? Ca { get; set; }
 
     public virtual ICollection<Subespacio> Subespacios { get; set; } = new List<Subespacio>();
-
+    [Display(Name = "Turno")]
     public virtual Turno? Tu { get; set; }
-
+    [Display(Name = "Docente")]
     public virtual Usuario? Us { get; set; }
 }

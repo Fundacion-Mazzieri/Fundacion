@@ -78,10 +78,20 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(espacio);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                // Comprobar si el espacio ya existe por Descripción
+                bool espacioExiste = await _context.Espacios.AnyAsync(e => e.EsDescripcion == espacio.EsDescripcion);
+
+                if (!espacioExiste)
+                {
+                    _context.Add(espacio);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError("EsDescripcion", "El espacio con ya existe.");
+                }
+            }            
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion", espacio.TuId);
             ViewData["UsId"] = new SelectList(
@@ -154,6 +164,20 @@ namespace Fundacion.Controllers
 
             if (ModelState.IsValid)
             {
+                // Comprobar si el espacio ya existe por Descripción
+                bool espacioExiste = await _context.Espacios.AnyAsync(e => e.EsDescripcion == espacio.EsDescripcion);
+
+                if (!espacioExiste)
+                {
+                    _context.Add(espacio);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError("EsDescripcion", "Ya existe un espacio con ese nombre.");
+                }
+
                 try
                 {
                     _context.Update(espacio);

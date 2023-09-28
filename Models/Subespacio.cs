@@ -16,9 +16,9 @@ public partial class Subespacio
     [MaxLength(200, ErrorMessage = "No se permiten más de 200 caracteres.")]
     public string SeDia { get; set; } = null!;
     [Display(Name = "Hora")]    
-    public TimeSpan? SeHora { get; set; }
+    public TimeSpan? SeHora { get; set; }    
     [Display(Name = "Cantidad de Horas")]
-    public string SeCantHs { get; set; } = null!;
+    public double SeCantHs { get; set; }
 
     public virtual Aula? Au { get; set; }
 

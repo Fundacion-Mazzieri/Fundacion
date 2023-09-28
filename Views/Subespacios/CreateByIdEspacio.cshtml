@@ -44,17 +44,17 @@
             <div class="form-group">
                 <label asp-for="SeCantHs" class="control-label"></label>
                 <select asp-for="SeCantHs" class="form-control">
-                    <option value="1.0">01:00</option>
-                    <option value="1.5">01:30</option>
-                    <option value="2.0">02:00</option>
-                    <option value="2.5">02:30</option>
-                    <option value="3.0">03:00</option>
-                    <option value="3.5">03:30</option>
-                    <option value="4.0">04:00</option>
-                    <option value="4.5">04:30</option>
-                    <option value="5.0">05:00</option>
-                    <option value="5.5">05:30</option>
-                    <option value="6.0">06:00</option>
+                    <option value=1.0>01:00</option>
+                    <option value=1.5>01:30</option>
+                    <option value=2.0>02:00</option>
+                    <option value=2.5>02:30</option>
+                    <option value=3.0>03:00</option>
+                    <option value=3.5>03:30</option>
+                    <option value=4.0>04:00</option>
+                    <option value=4.5>04:30</option>
+                    <option value=5.0>05:00</option>
+                    <option value=5.5>05:30</option>
+                    <option value=6.0>06:00</option>
                 </select>               
                 <span asp-validation-for="SeCantHs" class="text-danger"></span>
             </div>
@@ -67,6 +67,22 @@
         </form>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll('.dias-checkbox');
+        const seDiaInput = document.getElementById('seDia');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const selectedDays = Array.from(checkboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.value);
+
+                seDiaInput.value = selectedDays.join(', ');
+            });
+        });
+    });
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
