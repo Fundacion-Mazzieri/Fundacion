@@ -12,8 +12,9 @@ namespace Fundacion.Controllers
         {
             var dniClaim = User.FindFirstValue("DNI");
             var nombreClaim = User.FindFirstValue("Nombre");
+            var apellidoClaim = User.FindFirstValue("Apellido");
             var rolClaim = User.FindFirstValue(ClaimTypes.Role);
-            var bag= new UsuarioDTO { UsDni= Int32.Parse(dniClaim),rol=rolClaim,UsNombre=nombreClaim};
+            var bag= new UsuarioDTO { UsDni= Int32.Parse(dniClaim),rol=rolClaim,UsNombre=nombreClaim,UsApellido=apellidoClaim};
             return View(bag);
         }
     }

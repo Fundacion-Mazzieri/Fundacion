@@ -1,0 +1,34 @@
+﻿@model List<Asistencia>
+
+<table>
+    <thead>
+        <tr>
+            <th>Columna 1</th>
+            <th>Columna 2</th>
+            <th>Columna 3</th>
+            <th>Columna 4</th>
+            <th>Columna 5</th>
+            <th>Columna 6</th>
+            <th>Columna 7</th>
+            <!-- Agregar más encabezados de columna según tus necesidades -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Es.EsDescripcion</td>
+                <td>@item.Es.Us.UsDni</td>
+                <td>@item.AsIngreso</td>
+                <td>@item.AsIngreso</td>
+                <td>@item.AsEgreso</td>
+                <td>@item.AsPresent</td>
+                <td>@item.AsCantHsRedondeo</td>
+                <!-- Agregar más columnas según tus necesidades -->
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@(Url.Action("ExportToExcel"))">Exportar a Excel</a>
+<a href="@(Url.Action("ExportToPdf"))">Exportar a PDF</a>

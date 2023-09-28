@@ -1,10 +1,13 @@
 using Fundacion.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Rotativa.AspNetCore;
+using Fundacion.Data.DTO;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Registra UsuarioDTO como servicio de ámbito
+builder.Services.AddScoped<UsuarioDTO>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<FundacionContext>(option=>option.UseSqlServer(builder.Configuration.GetConnectionString("dbFundacion")));
@@ -36,7 +39,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.MapControllers();
 

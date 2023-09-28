@@ -15,7 +15,7 @@ public partial class Asistencia
     [Required(ErrorMessage = "Debe cargarse un horario de ingreso")]
     [Display(Name = "Ingreso")]    
     public DateTime AsIngreso { get; set; }
-    [DisplayFormat(DataFormatString = "{0: HH:mm}", ApplyFormatInEditMode = true)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM - HH:mm}", ApplyFormatInEditMode = true)]
     [Required(ErrorMessage = "Debe cargarse un horario de egreso")]
     [Display(Name = "Egreso")]
     public DateTime AsEgreso { get; set; }
@@ -23,6 +23,6 @@ public partial class Asistencia
     public bool AsPresent { get; set; }
     [Display(Name = "Horas trabajadas")]
     public double AsCantHsRedondeo { get; set; }
-
+    [Display(Name = "Espacio")]
     public virtual Espacio? Es { get; set; }
 }

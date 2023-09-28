@@ -10,29 +10,67 @@ using Fundacion.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using System.Net;
 
 namespace Fundacion.Controllers
 {
-    [Authorize(Roles="Super Admin,Admin,Usuario")]
+    [Authorize(Roles="Super Admin,Admin,Usuario")]    
     public class AsistenciasController : Controller
     {
         private readonly FundacionContext _context;
         private readonly IConfiguration _configuration;
+        //private readonly UsuarioDTO _user;
 
-        public AsistenciasController(FundacionContext context, IConfiguration configuration)
+        public AsistenciasController(FundacionContext context, IConfiguration configuration/*, UsuarioDTO user*/)
         {
             _context = context;
             _configuration = configuration;
-        }       
+            //_user = user;
+        }
         // GET: Asistencias
         public async Task<IActionResult> Index()
-        {
-            var fundacionContext = _context.Asistencias
-                .Include(a => a.Es)
-                .Include(a => a.Es.Tu)
-                .Include(a => a.Es.Us)
-                .Include(a => a.Es.Ca);
-            return View(await fundacionContext.ToListAsync());
+        {            
+            // En AsistenciasController
+            var DNI = User.FindFirstValue("DNI");
+            if (string.IsNullOrEmpty(DNI))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            //Convertir DNI string a dni long
+            long.TryParse(DNI, out var dni);
+
+            //Obtener el rol del usuario logueado
+            var ROL = User.FindFirstValue("ROL");
+            if (string.IsNullOrEmpty(ROL))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (ROL == "Usuario")
+            {
+                // Filtrar las asistencias por el ID del usuario actual
+                var asistencias = await _context.Asistencias
+                    .Include(a => a.Es)
+                    .Include(a => a.Es.Tu)
+                    .Include(a => a.Es.Us)
+                    .Include(a => a.Es.Ca)
+                    .Where(a => a.Es.Us.UsDni == dni) // Filtrar por el ID del usuario actual
+                    .ToListAsync();
+                return View(asistencias);
+            }
+            else
+            {
+                var asistencias = await _context.Asistencias
+                    .Include(a => a.Es)
+                    .Include(a => a.Es.Tu)
+                    .Include(a => a.Es.Us)
+                    .Include(a => a.Es.Ca)
+                    .ToListAsync();
+                return View(asistencias);
+            }            
         }
 
         // GET: Asistencias/Details/5
@@ -59,16 +97,49 @@ namespace Fundacion.Controllers
         {            
             ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
             ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
+            // En AsistenciasController
+            var DNI = User.FindFirstValue("DNI");
+            if (string.IsNullOrEmpty(DNI))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            //Convertir DNI string a dni long
+            long.TryParse(DNI, out var dni);
             ViewData["AsIngreso"] = DateTime.Now;
-            ViewData["EsId"] = new SelectList(
-                _context.Set<Espacio>()
-                .Where(espacio => espacio.Us.RoId == 2)
-                .Select(espacio => new
-                {
-                    espacio.EsId,
-                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
-                }),
-                "EsId", "EsDescripcion");            
+            //Obtener el rol del usuario logueado
+            var ROL = User.FindFirstValue("ROL");
+            if (string.IsNullOrEmpty(ROL))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            
+            if(ROL == "Usuario")
+            {
+                
+                ViewData["EsId"] = new SelectList(
+                    _context.Set<Espacio>()
+                    .Where(espacio => espacio.Us.RoId == 2)
+                    .Where(espacio => espacio.Us.UsDni == dni)
+                    .Select(espacio => new
+                    {
+                        espacio.EsId,
+                        EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                    }),
+                    "EsId", "EsDescripcion");
+            } 
+            else
+            {
+                ViewData["EsId"] = new SelectList(
+                    _context.Set<Espacio>()
+                    .Where(espacio => espacio.Us.RoId == 2)
+                    .Select(espacio => new
+                    {
+                        espacio.EsId,
+                        EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                    }),
+                    "EsId", "EsDescripcion");
+            }
+                      
             return View();
         }
         //public IActionResult Create()
@@ -97,7 +168,22 @@ namespace Fundacion.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]        
         public async Task<IActionResult> Create([Bind("EsId,AsIngreso")] Asistencia asistencia)
-        {            
+        {
+            // Capturar DNI de usuario logueado
+            var DNI = User.FindFirstValue("DNI");
+            if (string.IsNullOrEmpty(DNI))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            // Convertir DNI string a dni long
+            long.TryParse(DNI, out var dni);
+
+            // Obtener ROL de usuario logueado
+            var ROL = User.FindFirstValue("ROL");
+            if (string.IsNullOrEmpty(ROL))
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (ModelState.IsValid)
             {
                 asistencia.AsIngreso = DateTime.Now; // Establece el tiempo de inicio
@@ -105,9 +191,23 @@ namespace Fundacion.Controllers
                 _context.Add(asistencia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = asistencia.AsiId });
+            }            
+            if (ROL == "Usuario")
+            {
+                ViewData["EsId"] = new SelectList(
+                _context.Set<Espacio>()
+                .Where(espacio => espacio.Us.RoId == 2)
+                .Where(espacio => espacio.Us.UsDni == dni)
+                .Select(espacio => new
+                {
+                    espacio.EsId,
+                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                }),
+                "EsId", "EsDescripcion");
             }
-
-            ViewData["EsId"] = new SelectList(
+            else
+            {
+                ViewData["EsId"] = new SelectList(
                 _context.Set<Espacio>()
                 .Where(espacio => espacio.Us.RoId == 2)
                 .Select(espacio => new
@@ -116,6 +216,10 @@ namespace Fundacion.Controllers
                     EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
                 }),
                 "EsId", "EsDescripcion");
+            }
+            
+
+            
             return View(asistencia);
         }
 
@@ -123,11 +227,22 @@ namespace Fundacion.Controllers
         {
             ViewBag.CentroLatitud = _configuration.GetSection("Ubicacion")["Latitud"];
             ViewBag.CentroLongitud = _configuration.GetSection("Ubicacion")["Longitud"];
-            if (id == null || _context.Asistencias == null)
+            // Capturar DNI de usuario logueado
+            var DNI = User.FindFirstValue("DNI");
+            if (string.IsNullOrEmpty(DNI))
             {
-                return NotFound();
-            }          
-            
+                return RedirectToAction("Index", "Login");
+            }
+            //Convertir DNI string a dni long
+            long.TryParse(DNI, out var dni);
+
+            // Obtener ROL de usuario logueado
+            var ROL = User.FindFirstValue("ROL");
+            if (string.IsNullOrEmpty(ROL))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var asistencia = await _context.Asistencias
                 .Include(a => a.Es)
                 .Include(a => a.Es.Tu)
@@ -138,8 +253,22 @@ namespace Fundacion.Controllers
             {
                 return NotFound();
             }
-            
-            ViewData["EsId"] = new SelectList(
+            if (ROL == "Usuario")
+            {
+                ViewData["EsId"] = new SelectList(
+                _context.Set<Espacio>()
+                .Where(espacio => espacio.Us.RoId == 2)
+                .Where(espacio => espacio.Us.UsDni == dni)
+                .Select(espacio => new
+                {
+                    espacio.EsId,
+                    EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                }),
+                "EsId", "EsDescripcion");
+            }
+            else
+            {
+                ViewData["EsId"] = new SelectList(
                 _context.Set<Espacio>()
                 .Where(espacio => espacio.Us.RoId == 2)
                 .Select(espacio => new
@@ -147,7 +276,9 @@ namespace Fundacion.Controllers
                     espacio.EsId,
                     EsDescripcion = $"{espacio.EsDescripcion} - {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
                 }),
-                "EsId", "EsDescripcion");           
+                "EsId", "EsDescripcion");
+            }
+                     
             return View(asistencia);
         }
 
@@ -155,6 +286,22 @@ namespace Fundacion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, [Bind("AsiId,EsId,AsIngreso,AsEgreso,AsPresent")] Asistencia asistencia)
         {
+            // En AsistenciasController
+            var DNI = User.FindFirstValue("DNI");
+            if (string.IsNullOrEmpty(DNI))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            //Convertir DNI string a dni long
+            long.TryParse(DNI, out var dni);
+
+            // Obtener ROL de usuario logueado
+            var ROL = User.FindFirstValue("ROL");
+            if (string.IsNullOrEmpty(ROL))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             if (id != asistencia.AsiId)
             {
                 return NotFound();
@@ -193,8 +340,22 @@ namespace Fundacion.Controllers
 
             }
 
-            //ViewData["EsId"] = new SelectList(_context.Set<Espacio>().Where(espacio => espacio.Us.RoId == 2), "EsId", "EsDescripcion", asistencia.EsId);
-            ViewData["EsId"] = new SelectList(
+            if(ROL == "Usuario")
+            {
+                ViewData["EsId"] = new SelectList(
+                _context.Set<Espacio>()
+                .Where(espacio => espacio.Us.RoId == 2)
+                .Where(espacio => espacio.Us.UsDni == dni)
+                .Select(espacio => new
+                {
+                    espacio.EsId,
+                    EsDescripcion = $"{espacio.EsDescripcion} - Turno: {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
+                }),
+                "EsId", "EsDescripcion");
+            }
+            else
+            {
+                ViewData["EsId"] = new SelectList(
                 _context.Set<Espacio>()
                 .Where(espacio => espacio.Us.RoId == 2)
                 .Select(espacio => new
@@ -203,9 +364,11 @@ namespace Fundacion.Controllers
                     EsDescripcion = $"{espacio.EsDescripcion} - Turno: {espacio.Tu.TuDescripcion} - {espacio.Us.UsApellido}, {espacio.Us.UsNombre} ({espacio.Us.UsDni})"
                 }),
                 "EsId", "EsDescripcion");
-            return View(asistencia);
-        }
+            }
 
+            return View(asistencia);
+
+        }
 
         // GET: Asistencias/Delete/5
         public async Task<IActionResult> Delete(int? id)

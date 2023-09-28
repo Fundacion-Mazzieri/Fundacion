@@ -10,5 +10,6 @@ namespace Fundacion.Models
         public string Clave{ get; set; }
 
         public string ConfirmarClave { get; set; }
+        
     }
 }

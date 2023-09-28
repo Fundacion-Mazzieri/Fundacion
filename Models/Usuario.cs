@@ -28,15 +28,11 @@ public partial class Usuario
     [RegularExpression(@"^[A-Za-záéíóúÁÉÍÓÚüÜñÑ0-9\s°/:;,.\-_\+()]+$", ErrorMessage = "Ingrese una dirección válida.")]
     [Display(Name = "Dirección")]
     [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres.")]
-    public string? UsDireccion { get; set; }
-    [RegularExpression(@"^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s]*$", ErrorMessage ="Ingrese una localidad válida.")]
-    [Display(Name = "Localidad")]
-    [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres.")]
-    public string? UsLocalidad { get; set; }
-    [RegularExpression(@"^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s]*$", ErrorMessage = "Ingrese una provincia válida.")]
-    [Display(Name = "Provincia")]
-    [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres.")]
-    public string? UsProvincia { get; set; }
+    public string? UsDireccion { get; set; }    
+    [Display(Name = "Localidad")]    
+    public int UsLocalidad { get; set; }    
+    [Display(Name = "Provincia")]    
+    public int UsProvincia { get; set; }
     [Display(Name = "Email")]
     [EmailAddress(ErrorMessage = "Por favor verifique su dirección de email.")]
     [MaxLength(50, ErrorMessage = "No se permiten más de 50 caracteres.")]
@@ -62,4 +58,6 @@ public partial class Usuario
     public virtual ICollection<Espacio> Espacios { get; set; } = new List<Espacio>();
 
     public virtual Role? Ro { get; set; } = null!;
+    public virtual Localidad? Lc { get; set; } = null!;
+    public virtual Provincia? Pv { get; set; } = null!;
 }

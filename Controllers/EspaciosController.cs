@@ -78,8 +78,18 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Comprobar si el espacio ya existe por Descripción
-                bool espacioExiste = await _context.Espacios.AnyAsync(e => e.EsDescripcion == espacio.EsDescripcion);
+                // Convertir la descripción proporcionada a minúsculas
+                string descripcionMinusculas = espacio.EsDescripcion.ToLower();
+
+                // Recuperar los registros de la base de datos
+                var espacios = await _context.Espacios
+                    .Where(e =>
+                        e.TuId == espacio.TuId &&
+                        e.UsId == espacio.UsId)
+                    .ToListAsync();
+
+                // Realizar la comparación en memoria
+                bool espacioExiste = espacios.Any(e => LevenshteinDistance(e.EsDescripcion.ToLower(), descripcionMinusculas) <= 4);
 
                 if (!espacioExiste)
                 {
@@ -89,7 +99,8 @@ namespace Fundacion.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("EsDescripcion", "El espacio con ya existe.");
+                    var espacioSimilar = espacios.FirstOrDefault(e => LevenshteinDistance(e.EsDescripcion.ToLower(), descripcionMinusculas) <= 4);
+                    ModelState.AddModelError("EsDescripcion", $"El espacio '{espacio.EsDescripcion}' ya existe o tiene una nombre similar: '{espacioSimilar?.EsDescripcion}'.");
                 }
             }            
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
@@ -164,37 +175,55 @@ namespace Fundacion.Controllers
 
             if (ModelState.IsValid)
             {
-                // Comprobar si el espacio ya existe por Descripción
-                bool espacioExiste = await _context.Espacios.AnyAsync(e => e.EsDescripcion == espacio.EsDescripcion);
-
-                if (!espacioExiste)
-                {
-                    _context.Add(espacio);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    ModelState.AddModelError("EsDescripcion", "Ya existe un espacio con ese nombre.");
-                }
-
                 try
                 {
-                    _context.Update(espacio);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EspacioExists(espacio.EsId))
+                    // Cargar el espacio existente desde la base de datos
+                    var espacioActual = await _context.Espacios.FindAsync(id);
+
+                    if (espacioActual != null)
                     {
-                        return NotFound();
+                        // Convertir la descripción proporcionada a minúsculas
+                        string descripcionMinusculas = espacio.EsDescripcion.ToLower();
+
+                        // Recuperar los registros de la base de datos
+                        var espacios = await _context.Espacios
+                            .Where(e =>
+                                e.TuId == espacio.TuId &&
+                                e.UsId == espacio.UsId)
+                            .ToListAsync();
+
+                        // Realizar la comparación en memoria
+                        bool espacioExiste = espacios.Any(e => LevenshteinDistance(e.EsDescripcion.ToLower(), descripcionMinusculas) <= 4);
+
+                        if (!espacioExiste)
+                        {
+                            // Aplicar las actualizaciones necesarias al espacio existente
+                            espacioActual.EsDescripcion = espacio.EsDescripcion;
+                            espacioActual.TuId = espacio.TuId;
+                            espacioActual.UsId = espacio.UsId;
+                            espacioActual.EsActivo = espacio.EsActivo;
+                            espacioActual.CaId = espacio.CaId;
+
+                            // Guardar los cambios
+                            await _context.SaveChangesAsync();
+
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            var espacioSimilar = espacios.FirstOrDefault(e => LevenshteinDistance(e.EsDescripcion.ToLower(), descripcionMinusculas) <= 4);
+                            ModelState.AddModelError("EsDescripcion", $"El espacio '{espacio.EsDescripcion}' ya existe o tiene una nombre similar: '{espacioSimilar?.EsDescripcion}'.");
+                        }
                     }
                     else
                     {
-                        throw;
+                        return NotFound();
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("EsDescripcion", $"Se produjo un error al editar el espacio: {ex.Message}");
+                }
             }
             ViewData["CaId"] = new SelectList(_context.Categorias, "CaId", "CaDescripcion", espacio.CaId);
             ViewData["TuId"] = new SelectList(_context.Turnos, "TuId", "TuDescripcion", espacio.TuId);
@@ -209,9 +238,8 @@ namespace Fundacion.Controllers
                 "UsId", "UsDni");
             return View(espacio);
         }
-
-        // GET: Espacios/Delete
-        public async Task<IActionResult> Delete(int? id)
+            // GET: Espacios/Delete
+            public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Espacios == null)
             {
@@ -253,6 +281,38 @@ namespace Fundacion.Controllers
         private bool EspacioExists(int id)
         {
           return (_context.Espacios?.Any(e => e.EsId == id)).GetValueOrDefault();
+        }
+
+
+        // Función para calcular la distancia de Levenshtein entre dos cadenas
+        public int LevenshteinDistance(string s, string t)
+        {
+            int n = s.Length;
+            int m = t.Length;
+            int[,] d = new int[n + 1, m + 1];
+
+            if (n == 0)
+                return m;
+
+            if (m == 0)
+                return n;
+
+            for (int i = 0; i <= n; i++)
+                d[i, 0] = i;
+
+            for (int j = 0; j <= m; j++)
+                d[0, j] = j;
+
+            for (int j = 1; j <= m; j++)
+            {
+                for (int i = 1; i <= n; i++)
+                {
+                    int cost = (s[i - 1] == t[j - 1]) ? 0 : 1;
+                    d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1), d[i - 1, j - 1] + cost);
+                }
+            }
+
+            return d[n, m];
         }
     }
 }
