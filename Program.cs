@@ -1,6 +1,7 @@
 using Fundacion.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Rotativa.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,5 +37,10 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllers();
+
+string wwwroot = app.Environment.WebRootPath;
+RotativaConfiguration.Setup(wwwroot, "rotativa");
 
 app.Run();
