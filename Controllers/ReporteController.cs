@@ -16,6 +16,9 @@ using Microsoft.AspNetCore.Identity;
 using System.Net;
 using ClosedXML.Excel;
 using System.Data;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using Rotativa;
+using Rotativa.AspNetCore;
 
 namespace Fundacion.Controllers
 {
@@ -75,14 +78,14 @@ namespace Fundacion.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ExportToExcel(int? mes)
-        {            
-            // En AsistenciasController
+        public async Task<IActionResult> ExportToExcel(int? mes, int? year)
+        {
             var DNI = User.FindFirstValue("DNI");
             if (string.IsNullOrEmpty(DNI))
             {
                 return RedirectToAction("Index", "Login");
             }
+
             //Convertir DNI string a dni long
             long.TryParse(DNI, out var dni);
 
@@ -92,6 +95,7 @@ namespace Fundacion.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+
             IQueryable<Asistencia> asistenciasQuery = _context.Asistencias
                 .Include(a => a.Es)
                 .Include(a => a.Es.Tu)
@@ -104,13 +108,33 @@ namespace Fundacion.Controllers
                 asistenciasQuery = asistenciasQuery.Where(a => a.Es.Us.UsDni == dni);
             }
 
+            List<Asistencia> asistencias = null;
+
             if (mes.HasValue)
             {
-                asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == mes);
-            }
-
-            var asistencias = await asistenciasQuery.ToListAsync();
-
+                if (mes.Value == 0)
+                {
+                    asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == DateTime.Now.Month);
+                }
+                else
+                {
+                    asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == mes);
+                }
+                if (year.HasValue)
+                {
+                    if (year.Value == 0)
+                    {
+                        asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Year == DateTime.Now.Year);
+                    }
+                    else
+                    {
+                        asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Year == year);
+                    }
+                }
+            } 
+            
+            asistencias = await asistenciasQuery.ToListAsync();
+            
             string Espacio = "";
             string Turno = "";
             string Usuario = "";
@@ -138,7 +162,7 @@ namespace Fundacion.Controllers
 
             var dateForXcellSheet = DateTime.Now;
             //var worksheet = wb.Worksheets.Add("Hoja1");
-
+            
             foreach (var asistencia in asistencias)
             {
                 Espacio = asistencia.Es.EsDescripcion;
@@ -165,20 +189,90 @@ namespace Fundacion.Controllers
             }
         }
 
-
-
-        // Método para obtener datos desde una fuente (por ejemplo, una base de datos)
-        private List<Asistencia> GetYourDataFromDatabase()
+        // GET: Customers
+        public async Task<IActionResult> ImprimirPDF(int? mes, int? year)
         {
-            // Implementa la lógica para obtener los datos de tu fuente de datos.
-            // Reemplaza YourDataModel con el tipo de modelo real.
-            var data = new List<Asistencia>
-        {
-            new Asistencia { /* Propiedades de datos */ },
-            // Agregar más elementos según tus necesidades
-        };
+            var DNI = User.FindFirstValue("DNI");
+            if (string.IsNullOrEmpty(DNI))
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
-            return data;
+            //Convertir DNI string a dni long
+            long.TryParse(DNI, out var dni);
+
+            //Obtener el rol del usuario logueado
+            var ROL = User.FindFirstValue("ROL");
+            if (string.IsNullOrEmpty(ROL))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            IQueryable<Asistencia> asistenciasQuery = _context.Asistencias
+                .Include(a => a.Es)
+                .Include(a => a.Es.Tu)
+                .Include(a => a.Es.Us)
+                .Include(a => a.Es.Ca);
+
+            if (ROL == "Usuario")
+            {
+                // Filtrar las asistencias por el ID del usuario actual
+                asistenciasQuery = asistenciasQuery.Where(a => a.Es.Us.UsDni == dni);
+            }
+
+            List<Asistencia> asistencias = null;
+
+            if (mes.HasValue)
+            {
+                if (mes.Value == 0)
+                {
+                    asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == DateTime.Now.Month);
+                }
+                else
+                {
+                    asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == mes);
+                }
+                if (year.HasValue)
+                {
+                    if (year.Value == 0)
+                    {
+                        asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Year == DateTime.Now.Year);
+                    }
+                    else
+                    {
+                        asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Year == year);
+                    }
+                }
+            }
+
+            asistencias = await asistenciasQuery.ToListAsync();
+
+            var dateForXcellSheet = DateTime.Now;
+
+            // Define la URL de la Cabecera 
+            string _headerUrl = Url.Action("HeaderPDF", "Reporte", null, "https");
+            // Define la URL del Pie de página
+            string _footerUrl = Url.Action("FooterPDF", "Reporte", null, "https");
+
+
+            return new ViewAsPdf("ImprimirPDF", asistencias)
+            {
+                // Establece la Cabecera y el Pie de página
+                CustomSwitches = "--header-html " + _headerUrl + " --header-spacing 13 " +
+                             "--footer-html " + _footerUrl + " --footer-spacing 0",
+                PageMargins = { Left = 10, Right = 10, Top = 40, Bottom = 10 }, // Define los márgenes
+                PageSize = Rotativa.AspNetCore.Options.Size.A4, // Define el tamaño de página
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait, // Opcional: Orientación de página (Portrait o Landscape)
+                FileName = "Asistencias-" + dateForXcellSheet + ".pdf" // Opcional: Nombre del archivo de salida
+            };
+        }
+        public IActionResult HeaderPDF()
+        {
+            return View("HeaderPDF");
+        }
+        public IActionResult FooterPDF()
+        {
+            return View("FooterPDF");
         }
     }
 }

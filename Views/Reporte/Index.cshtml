@@ -42,34 +42,65 @@
 </div>
 
 <br />
-<h1>Asistencia</h1>
-<h5>Reporte Mensual</h5>
-<p>    
-    <div class="col-2">        
-        @using (Html.BeginForm("ExportToExcel", "Reporte", FormMethod.Post))
-        {
-            <div class="form-group row">                
-                <select class="form-control form-control-sm m-1" id="mes" name="mes">
-                    <option value="1">Enero</option>
-                    <option value="2">Febrero</option>
-                    <option value="3">Marzo</option>
-                    <option value="4">Abril</option>
-                    <option value="5">Mayo</option>
-                    <option value="6">Junio</option>
-                    <option value="7">Julio</option>
-                    <option value="8">Agosto</option>
-                    <option value="9">Septiembre</option>
-                    <option value="10">Octubre</option>
-                    <option value="11">Noviembre</option>
-                    <option value="12">Diciembre</option>
-                </select>
-                <button class="btn btn-success btn-sm m-1" type="submit">Exportar Mes Excel</button>
-            </div>
-        }
+@*< h1>Asistencia</h1> *@
+
+<div class="card mt-2">
+    <div class="card-header">
+        <h6 class="card-title">Exportar Reporte</h6>
     </div>
-</p>
+    <div class="card-body">
+        <div class="flex-column align-items-center justify-content-center">
+            <div class="col-14 col-md-auto">
+                @using (Html.BeginForm("ExportToExcel", "Reporte", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <div class="input-group">   
+                             <select class="form-control form-control-sm form-select m-1" style="height: 24px" id="mes" name="mes">
+                                <option value="0" style="font-style: italic">Seleccione un mes...</option>
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                            <select class="form-control form-control-sm form-select m-1" style="height: 24px" id="year" name="year">
+                                <option value="0" style="font-style: italic">Seleccione el Año...</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-success btn-sm m-1" type="submit">
+                                    Exportar
+                                    <img src="~/assets/icons/excel-icon.png" alt="Exportar Excel" style="height: 24px;" />                                    
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm m-1" asp-controller="Reporte" asp-action="ImprimirPDF">
+                                    Imprimir
+                                    <img src="~/assets/icons/pdf-icon.png" alt="Imprimir PDF" style="height: 24px;" />                                    
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }               
+            </div>
+        </div>
+    </div>
+</div>
+
 <br />
-<h5>Reporte Completo</h5>
+<h6>Reporte de Asistencias</h6>
 <table class="table">
     <thead>
         <tr>
@@ -99,15 +130,26 @@
                 <td>@Html.DisplayFor(modelItem => item.AsIngreso)</td>
                 <td>@Html.DisplayFor(modelItem => item.AsEgreso)</td>
                 <td>@Html.DisplayFor(modelItem => item.AsCantHsRedondeo)</td>
-                <td>@Html.DisplayFor(modelItem => item.Es.Ca.CaValorHora)</td>
-                <td>@(item.Es.Ca.CaValorHora * item.AsCantHsRedondeo)</td>
+                <td>$ @Html.DisplayFor(modelItem => item.Es.Ca.CaValorHora)</td>
+                <td>$ @(item.Es.Ca.CaValorHora * item.AsCantHsRedondeo)</td>
             </tr>
         }
     </tbody>
 </table>
-<p>
+@* <br/>
+<div class=" d-flex align-items-center justify-content-end">
     @using (Html.BeginForm("ExportToExcel", "Reporte", FormMethod.Post))
     {
-        <input class="btn btn-success btn-sm m-1" type="submit" value="Exportar Todo Excel" />
+        <button class="btn btn-success btn-sm m-1" type="submit">
+            Exportar todo
+            <img src="~/assets/icons/excel-icon.png" alt="Exportar Todo a Excel" style="height: 24px;" />
+        </button>        
     }
-</p>
+    @using (Html.BeginForm("ImprimirPDF", "Reporte", FormMethod.Post))
+    {
+        <button class="btn btn-danger btn-sm m-1" type="submit">
+            Imprimir reporte
+            <img src="~/assets/icons/pdf-icon.png" alt="Exportar Todo a PDF" style="height: 24px;" />
+        </button>
+    }
+</div> *@

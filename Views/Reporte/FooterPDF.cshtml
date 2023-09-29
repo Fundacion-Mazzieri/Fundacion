@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Fundacion</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Fundacion.styles.css" asp-append-version="true" />
+</head>
+<body style="overflow: hidden; background-color: white;">
+    <footer class="border-top footer text-muted">
+        <div class="text-center">
+            Página <span id='page'></span> de
+            <span id='topage'></span>
+            <script>
+                var vars = {};
+                var x = window.location.search.substring(1).split('&');
+                for (var i in x) {
+                    var z = x[i].split('=', 2);
+                    vars[z[0]] = unescape(z[1]);
+                }
+                document.getElementById('page').innerHTML = vars.page;
+                document.getElementById('topage').innerHTML = vars.topage;
+            </script>
+        </div>
+    </footer>    
+</body>
+</html>
