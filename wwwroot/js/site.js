@@ -166,3 +166,12 @@ function actualizarDatos() {
 $(document).ready(function () {
     actualizarDatos();
 });
+$(document).ready(function () {
+    $('#tablaAsistencias').DataTable({
+        "language": {
+            "url": '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' // Opcional: Traducción al español
+        },
+        "searching": "true",
+        
+    });
+});
