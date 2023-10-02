@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Fundacion</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Fundacion.styles.css" asp-append-version="true" />
     
@@ -15,8 +16,8 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary bg-transparent border-bottom border-body">
             <div class="container-fluid">
                 
-                <a class="navbar-brand" asp-area="" asp-controller="Inicio" asp-action="Index"><img src="https://fundacionmazzieri.com.ar/wp-content/uploads/2019/04/fundacion-mazzieri-1.jpg" width="60" style="filter:invert();border-radius:20px"/></a>
-                <h2>Fundacion Mazzieri</h2>
+                <a class="navbar-brand" asp-area="" asp-controller="Inicio" asp-action="Index"><img src="https://fundacionmazzieri.com.ar/wp-content/uploads/2019/04/fundacion-mazzieri-1.jpg" width="60" /></a>
+                
                 <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -66,13 +67,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Fundacion - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Fundación Mazzieri
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/Geo.js" asp-append-version="true"></script>
+    <script src="~/js/Geo.js" asp-append-version="true"></script>    
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

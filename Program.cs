@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Fundacion.Data.DTO;
 using Microsoft.Extensions.DependencyInjection;
+using Rotativa.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,9 +42,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
 
-app.MapControllers();
-
-string wwwroot = app.Environment.WebRootPath;
-
+IWebHostEnvironment env = app.Environment;
+RotativaConfiguration.Setup(env.WebRootPath, "../Rotativa/Windows/");
 
 app.Run();
