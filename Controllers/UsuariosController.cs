@@ -115,6 +115,8 @@ namespace Fundacion.Controllers
                 return NotFound();
             }
             ViewData["RoId"] = new SelectList(_context.Roles, "RoId", "RoDenominacion", usuario.RoId);
+            ViewData["UsProvincia"] = new SelectList(_context.Provincias, "PvId", "PvDescripcion");
+            ViewData["UsLocalidad"] = new SelectList(_context.Localidades, "LcId", "LcDescripcion");
             return View(usuario);
         }
 
