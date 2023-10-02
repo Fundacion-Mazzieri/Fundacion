@@ -44,6 +44,6 @@ app.MapControllerRoute(
 app.MapControllers();
 
 string wwwroot = app.Environment.WebRootPath;
-RotativaConfiguration.Setup(wwwroot, "rotativa");
+
 
 app.Run();
