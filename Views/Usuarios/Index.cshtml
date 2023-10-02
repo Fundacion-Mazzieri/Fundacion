@@ -42,10 +42,11 @@
 </div>
 
 
-<h1>Usuarios</h1>
-
+<h1>Listado de usuarios</h1>
 <p>
-    <a asp-action="Create" class="btn btn-success btn-sm">Agregar nuevo Usuario</a>
+    <a asp-action="Create" class="btn btn-sm" title="Cargar usuario">
+        <img width="60px" src="~/assets/icons/boton-agregar.png" />
+    </a>
 </p>
 <table id="tablaAsistencias" class="table">
     <thead>
@@ -110,10 +111,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Ro.RoDenominacion)
             </td>
-            <td>
-                    <a class="btn btn-warning btn-sm mb-1" asp-action="Edit" asp-route-id="@item.UsId">Modificar</a>
-                    <a class="btn btn-primary btn-sm mb-1" asp-action="Details" asp-route-id="@item.UsId">Detalles</a>
-                    <a class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.UsId">Eliminar</a>
+            <td class="d-inline-flex" width="130px">
+                    <a class="btn btn-sm mb-1" title="Editar" asp-action="Edit" asp-route-id="@item.UsId">
+                        <img width="20px" src="~/assets/icons/editar.png" />
+                    </a>
+                    <a class="btn btn-sm mb-1" title="Detalle" asp-action="Details" asp-route-id="@item.UsId">
+                        <img width="20px" src="~/assets/icons/documento.png" />
+                    </a>
+                    <a class="btn btn-sm mb-1" title="Borrar" asp-action="Delete" asp-route-id="@item.UsId">
+                        <img width="20px" src="~/assets/icons/borrar.png" />
+                    </a>
             </td>
         </tr>
 }

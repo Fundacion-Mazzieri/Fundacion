@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+}
+
+
+<table class="table">
+    
+    <img src="https://fundacionmazzieri.com.ar/wp-content/uploads/2019/04/fundacion-mazzieri-1.jpg" style="filter:invert();border-radius:20px;width: 100px;display:inline-block;
+    margin-bottom: 50px;
+    margin-top: 30px;" />
+    <h1 style="display:inline-block; margin-left:30px;">Reporte de Asistencias Fundacion Mazzieri</h1>
+
+    <h3>Fecha: @DateTime.Today.Day/@DateTime.Today.Month</h3>
+
+    <a href="#"/>Descargar Pdf</a>
+
+    <tbody>
+        <tr>
+            <th>Nombre</th>
+            <th>Categoria</th>
+            <th>Espacio</th>
+            <th>Valor x hr</th>
+            <th>Horas Totales</th>
+            <th>Valor Final</th>
+        </tr>
+        <tr>
+            <th>@Model.AsCantHsRedondeo</th>
+           
+            
+        </tr>
+   </tbody>
+</table>
