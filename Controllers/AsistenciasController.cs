@@ -32,7 +32,8 @@ namespace Fundacion.Controllers
         }
         // GET: Asistencias
         public async Task<IActionResult> Index()
-        {            
+        {
+            
             // En AsistenciasController
             var DNI = User.FindFirstValue("DNI");
             if (string.IsNullOrEmpty(DNI))
@@ -47,8 +48,7 @@ namespace Fundacion.Controllers
             if (string.IsNullOrEmpty(ROL))
             {
                 return RedirectToAction("Index", "Login");
-            }
-
+            }            
             if (ROL == "Usuario")
             {
                 // Filtrar las asistencias por el ID del usuario actual
@@ -58,7 +58,7 @@ namespace Fundacion.Controllers
                     .Include(a => a.Es.Us)
                     .Include(a => a.Es.Ca)
                     .Where(a => a.Es.Us.UsDni == dni) // Filtrar por el ID del usuario actual
-                    .ToListAsync();
+                    .ToListAsync();                
                 return View(asistencias);
             }
             else
@@ -68,7 +68,7 @@ namespace Fundacion.Controllers
                     .Include(a => a.Es.Tu)
                     .Include(a => a.Es.Us)
                     .Include(a => a.Es.Ca)
-                    .ToListAsync();
+                    .ToListAsync();                
                 return View(asistencias);
             }            
         }

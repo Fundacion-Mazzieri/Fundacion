@@ -81,14 +81,22 @@
                                 <option value="2029">2029</option>
                                 <option value="2030">2030</option>
                             </select>
+                            <select class="form-control form-control-sm form-select m-1" style="height: 24px" id="categoria" name="categoria">
+                                <option value="0" style="font-style: italic">Seleccione una categoría...</option>
+                                @foreach (var categoria in ViewBag.Categorias)
+                                {
+                                    <option value="@categoria.Value">@categoria.Text</option>
+                                }
+                            </select>
+                            <input type="hidden" id="categoriaSeleccionada" name="idcategoria" value="">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-success btn-sm m-1" type="submit">
+                                <button class="btn btn-outline-success btn-sm m-1" type="submit" onclick="setCategoriaSeleccionada()">
                                     Exportar
-                                    <img src="~/assets/icons/excel-icon.png" alt="Exportar Excel" style="height: 24px;" />                                    
+                                    <img src="~/assets/icons/excel-icon.png" alt="Exportar Excel" style="height: 24px;" />
                                 </button>
-                                <button class="btn btn-outline-danger btn-sm m-1" asp-controller="Reporte" asp-action="ImprimirPDF">
+                                <button class="btn btn-outline-danger btn-sm m-1" asp-controller="Reporte" asp-action="ImprimirPDF" onclick="setCategoriaSeleccionada()">
                                     Imprimir
-                                    <img src="~/assets/icons/pdf-icon.png" alt="Imprimir PDF" style="height: 24px;" />                                    
+                                    <img src="~/assets/icons/pdf-icon.png" alt="Imprimir PDF" style="height: 24px;" />
                                 </button>
                             </div>
                         </div>
@@ -101,7 +109,7 @@
 
 <br />
 <h6>Reporte de Asistencias</h6>
-<table class="table">
+<table id="tablas" class="table">
     <thead>
         <tr>
             <th>Espacio</th>

@@ -37,6 +37,8 @@ namespace Fundacion.Controllers
         // GET: Home
         public async Task<IActionResult> Index()
         {
+            var categorias = await _context.Categorias.ToListAsync();
+            ViewBag.Categorias = new SelectList(categorias, "CaId", "CaDescripcion");
             // En AsistenciasController
             var DNI = User.FindFirstValue("DNI");
             if (string.IsNullOrEmpty(DNI))
@@ -51,8 +53,7 @@ namespace Fundacion.Controllers
             if (string.IsNullOrEmpty(ROL))
             {
                 return RedirectToAction("Index", "Login");
-            }
-
+            }            
             if (ROL == "Usuario")
             {
                 // Filtrar las asistencias por el ID del usuario actual
@@ -74,12 +75,15 @@ namespace Fundacion.Controllers
                     .Include(a => a.Es.Ca)
                     .ToListAsync();
                 return View(asistencias);
-            }
+            }            
         }
 
         [HttpPost]
-        public async Task<IActionResult> ExportToExcel(int? mes, int? year)
+        public async Task<IActionResult> ExportToExcel(int? mes, int? year, int? idcategoria)
         {
+            //var categorias = await _context.Categorias.ToListAsync();
+            //ViewBag.Categorias = new SelectList(categorias, "CaId", "CaDescripcion");
+            // En AsistenciasController
             var DNI = User.FindFirstValue("DNI");
             if (string.IsNullOrEmpty(DNI))
             {
@@ -112,27 +116,26 @@ namespace Fundacion.Controllers
 
             if (mes.HasValue)
             {
-                if (mes.Value == 0)
-                {
-                    asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == DateTime.Now.Month);
-                }
-                else
+                if (mes.Value != 0)
                 {
                     asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == mes);
                 }
                 if (year.HasValue)
                 {
-                    if (year.Value == 0)
-                    {
-                        asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Year == DateTime.Now.Year);
-                    }
-                    else
+                    if (year.Value != 0)
                     {
                         asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Year == year);
                     }
+                    if (idcategoria.HasValue)
+                    {
+                        if (idcategoria.Value != 0)
+                        {
+                            asistenciasQuery = asistenciasQuery.Where(a => a.Es.Ca.CaId == idcategoria);
+                        }
+                    }
                 }
-            } 
-            
+            }
+
             asistencias = await asistenciasQuery.ToListAsync();
             
             string Espacio = "";
@@ -190,7 +193,7 @@ namespace Fundacion.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> ImprimirPDF(int? mes, int? year)
+        public async Task<IActionResult> ImprimirPDF(int? mes, int? year, int? idcategoria)
         {
             var DNI = User.FindFirstValue("DNI");
             if (string.IsNullOrEmpty(DNI))
@@ -224,23 +227,22 @@ namespace Fundacion.Controllers
 
             if (mes.HasValue)
             {
-                if (mes.Value == 0)
-                {
-                    asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == DateTime.Now.Month);
-                }
-                else
+                if (mes.Value != 0)
                 {
                     asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Month == mes);
                 }
                 if (year.HasValue)
                 {
-                    if (year.Value == 0)
-                    {
-                        asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Year == DateTime.Now.Year);
-                    }
-                    else
+                    if (year.Value != 0)
                     {
                         asistenciasQuery = asistenciasQuery.Where(a => a.AsIngreso.Year == year);
+                    }
+                    if (idcategoria.HasValue)
+                        {
+                        if (idcategoria.Value != 0)
+                        {
+                            asistenciasQuery = asistenciasQuery.Where(a => a.Es.Ca.CaId == idcategoria);
+                        }
                     }
                 }
             }
@@ -273,6 +275,12 @@ namespace Fundacion.Controllers
         public IActionResult FooterPDF()
         {
             return View("FooterPDF");
+        }
+        public async Task<IActionResult> CargarCategorias()
+        {
+            var categorias = await _context.Categorias.ToListAsync();
+            ViewBag.Categorias = new SelectList(categorias, "CaId", "CaDescripcion");
+            return View(categorias);
         }
     }
 }

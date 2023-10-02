@@ -62,6 +62,21 @@ function validarReingreso() {
     }
 }
 
+function setCategoriaSeleccionada() {
+    //var categoriaSelect = document.getElementById("categoria");
+    //var categoriaSeleccionadaInput = document.getElementById("categoriaSeleccionada");
+    //categoriaSeleccionadaInput.value = categoriaSelect.value;
+
+
+    var selectedValue = document.getElementById("categoria").value;
+    document.getElementById("categoriaSeleccionada").value = selectedValue;
+}
+
+// Llama a la función para cargar las categorías al cargar la página
+$(document).ready(function () {
+    cargarCategorias();
+});
+
 // Manejo de eventos al cargar la página
 document.addEventListener('DOMContentLoaded', function () {
     const verificarBtn = document.getElementById('verificarBtn');
@@ -167,7 +182,7 @@ $(document).ready(function () {
     actualizarDatos();
 });
 $(document).ready(function () {
-    $('#tablaAsistencias').DataTable({
+    $('#tablas').DataTable({
         "language": {
             "url": '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' // Opcional: Traducción al español
         },
@@ -175,3 +190,5 @@ $(document).ready(function () {
         
     });
 });
+
+
