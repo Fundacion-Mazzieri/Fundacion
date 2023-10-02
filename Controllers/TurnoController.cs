@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Fundacion.Data;
 using Fundacion.Models;
 using Microsoft.AspNetCore.Authorization;
+using DocumentFormat.OpenXml.InkML;
 
 namespace Fundacion.Controllers
 {
@@ -62,14 +63,22 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                _context.Add(turno);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if(!TurnoExists(turno.TuId, turno.TuDescripcion))
+                {
+                    _context.Add(turno);
+                    _context.Add(turno);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                };
+                TempData["Mensaje"] = turno.TuDescripcion;
+                return RedirectToAction("ErrorTurno");
             }
             return View(turno);
         }
-
+        public ActionResult ErrorTurno()
+        {
+            return View();
+        }
         // GET: Turno/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -158,9 +167,9 @@ namespace Fundacion.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TurnoExists(int id)
+        private bool TurnoExists(int id, string descripcion = null)
         {
-          return (_context.Turnos?.Any(e => e.TuId == id)).GetValueOrDefault();
+          return (_context.Turnos?.Any(e => e.TuId == id || e.TuDescripcion== descripcion)).GetValueOrDefault();
         }
     }
 }

@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Error";
+}
+<br />
+<h1 class="text-danger">@ViewData["Title"]</h1>
+<br />
+<h2 class="text-danger">El turno @TempData["Mensaje"] ya existe </h2>
+
+<a asp-action="Index" class="btn btn-outline-danger" style="margin-top:20px">Volver</a>
