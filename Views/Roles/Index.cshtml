@@ -43,7 +43,9 @@
 <h1>Listado de Roles</h1>
 
 <p>
-    <a class="btn btn-success btn-sm" asp-action="Create">Agregar nuevo Rol</a>
+    <a class="btn btn-sm" asp-action="Create" title="Agregar Rol">
+        <img width="60px" src="~/assets/icons/boton-agregar.png" />
+    </a>
 </p>
 <table id="tablas" class="table">
     <thead>
@@ -62,9 +64,15 @@
                 @Html.DisplayFor(modelItem => item.RoDenominacion)
             </td>
             <td>
-                    <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.RoId">Modificar</a> |
-                    <a asp-action="Details" class="btn btn-primary btn-sm mb-1" asp-route-id="@item.RoId">Detalles</a> |
-                   @* <a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.RoId">Eliminar</a>*@
+                    <a asp-action="Edit" class="btn btn-sm mb-1" asp-route-id="@item.RoId" title="Editar">
+                        <img width="20px" src="~/assets/icons/editar.png" />
+                    </a>
+                    <a asp-action="Details" class="btn btn-sm mb-1" asp-route-id="@item.RoId" title="Detalles">
+                        <img width="20px" src="~/assets/icons/documento.png" />
+                    </a>
+                    @* <a asp-action="Delete" class="btn btn-sm mb-1" asp-route-id="@item.RoId">
+                        <img width="20px" src="~/assets/icons/borrar.png" />
+                    </a> *@
             </td>
         </tr>
 }

@@ -48,7 +48,7 @@
         <img width="60px" src="~/assets/icons/boton-agregar.png" />
     </a>
 </p>
-<table id="tablaAsistencias" class="table">
+<table id="tablas" class="table">
     <thead>
         <tr>
             <th>
@@ -111,7 +111,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Ro.RoDenominacion)
             </td>
-            <td class="d-inline-flex" width="130px">
+            <td width="100px">
                     <a class="btn btn-sm mb-1" title="Editar" asp-action="Edit" asp-route-id="@item.UsId">
                         <img width="20px" src="~/assets/icons/editar.png" />
                     </a>

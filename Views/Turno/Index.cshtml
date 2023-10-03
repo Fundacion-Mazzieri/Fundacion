@@ -42,11 +42,12 @@
 </div>
 <h1>Listados de Turnos</h1>
 <p>
-    <a asp-action="Create" class="btn btn-success btn-sm">Crear nuevo turno</a>
+    <a asp-action="Create" class="btn btn-sm" title="Crear turno">
+        <img width="60px" src="~/assets/icons/boton-agregar.png" />
+    </a>
 </p>
-<table id="tablas" class="table">
-    <thead>
-       
+<table class="table">
+    <thead>       
         <tr>
             <th>
                 @*@Html.DisplayNameFor(model => model.TuDescripcion)*@
@@ -64,10 +65,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TuDescripcion)
             </td>
-            <td>
-                <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.TuId">Modificar</a> |
-                    <a asp-action="Details" class="btn btn-primary btn-sm" asp-route-id="@item.TuId">Detalles</a>
-                    @*<a asp-action="Delete" class="btn btn-danger btn-sm" asp-route-id="@item.TuId">Eliminar</a>*@
+            <td width="100px">
+                <a asp-action="Edit" class="btn btn-sm" asp-route-id="@item.TuId" title="Editar">
+                        <img width="20px" src="~/assets/icons/editar.png" />
+                </a>
+                <a asp-action="Details" class="btn btn-sm" asp-route-id="@item.TuId" title="Detalles">
+                        <img width="20px" src="~/assets/icons/documento.png" />
+                </a>
+                @* <a asp-action="Delete" class="btn btn-sm" asp-route-id="@item.TuId">
+                        <img width="20px" src="~/assets/icons/borrar.png" />
+                </a> *@
             </td>
         </tr>
 }
