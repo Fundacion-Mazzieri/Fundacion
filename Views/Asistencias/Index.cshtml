@@ -43,8 +43,12 @@
 <h1>Listado de Asistencia</h1>
 
 <p>
-    <a class="btn btn-success btn-sm m-1" asp-action="Create">Cargar Nueva Asistencia</a>
-    <a class="btn btn-success btn-sm m-1" asp-controller="Reporte" asp-action="Index">Reportes</a>
+    <a class="btn btn-sm m-1" asp-action="Create" title="Cargar asistencia">
+        <img width="60px" src="~/assets/icons/boton-agregar.png" />
+    </a>
+    <a class="btn btn-sm m-1" asp-controller="Reporte" asp-action="Index" title="Reportes">
+        <img width="60px" src="~/assets/icons/reporte-de-negocios.png" />
+    </a>
 </p>
 
 <table id="tablas" class="table">
@@ -101,12 +105,14 @@
                 <td>
                     @if (item.AsEgreso > item.AsIngreso)
                     {
-                        <span class="btn btn-secondary btn-sm disabled">Finalizado</span>
+                        <span class="btn btn-sm">
+                            <img width="18px" title="Finalizado" style="filter: grayscale(100%)" src="~/assets/icons/temporizador.png" />
+                        </span>
                     }
                     else
                     {
-                        <a class="btn btn-sm" asp-action="Edit" asp-route-id="@item.AsiId">
-                            <img src="~/assets/icons/borrar.png" />
+                        <a class="btn btn-sm" asp-action="Edit" asp-route-id="@item.AsiId" title="Finalizar">
+                            <img width="20px" src="~/assets/icons/temporizador.png" />
                         </a>
                     }                    
                 </td>
