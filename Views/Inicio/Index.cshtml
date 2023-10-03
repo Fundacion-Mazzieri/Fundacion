@@ -13,22 +13,22 @@
     <br />
     <h4>¡Bienvenido, @Model.UsNombre @Model.UsApellido!</h4> 
     <br />
-    <div class="btn btn-danger text-black text-decoration-none"> <a asp-area="" asp-controller="Login" asp-action="Salir" style="text-decoration:none;color:black"><h3>Cerrar Sesión</h3></a></div>
+    
     <div class="container-grid text-center">
         <div class="row row-cols-2">
             @if (User.IsInRole("Usuario") || User.IsInRole("Super Admin") || User.IsInRole("Admin"))
             {
-                <div class="col col1"><h3>Asistencias</h3><a class="nav-link text-dark" asp-area="" asp-controller="Asistencias" asp-action="Index"><img src="./assets/inicio/lista-de-verificacion.png" /></a></div>    
+                <div class="col col1"><h3>Asistencias</h3><a class="nav-link text-dark" asp-area="" asp-controller="Asistencias" asp-action="Index"><img src="./assets/inicio/ausencia.png" width="64" /></a></div>    
             }
             @if (User.IsInRole("Super Admin") || User.IsInRole("Admin"))
             {
                 
                 <div class="col"><h3>Turnos</h3><a asp-area="" asp-controller="Turno" asp-action="Index"><img src="./assets/inicio/turnos.png" width="64" /></a></div>
-                <div class="col"> <h3>Categorias</h3> <a asp-area="" asp-controller="Categorias" asp-action="Index"><img src="./assets/inicio/aplicacion.png" /></a></div>
-                <div class="col"> <h3>Espacios</h3> <a asp-area="" asp-controller="Espacios" asp-action="Index"> <img src="./assets/inicio/ruptura.png" /></a></div>
-                <div class="col"> <h3>Roles</h3> <a asp-area="" asp-controller="Roles" asp-action="Index"><img src="./assets/inicio/roles.png" /></a></div>
-                <div class="col"><h3>Aulas</h3> <a asp-area="" asp-controller="Aulas" asp-action="Index"> <img src="./assets/inicio/aula.png" /></a></div>
-                <div class="col"> <h3>Usuarios</h3> <a asp-area="" asp-controller="Usuarios" asp-action="Index"> <img src="./assets/inicio/grupo.png" /></a></div>
+                <div class="col"> <h3>Categorias</h3> <a asp-area="" asp-controller="Categorias" asp-action="Index"><img src="./assets/inicio/aplicacion.png" width="64"/></a></div>
+                <div class="col"> <h3>Espacios</h3> <a asp-area="" asp-controller="Espacios" asp-action="Index"> <img src="./assets/inicio/ruptura.png" width="64" /></a></div>
+                <div class="col"> <h3>Roles</h3> <a asp-area="" asp-controller="Roles" asp-action="Index"><img src="./assets/inicio/roles (2).png" width="64" /></a></div>
+                <div class="col"><h3>Aulas</h3> <a asp-area="" asp-controller="Aulas" asp-action="Index"> <img src="./assets/inicio/aula2.png" width="64" /></a></div>
+                <div class="col"> <h3>Usuarios</h3> <a asp-area="" asp-controller="Usuarios" asp-action="Index"> <img src="./assets/inicio/equipo.png" width="64" /></a></div>
             }
 
             @*<div class="col col1"> <a asp-area="" asp-controller="Login" asp-action="Salir"><h3>Cerrar Sesión</h3></a></div>*@
