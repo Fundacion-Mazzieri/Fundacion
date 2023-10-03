@@ -1,7 +1,7 @@
 ﻿@model Fundacion.Models.Turno
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar turno";
 }
 
 <h1>Eliminar</h1>
@@ -21,7 +21,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="TuId" />
-        <input type="submit" value="Eliminar" class="btn btn-danger"/>
-        <a asp-action="Index" class="btn btn-primary">Volver</a>
+        <input type="submit" value="Eliminar" class="btn btn-outline-danger"/>
+        <a asp-action="Index" class="btn btn-outline-primary">Volver</a>
     </form>
 </div>

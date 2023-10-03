@@ -1,13 +1,13 @@
 ﻿@model Fundacion.Models.Role
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalle de rol";
 }
 
-<h1>Detalles de Roles:</h1>
+<h1>Detalles</h1>
 
 <div>
-    <h4>Roles</h4>
+    <h4>Rol</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -19,6 +19,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.RoId" class="btn btn-warning">Modificar</a> 
-    <a asp-action="Index" class="btn btn-primary">Volver</a>
+    <a asp-action="Edit" asp-route-id="@Model?.RoId" class="btn btn-outline-primary">Modificar</a> 
+    <a asp-action="Index" class="btn btn-outline-danger">Volver</a>
 </div>
