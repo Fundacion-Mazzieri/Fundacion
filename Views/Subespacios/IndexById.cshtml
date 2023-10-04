@@ -44,7 +44,9 @@
 <h1>Espacio de Asignaciones</h1>
 
 <p>    
-    <a asp-action="Index" class="btn btn-danger btn-sm" asp-controller="Espacios">Volver a espacios</a>
+    <a asp-action="Index" class="btn btn-danger btn-sm" asp-controller="Espacios" title="Volver a espacios">
+        <img width="60px" src="~/assets/icons/flecha-hacia-atras.png" />
+    </a>
 </p>
 <table id="tablas" class="table">
     <thead>
@@ -79,8 +81,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Au.AuDescripcion)
             </td>            
-            <td>
-                <a class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.SeId">Borrar</a>
+            <td width="100px">
+                    <a class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.SeId" title="Borrar">
+                        <img width="20px" src="~/assets/icons/borrar.png" />
+                    </a>
             </td>
         </tr>
 }

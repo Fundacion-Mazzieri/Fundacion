@@ -45,7 +45,9 @@
 <h1>Listado de Espacios</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-success btn-sm">Crear nuevo Espacio</a>
+    <a asp-action="Create" class="btn btn-sm" title="Crear nuevo Espacio">
+        <img width="60px" src="~/assets/icons/boton-agregar.png" />
+    </a>
 </p>
 <table id="tablas" class="table">
     <thead>
@@ -95,8 +97,12 @@
                     
                 </td>
                 <td>
-                    <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.EsId">Modificar espacio</a>
-                    <a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.EsId">Eliminar espacio</a>
+                    <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.EsId" title="Modificar espacio">
+                        <img width="20px" src="~/assets/icons/editar.png" />
+                    </a>
+                    @*<a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.EsId" title="Eliminar espacio">
+                        <img width="20px" src="~/assets/icons/borrar.png" />
+                    </a>*@
                 </td>
             </tr>
         }

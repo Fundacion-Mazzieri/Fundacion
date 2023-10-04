@@ -265,7 +265,7 @@ namespace Fundacion.Controllers
                 PageMargins = { Left = 10, Right = 10, Top = 40, Bottom = 10 }, // Define los márgenes
                 PageSize = Rotativa.AspNetCore.Options.Size.A4, // Define el tamaño de página
                 PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait, // Opcional: Orientación de página (Portrait o Landscape)
-                FileName = "Asistencias-" + dateForXcellSheet + ".pdf" // Opcional: Nombre del archivo de salida
+                //FileName = "Asistencias-" + dateForXcellSheet + ".pdf" // Opcional: Nombre del archivo de salida
             };
         }
         public IActionResult HeaderPDF()

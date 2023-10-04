@@ -46,7 +46,9 @@
 <h1>Listado de Categorías</h1>
 
 <p>
-    <a class="btn btn-success btn-sm" asp-action="Create">Agregar Categoría</a>
+    <a class="btn btn-sm" asp-action="Create" title="Agregar Categoría">
+        <img width="60px" src="~/assets/icons/boton-agregar.png" />
+    </a>
 </p>
 <table id="tablas" class="table">
     <thead>
@@ -70,9 +72,15 @@
                 @Html.DisplayFor(modelItem => item.CaValorHora)
             </td>
             <td>
-                <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.CaId">Modificar</a>
-                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.CaId">Detalles</a>
-                @*<a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.CaId">Eliminar</a>*@
+                    <a class="btn btn-sm" asp-action="Edit" asp-route-id="@item.CaId" title="Modificar">
+                        <img width="20px" src="~/assets/icons/editar.png" />
+                    </a>
+                    <a class="btn btn-sm" asp-action="Details" asp-route-id="@item.CaId" title="Detalles">
+                        <img width="20px" src="~/assets/icons/documento.png" />
+                    </a>
+                    @*<a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.CaId" title="Eliminar">
+                        <img width="20px" src="~/assets/icons/borrar.png" />
+                    </a>*@
             </td>
         </tr>
 }
