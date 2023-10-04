@@ -8,7 +8,7 @@
 </head>
 
 @if (User.IsInRole("Super Admin") || User.IsInRole("Admin")){
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Volver</button>
+    <button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><img src="./assets/inicio/volver.png" width="40" /></button>
 }
 @if (User.IsInRole("Usuario"))
 {
