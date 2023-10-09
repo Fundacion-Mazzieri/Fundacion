@@ -8,7 +8,7 @@
 </head>
 
 @if (User.IsInRole("Super Admin") || User.IsInRole("Admin")){
-    <button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><img src="./assets/inicio/volver.png" width="40" /></button>
+    <button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Menú"><img src="./assets/inicio/volver.png" width="40px" /></button>
 }
 @if (User.IsInRole("Usuario"))
 {
@@ -55,85 +55,86 @@
         <img width="60px" src="~/assets/icons/boton-agregar.png" />
     </a>
 </p>
-<table id="tablas" class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UsDni)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsApellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsNombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsDireccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsLocalidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsTelefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsActivo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsDni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsDireccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lc.LcDescripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsTelefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsActivo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ro.RoDenominacion)
-            </td>
-            <td width="100px">
-                    <a class="btn btn-sm mb-1" title="Editar" asp-action="Edit" asp-route-id="@item.UsId">
-                        <img width="20px" src="~/assets/icons/editar.png" />
-                    </a>
-                    <a class="btn btn-sm mb-1" title="Detalle" asp-action="Details" asp-route-id="@item.UsId">
-                        <img width="20px" src="~/assets/icons/documento.png" />
-                    </a>
-                   @* <a class="btn btn-sm mb-1" title="Borrar" asp-action="Delete" asp-route-id="@item.UsId">
-                        <img width="20px" src="~/assets/icons/borrar.png" />
-                    </a>*@
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-
+<div class="table-responsive">
+    <table id="tablas" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UsDni)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UsApellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UsNombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UsDireccion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UsLocalidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UsEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UsTelefono)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.UsActivo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoId)
+                </th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsDni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsDireccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lc.LcDescripcion)
+                </td>
+                <td class="text-nowrap">
+                    @Html.DisplayFor(modelItem => item.UsEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsTelefono)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.UsActivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ro.RoDenominacion)
+                </td>*@
+                    <td class="d-flex justify-content-between" style="border:none;">
+                        <a class="btn btn-sm mb-1" title="Editar" asp-action="Edit" asp-route-id="@item.UsId">
+                            <img width="20px" src="~/assets/icons/editar.png" />
+                        </a>
+                        <a class="btn btn-sm mb-1" title="Detalle" asp-action="Details" asp-route-id="@item.UsId">
+                            <img width="20px" src="~/assets/icons/documento.png" />
+                        </a>
+                       @* <a class="btn btn-sm mb-1" title="Borrar" asp-action="Delete" asp-route-id="@item.UsId">
+                            <img width="20px" src="~/assets/icons/borrar.png" />
+                        </a>*@
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
 <style>
     .offcanvas{
         width:250px;

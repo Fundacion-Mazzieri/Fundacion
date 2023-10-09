@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/btn-volver/styles.css" />
 </head>
 
-<button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><img src="./assets/inicio/volver.png" width="40px" /></button>
+<button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Menú"><img src="./assets/inicio/volver.png" width="40px" /></button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
@@ -92,12 +92,16 @@
                     (@Html.DisplayFor(modelItem => item.Us.UsDni)) @Html.DisplayFor(modelItem => item.Us.UsApellido), @Html.DisplayFor(modelItem => item.Us.UsNombre)
                 </td>
                 <td>                    
-                    <a asp-action="RedirectToCreateByIdEspacio" class="btn btn-outline-primary btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Espacios">Asignar días</a>
-                    <a asp-action="RedirectToDetailsByEsId" class="btn btn-primary btn-sm mb-1" asp-route-esId="@item.EsId" asp-controller="Espacios">Detalle</a>
+                    <a asp-action="RedirectToCreateByIdEspacio" class="btn btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Espacios" title="Asignar días">
+                        <img width="25px" src="~/assets/icons/30-dias.png" />
+                    </a>
+                    <a asp-action="RedirectToDetailsByEsId" class="btn btn-sm mb-1" asp-route-esId="@item.EsId" asp-controller="Espacios" title="Detalle">
+                        <img width="20px" src="~/assets/icons/documento.png" />
+                    </a>
                     
                 </td>
                 <td>
-                    <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.EsId" title="Modificar espacio">
+                    <a asp-action="Edit" class="btn btn-sm mb-1" asp-route-id="@item.EsId" title="Modificar espacio">
                         <img width="20px" src="~/assets/icons/editar.png" />
                     </a>
                     @*<a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.EsId" title="Eliminar espacio">

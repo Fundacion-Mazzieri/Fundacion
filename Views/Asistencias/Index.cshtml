@@ -9,7 +9,7 @@
 
 @if (User.IsInRole("Super Admin") || User.IsInRole("Admin"))
 {
-    <button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><img src="./assets/inicio/volver.png" width="40px"/></button>
+    <button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Menú"><img src="./assets/inicio/volver.png" width="40px" /></button>
 }
 @if (User.IsInRole("Usuario"))
 {
