@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/btn-volver/styles.css" />
 </head>
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Volver</button>
+<button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Menú"><img src="./assets/inicio/volver.png" width="40px" /></button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
@@ -19,25 +19,25 @@
 
 
         <a asp-area="" asp-controller="Asistencias" asp-action="Index">
-            <div class="col col1"><h3>Asistencias</h3><img src="./assets/inicio/lista-de-verificacion.png" /></div>
+            <div class="col col1"><h3>Asistencias</h3><img src="./assets/inicio/ausencia.png" width="50" /></div>
         </a>
         <a asp-area="" asp-controller="Turno" asp-action="Index">
-            <div class="col"><h3>Turnos</h3><img src="./assets/inicio/turnos.png" width="64" /></div>
+            <div class="col"><h3>Turnos</h3><img src="./assets/inicio/turnos.png" width="50" /></div>
         </a>
         <a asp-area="" asp-controller="Categorias" asp-action="Index">
-            <div class="col"> <h3>Categorias</h3> <img src="./assets/inicio/aplicacion.png" /></div>
+            <div class="col"> <h3>Categorias</h3> <img src="./assets/inicio/categoria (1).png" width="50" /></div>
         </a>
         <a asp-area="" asp-controller="Espacios" asp-action="Index" class="visually-hidden">
-            <div class="col"> <h3>Espacios</h3>  <img src="./assets/inicio/ruptura.png" /></div>
+            <div class="col"> <h3>Espacios</h3>  <img src="./assets/inicio/ruptura.png" width="50" /></div>
         </a>
         <a asp-area="" asp-controller="Roles" asp-action="Index">
-            <div class="col"> <h3>Roles</h3> <img src="./assets/inicio/roles.png" /></div>
+            <div class="col"> <h3>Roles</h3> <img src="./assets/inicio/engranaje.png" width="50" /></div>
         </a>
         <a asp-area="" asp-controller="Aulas" asp-action="Index">
-            <div class="col"><h3>Aulas</h3>  <img src="./assets/inicio/aula.png" /></div>
+            <div class="col"><h3>Aulas</h3>  <img src="./assets/inicio/aula2.png" width="50" /></div>
         </a>
         <a asp-area="" asp-controller="Usuarios" asp-action="Index">
-            <div class="col"> <h3>Usuarios</h3>  <img src="./assets/inicio/grupo.png" /></div>
+            <div class="col"> <h3>Usuarios</h3>  <img src="./assets/inicio/equipo.png" width="50" /></div>
         </a>
     </div>
 </div>
@@ -92,12 +92,16 @@
                     (@Html.DisplayFor(modelItem => item.Us.UsDni)) @Html.DisplayFor(modelItem => item.Us.UsApellido), @Html.DisplayFor(modelItem => item.Us.UsNombre)
                 </td>
                 <td>                    
-                    <a asp-action="RedirectToCreateByIdEspacio" class="btn btn-outline-primary btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Espacios">Asignar días</a>
-                    <a asp-action="RedirectToDetailsByEsId" class="btn btn-primary btn-sm mb-1" asp-route-esId="@item.EsId" asp-controller="Espacios">Detalle</a>
+                    <a asp-action="RedirectToCreateByIdEspacio" class="btn btn-sm mb-1" asp-route-id="@item.EsId" asp-controller="Espacios" title="Asignar días">
+                        <img width="25px" src="~/assets/icons/30-dias.png" />
+                    </a>
+                    <a asp-action="RedirectToDetailsByEsId" class="btn btn-sm mb-1" asp-route-esId="@item.EsId" asp-controller="Espacios" title="Detalle">
+                        <img width="20px" src="~/assets/icons/documento.png" />
+                    </a>
                     
                 </td>
                 <td>
-                    <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.EsId" title="Modificar espacio">
+                    <a asp-action="Edit" class="btn btn-sm mb-1" asp-route-id="@item.EsId" title="Modificar espacio">
                         <img width="20px" src="~/assets/icons/editar.png" />
                     </a>
                     @*<a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.EsId" title="Eliminar espacio">
@@ -110,6 +114,10 @@
 </table>
 
 <style>
+    .offcanvas {
+        width: 250px;
+    }
+
     a {
         text-decoration: none;
         color: black;
@@ -117,7 +125,7 @@
 
     h3 {
         display: flex;
-        font-size: 22px;
+        font-size: larger;
         text-align: start;
         align-content: center;
         align-items: center;
@@ -127,6 +135,9 @@
         display: flex;
         margin-bottom: 20px;
         justify-content: space-between;
+        align-items: center;
+        width: 200px;
+        flex-direction: column;
     }
 </style>
 

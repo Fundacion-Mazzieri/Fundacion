@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/btn-volver/styles.css" />
 </head>
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Volver</button>
+<button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Menú"><img src="./assets/inicio/volver.png" width="40px" /></button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
@@ -94,7 +94,7 @@
                                     Exportar
                                     <img src="~/assets/icons/excel-icon.png" alt="Exportar Excel" style="height: 24px;" />
                                 </button>
-                                <button class="btn btn-outline-danger btn-sm m-1" asp-controller="Reporte" asp-action="ImprimirPDF" onclick="setCategoriaSeleccionada()">
+                                <button class="btn btn-outline-danger btn-sm m-1" asp-controller="Reporte" asp-action="ImprimirPDF" onclick="setCategoriaSeleccionada()" formtarget="_blank">
                                     Imprimir
                                     <img src="~/assets/icons/pdf-icon.png" alt="Imprimir PDF" style="height: 24px;" />
                                 </button>

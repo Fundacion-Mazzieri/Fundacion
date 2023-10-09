@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/btn-volver/styles.css" />
 </head>
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Volver</button>
+<button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Menú"><img src="~/assets/inicio/volver.png" width="40px" /></button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
@@ -44,8 +44,8 @@
 <h1>Espacio de Asignaciones</h1>
 
 <p>    
-    <a asp-action="Index" class="btn btn-danger btn-sm" asp-controller="Espacios" title="Volver a espacios">
-        <img width="60px" src="~/assets/icons/flecha-hacia-atras.png" />
+    <a asp-action="Index" class="btn btn-sm" asp-controller="Espacios" title="Volver a espacios">
+        <img width="60px" src="~/assets/icons/ciencia-y-tecnologia.png" />
     </a>
 </p>
 <table id="tablas" class="table">
@@ -82,7 +82,7 @@
                 @Html.DisplayFor(modelItem => item.Au.AuDescripcion)
             </td>            
             <td width="100px">
-                    <a class="btn btn-danger btn-sm mb-1" asp-action="Delete" asp-route-id="@item.SeId" title="Borrar">
+                    <a class="btn btn-sm mb-1" asp-action="Delete" asp-route-id="@item.SeId" title="Borrar">
                         <img width="20px" src="~/assets/icons/borrar.png" />
                     </a>
             </td>

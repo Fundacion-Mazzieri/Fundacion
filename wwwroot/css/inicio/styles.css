@@ -1,37 +1,43 @@
 ﻿
 .container-grid {
     height: 500px;
+    width:90%;
     margin-top: 20px;
+    margin:auto;
 }
 
 h3 {
     cursor: pointer;
+    font-size:larger;
 }
 
 .row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     height: 100%;
-    grid-gap: 20px;
+    grid-gap: 10px;
     width:80%;
     margin:auto;
 }
 
 .col {
     display: flex;
-    width: 100%;
     flex-direction: column;
     justify-content: center;
     background-color: #d8d8d45c;
     border-radius: 6px;
+    margin: auto;
+    width: 50%;
+    height: 110px;
 }
 
 .col1 {
-    width: 50%;
+    width: auto;
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     margin: auto;
+    margin-bottom:0px;
 }
 
 .col:hover {
