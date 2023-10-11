@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary bg-transparent border-bottom border-body">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" asp-area="" asp-controller="Inicio" asp-action="Index"><img src="https://fundacionmazzieri.com.ar/wp-content/uploads/2019/04/fundacion-mazzieri-1.jpg" width="60" /></a>
+
+                <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex ">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end nav-underline ">
+                        <li class="nav-item">
+                            <a class="nav-link text-black " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black " asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black " asp-area="" asp-controller="Aulas" asp-action="Index">Aulas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black " asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black " asp-area="" asp-controller="Categorias" asp-action="Index">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-blackblack visually-hidden" asp-area="" asp-controller="Espacios" asp-action="Index">Espacios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black visually-hidden " asp-area="" asp-controller="Turno" asp-action="Index">Turnos</a>
+                        </li>
+                        <li class="nav-item login">
+                            <div class="btn btn-danger text-black text-decoration-none" style=" width:80px"> <a asp-area="" asp-controller="Login" asp-action="Salir" style="text-decoration:none;color:black;"><img src="./assets/inicio/cerrar-sesion.png" width="25" /></a></div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark visually-hidden" asp-area="" asp-controller="Asistencias" asp-action="Index">Asistencias</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+</body>

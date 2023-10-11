@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Asistencia";
+
 }
 <head>
     <link rel="stylesheet" href="~/css/btn-volver/styles.css" />
@@ -9,12 +10,12 @@
 
 @if (User.IsInRole("Super Admin") || User.IsInRole("Admin"))
 {
-    <button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><img src="./assets/inicio/volver.png" width="40px"/></button>
+    <button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><img src="./assets/inicio/volver.png" width="40"/></button>
 }
 @if (User.IsInRole("Usuario"))
 {
     <a asp-area="" asp-controller="inicio" asp-action="Index">
-        <img src="./assets/inicio/volver.png"/>
+        <img src="./assets/inicio/volver.png" style="border:none;background-color:transparent;margin:20px;" width="40"/>
     </a>
 }
 
