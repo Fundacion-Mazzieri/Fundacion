@@ -26,10 +26,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Espacio</th>
-                <th scope="col">Turno</th>
-                <th scope="col">Usuario</th>
-                <th scope="col">Categoría</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Apellido y Nombre</th>
+                <th scope="col">Cargo</th>
                 <th scope="col">Ingreso</th>
                 <th scope="col">Egreso</th>
                 <th scope="col">Cantidad Horas</th>
@@ -41,14 +40,12 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td scope="row">@Html.DisplayFor(modelItem => item.Es.EsDescripcion)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Es.Tu.TuDescripcion)</td>
-                    <td>
-                        (@Html.DisplayFor(modelItem => item.Es.Us.UsDni))
-                        @Html.DisplayFor(modelItem => item.Es.Us.UsApellido),
+                    <td>@Html.DisplayFor(modelItem => item.Es.Us.UsDni)</td>
+                    <td>                        
+                        @Html.DisplayFor(modelItem => item.Es.Us.UsApellido), 
                         @Html.DisplayFor(modelItem => item.Es.Us.UsNombre)
                     </td>
-                    <td>@Html.DisplayFor(modelItem => item.Es.Ca.CaDescripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Es.Ca.CaDescripcion) @Html.DisplayFor(modelItem => item.Es.EsDescripcion)</td>                    
                     <td>@Html.DisplayFor(modelItem => item.AsIngreso)</td>
                     <td>@Html.DisplayFor(modelItem => item.AsEgreso)</td>
                     <td>@Html.DisplayFor(modelItem => item.AsCantHsRedondeo)</td>
@@ -58,7 +55,7 @@
             }
      
             <tr>
-                <td colspan="8" class="text-right col-auto"><strong>Total:</strong></td>
+                <td colspan="7" class="text-right col-auto"><strong>Total:</strong></td>
                 <td>
                     $ @Model.Sum(item => item.Es.Ca.CaValorHora * item.AsCantHsRedondeo)
                 </td>

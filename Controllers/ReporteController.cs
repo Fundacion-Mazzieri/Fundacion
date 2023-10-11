@@ -19,6 +19,8 @@ using System.Data;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Rotativa;
 using Rotativa.AspNetCore;
+//using DocumentFormat.OpenXml.Spreadsheet;
+//using DocumentFormat.OpenXml.Office2010.Drawing.Charts;
 
 namespace Fundacion.Controllers
 {
@@ -137,30 +139,25 @@ namespace Fundacion.Controllers
             }
 
             asistencias = await asistenciasQuery.ToListAsync();
-            
-            string Espacio = "";
-            string Turno = "";
-            string Usuario = "";
-            string Categoria = "";
-            string Ingreso = "";
-            string Egreso = "";
+
+            long Dni = 0;
+            string ApellidoNombre = "";
+            string Cargo = "";
             double CantidadHoras = 0;
             double ValorHora = 0;
             double Subtotal = 0;
+            double Total = 0;
 
 
             DataTable dt = new DataTable("Asistencias");
-            dt.Columns.AddRange(new DataColumn[9]
+            dt.Columns.AddRange(new DataColumn[6]
             {
-             new DataColumn("Espacio"),
-             new DataColumn("Turno"),
-             new DataColumn("Usuario"),
-             new DataColumn("Categoría"),
-             new DataColumn("Ingreso"),
-             new DataColumn("Egreso"),
-             new DataColumn("Cantidad Horas"),
-             new DataColumn("Valor Hora"),
-             new DataColumn("Subtotal")
+                new DataColumn("DNI"),
+                new DataColumn("Apellido y Nombre"),
+                new DataColumn("Cargo"),
+                new DataColumn("Cantidad Horas"),
+                new DataColumn("Valor Hora"),
+                new DataColumn("Subtotal")
             });
 
             var dateForXcellSheet = DateTime.Now;
@@ -168,19 +165,17 @@ namespace Fundacion.Controllers
             
             foreach (var asistencia in asistencias)
             {
-                Espacio = asistencia.Es.EsDescripcion;
-                Turno = asistencia.Es.Tu.TuDescripcion;
-                Usuario = asistencia.Es.Us.UsDni.ToString() + " " + asistencia.Es.Us.UsApellido.ToString() + ", " + asistencia.Es.Us.UsNombre.ToString();
-                Categoria = asistencia.Es.Ca.CaDescripcion;
-                Ingreso = asistencia.AsIngreso.ToString();
-                Egreso = asistencia.AsEgreso.ToString();
+                Dni = asistencia.Es.Us.UsDni;
+                ApellidoNombre = asistencia.Es.Us.UsApellido + ", " + asistencia.Es.Us.UsNombre;
+                Cargo = asistencia.Es.Ca.CaDescripcion + " " + asistencia.Es.EsDescripcion;                
                 CantidadHoras = asistencia.AsCantHsRedondeo;
                 ValorHora = asistencia.Es.Ca.CaValorHora;
                 Subtotal = asistencia.Es.Ca.CaValorHora * asistencia.AsCantHsRedondeo;
-
-                dt.Rows.Add(Espacio, Turno, Usuario, Categoria, Ingreso, Egreso, CantidadHoras, ValorHora, Subtotal);
+                Total += Subtotal;
+                dt.Rows.Add(Dni, ApellidoNombre, Cargo, CantidadHoras, ValorHora, Subtotal);
             }
-
+            dt.Rows.Add("","","","","Total:",Total);
+            
             using (XLWorkbook wb = new XLWorkbook())
             {
                 wb.Worksheets.Add(dt);
