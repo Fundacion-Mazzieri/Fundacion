@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Asistencia";
+
 }
 <head>
     <link rel="stylesheet" href="~/css/btn-volver/styles.css" />
@@ -14,7 +15,7 @@
 @if (User.IsInRole("Usuario"))
 {
     <a asp-area="" asp-controller="inicio" asp-action="Index">
-        <img src="./assets/inicio/volver.png"/>
+        <img src="./assets/inicio/volver.png" style="border:none;background-color:transparent;margin:20px;" width="40"/>
     </a>
 }
 

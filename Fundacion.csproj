@@ -7,6 +7,82 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\Asistencias\assets\inicio\aplicacion.png" />
+    <None Remove="Views\Asistencias\assets\inicio\asistencia.png" />
+    <None Remove="Views\Asistencias\assets\inicio\aula2.png" />
+    <None Remove="Views\Asistencias\assets\inicio\ausencia.png" />
+    <None Remove="Views\Asistencias\assets\inicio\categoria (1).png" />
+    <None Remove="Views\Asistencias\assets\inicio\cerrar-sesion.png" />
+    <None Remove="Views\Asistencias\assets\inicio\engranaje.png" />
+    <None Remove="Views\Asistencias\assets\inicio\equipo.png" />
+    <None Remove="Views\Asistencias\assets\inicio\grupo.png" />
+    <None Remove="Views\Asistencias\assets\inicio\roles (2).png" />
+    <None Remove="Views\Asistencias\assets\inicio\ruptura.png" />
+    <None Remove="Views\Asistencias\assets\inicio\turnos.png" />
+    <None Remove="Views\Asistencias\assets\inicio\usuario.png" />
+    <None Remove="Views\Asistencias\assets\inicio\volver.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Asistencias\assets\inicio\aplicacion.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\asistencia.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\aula2.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\ausencia.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\categoria (1).png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\cerrar-sesion.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\engranaje.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\equipo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\grupo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\roles (2).png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\ruptura.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\turnos.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\usuario.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Asistencias\assets\inicio\volver.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.3.1" />
     <PackageReference Include="ClosedXML" Version="0.102.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.sqlServer" Version="7.0.8" />
