@@ -84,29 +84,26 @@
 <table id="tablas" class="table">
     <thead>
         <tr>
-            <th>Espacio</th>
-            <th>Turno</th>
-            <th>Usuario</th>
-            <th>Categoría</th>
-            <th>Ingreso</th>
-            <th>Egreso</th>
-            <th>Cantidad Horas</th>
-            <th>Valor Hora</th>
-            <th>Subtotal</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Apellido y Nombre</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Ingreso</th>
+            <th scope="col">Egreso</th>
+            <th scope="col">Cantidad Horas</th>
+            <th scope="col">Valor Hora</th>
+            <th scope="col">Subtotal</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Es.EsDescripcion)</td>
-                <td>@Html.DisplayFor(modelItem => item.Es.Tu.TuDescripcion)</td>
+                <td>@Html.DisplayFor(modelItem => item.Es.Us.UsDni)</td>
                 <td>
-                    (@Html.DisplayFor(modelItem => item.Es.Us.UsDni))
                     @Html.DisplayFor(modelItem => item.Es.Us.UsApellido),
                     @Html.DisplayFor(modelItem => item.Es.Us.UsNombre)
                 </td>
-                <td>@Html.DisplayFor(modelItem => item.Es.Ca.CaDescripcion)</td>
+                <td>@Html.DisplayFor(modelItem => item.Es.Ca.CaDescripcion) @Html.DisplayFor(modelItem => item.Es.EsDescripcion)</td>
                 <td>@Html.DisplayFor(modelItem => item.AsIngreso)</td>
                 <td>@Html.DisplayFor(modelItem => item.AsEgreso)</td>
                 <td>@Html.DisplayFor(modelItem => item.AsCantHsRedondeo)</td>
