@@ -11,7 +11,8 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RoDenominacion)
+           @* @Html.DisplayNameFor(model => model.RoDenominacion)*@
+           Rol
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.RoDenominacion)
@@ -19,6 +20,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.RoId" class="btn btn-outline-primary">Modificar</a> 
+    @*<a asp-action="Edit" asp-route-id="@Model?.RoId" class="btn btn-outline-primary">Modificar</a> *@
     <a asp-action="Index" class="btn btn-outline-danger">Volver</a>
 </div>
