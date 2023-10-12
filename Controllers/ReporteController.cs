@@ -19,6 +19,7 @@ using System.Data;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Rotativa;
 using Rotativa.AspNetCore;
+using Fundacion.Data.DTO;
 //using DocumentFormat.OpenXml.Spreadsheet;
 //using DocumentFormat.OpenXml.Office2010.Drawing.Charts;
 
@@ -242,6 +243,7 @@ namespace Fundacion.Controllers
                 }
             }
 
+            
             asistencias = await asistenciasQuery.ToListAsync();
 
             var dateForXcellSheet = DateTime.Now;
@@ -250,7 +252,6 @@ namespace Fundacion.Controllers
             string _headerUrl = Url.Action("HeaderPDF", "Reporte", null, "https");
             // Define la URL del Pie de página
             string _footerUrl = Url.Action("FooterPDF", "Reporte", null, "https");
-
 
             return new ViewAsPdf("ImprimirPDF", asistencias)
             {
@@ -264,7 +265,7 @@ namespace Fundacion.Controllers
             };
         }
         public IActionResult HeaderPDF()
-        {
+        {            
             return View("HeaderPDF");
         }
         public IActionResult FooterPDF()

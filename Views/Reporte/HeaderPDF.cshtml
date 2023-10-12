@@ -2,6 +2,8 @@
     Layout = null;
 }
 
+@model Fundacion.Data.DTO.UsuarioDTO;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +19,10 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary bg-transparent border-bottom border-body">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Inicio" asp-action="Index"><img src="https://fundacionmazzieri.com.ar/wp-content/uploads/2019/04/fundacion-mazzieri-1.jpg" width="80" /></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Inicio" asp-action="Index"><img src="https://fundacionmazzieri.com.ar/wp-content/uploads/2019/04/fundacion-mazzieri-1.jpg" width="80" /></a>                
+            </div>
+            <div>
+                @*<p>Usuario: @Model.UsApellido, @Model.UsNombre - Rol: @Model.rol</p>*@
             </div>
         </nav>
     </header> 
