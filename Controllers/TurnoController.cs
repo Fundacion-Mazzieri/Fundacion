@@ -63,22 +63,44 @@ namespace Fundacion.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(!TurnoExists(turno.TuId, turno.TuDescripcion))
+                // Convertir la descripción proporcionada a minúsculas
+                string descripcionMinusculas = turno.TuDescripcion.ToLower();
+
+                // Recuperar los registros de la base de datos
+                var turnos = await _context.Turnos
+                    .ToListAsync();
+
+                // Realizar la comparación en memoria
+                bool turnoExiste = turnos.Any(e => LevenshteinDistance(e.TuDescripcion.ToLower(), descripcionMinusculas) <= 3);
+
+                if (!turnoExiste)
                 {
-                    _context.Add(turno);
                     _context.Add(turno);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
-                };
-                TempData["Mensaje"] = turno.TuDescripcion;
-                return RedirectToAction("ErrorTurno");
+                }
+                else
+                {
+                    var turnoSimilar = turnos.FirstOrDefault(e => LevenshteinDistance(e.TuDescripcion.ToLower(), descripcionMinusculas) <= 3);
+                    ModelState.AddModelError("TuDescripcion", $"El turno '{turno.TuDescripcion}' ya existe o tiene una nombre similar: '{turnoSimilar?.TuDescripcion}'.");
+                }
+
+                //if (!TurnoExists(turno.TuId, turno.TuDescripcion))
+                //{
+                //    _context.Add(turno);
+                //    _context.Add(turno);
+                //    await _context.SaveChangesAsync();
+                //    return RedirectToAction(nameof(Index));
+                //};
+                //TempData["Mensaje"] = turno.TuDescripcion;
+                //return RedirectToAction("ErrorTurno");
             }
             return View(turno);
         }
-        public ActionResult ErrorTurno()
-        {
-            return View();
-        }
+        //public ActionResult ErrorTurno()
+        //{
+        //    return View();
+        //}
         // GET: Turno/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -111,22 +133,71 @@ namespace Fundacion.Controllers
             {
                 try
                 {
-                    _context.Update(turno);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TurnoExists(turno.TuId))
+                    // Cargar el turno desde la base de datos
+                    var turnoActual = await _context.Turnos.FindAsync(id);
+
+                    if (turnoActual != null)
                     {
-                        return NotFound();
+                        // Convertir la descripción proporcionada a minúsculas
+                        string descripcionMinusculas = turno.TuDescripcion.ToLower();
+
+                        // Recuperar los registros de la base de datos
+                        var turnos = await _context.Turnos
+                            .ToListAsync();
+
+                        // Realizar la comparación en memoria
+                        bool turnoExiste = turnos.Any(e => LevenshteinDistance(e.TuDescripcion.ToLower(), descripcionMinusculas) <= 3);
+
+                        if (!turnoExiste)
+                        {
+                            // Aplicar las actualizaciones necesarias al espacio existente
+                            turnoActual.TuDescripcion = turno.TuDescripcion;
+
+                            // Guardar los cambios
+                            //_context.Update(turno);
+                            await _context.SaveChangesAsync();
+
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            var turnoSimilar = turnos.FirstOrDefault(e => LevenshteinDistance(e.TuDescripcion.ToLower(), descripcionMinusculas) <= 3);
+                            ModelState.AddModelError("TuDescripcion", $"El turno '{turno.TuDescripcion}' ya existe o tiene una nombre similar: '{turnoSimilar?.TuDescripcion}'.");
+                        }
                     }
                     else
                     {
-                        throw;
+                        return NotFound();
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("TuDescripcion", $"Se produjo un error al editar el Turno: {ex.Message}");
+                }
             }
+
+
+
+            //try
+            //    {
+            //        _context.Update(turno);
+            //        await _context.SaveChangesAsync();
+            //    }
+            //    catch (DbUpdateConcurrencyException)
+            //    {
+            //        if (!TurnoExists(turno.TuId))
+            //        {
+            //            return NotFound();
+            //        }
+            //        else
+            //        {
+            //            throw;
+            //        }
+            //    }
+            //    return RedirectToAction(nameof(Index));
+            //}
+
+
             return View(turno);
         }
 
@@ -167,9 +238,40 @@ namespace Fundacion.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TurnoExists(int id, string descripcion = null)
+        // Función para calcular la distancia de Levenshtein entre dos cadenas
+        public int LevenshteinDistance(string s, string t)
         {
-          return (_context.Turnos?.Any(e => e.TuId == id || e.TuDescripcion== descripcion)).GetValueOrDefault();
+            int n = s.Length;
+            int m = t.Length;
+            int[,] d = new int[n + 1, m + 1];
+
+            if (n == 0)
+                return m;
+
+            if (m == 0)
+                return n;
+
+            for (int i = 0; i <= n; i++)
+                d[i, 0] = i;
+
+            for (int j = 0; j <= m; j++)
+                d[0, j] = j;
+
+            for (int j = 1; j <= m; j++)
+            {
+                for (int i = 1; i <= n; i++)
+                {
+                    int cost = (s[i - 1] == t[j - 1]) ? 0 : 1;
+                    d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1), d[i - 1, j - 1] + cost);
+                }
+            }
+
+            return d[n, m];
         }
+
+        //private bool TurnoExists(int id, string descripcion = null)
+        //{
+        //  return (_context.Turnos?.Any(e => e.TuId == id || e.TuDescripcion== descripcion)).GetValueOrDefault();
+        //}
     }
 }
