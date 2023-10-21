@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Fundacion.Models.Subespacio>
+﻿@model IEnumerable<Subespacio>
 
 @{
     ViewData["Title"] = "Asignaciones de espacios";
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/btn-volver/styles.css" />
 </head>
 
-<button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Menú"><img src="~/assets/inicio/volver.png" width="40px" /></button>
+@*<button class="" type="button" style="border:none;background-color:transparent;margin:20px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Menú"><img src="~/assets/inicio/volver.png" width="40px" /></button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
@@ -39,15 +39,14 @@
             <div class="col"> <h3>Usuarios</h3>  <img src="./assets/inicio/grupo.png" /></div>
         </a>
     </div>
-</div>
+</div>*@
+
+<a asp-action="Index" class="btn btn-sm" asp-controller="Espacios" title="Volver a espacios">
+    <img src="~/assets/icons/flecha-hacia-atras.png" style="border:none;background-color:transparent;margin:20px;" width="40" />
+</a>
 
 <h1>Espacio de Asignaciones</h1>
 
-<p>    
-    <a asp-action="Index" class="btn btn-sm" asp-controller="Espacios" title="Volver a espacios">
-        <img width="60px" src="~/assets/icons/ciencia-y-tecnologia.png" />
-    </a>
-</p>
 <table id="tablas" class="table">
     <thead>
         <tr>            
