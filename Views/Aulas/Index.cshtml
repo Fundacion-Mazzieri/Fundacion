@@ -45,13 +45,15 @@
 <h1>Listado de Aulas</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-success btn-sm">Agregar nueva aula</a>
+    <a class="btn btn-sm m-1" asp-action="Create" title="Agregar nueva aula">
+        <img width="60px" src="~/assets/icons/boton-agregar.png" />
+    </a>
 </p>
 <table id="tablas" class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AuDescripcion)
+                Descripción
             </th>
             <th></th>
         </tr>
@@ -62,11 +64,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AuDescripcion)
             </td>
-            <td>
-                    <a asp-action="Edit" class="btn btn-warning btn-sm mb-1" asp-route-id="@item.AuId">Modificar</a> |
-                    <a asp-action="Details" class="btn btn-primary btn-sm mb-1" asp-route-id="@item.AuId">Detalles</a> |
-                    <a asp-action="Delete" class="btn btn-danger btn-sm mb-1" asp-route-id="@item.AuId">Eliminar</a>
-            </td>
+                <td>
+                    <a class="btn btn-sm" asp-action="Edit" asp-route-id="@item.AuId" title="Modificar">
+                        <img width="20px" src="~/assets/icons/editar.png" />
+                    </a>
+                    <a class="btn btn-sm" asp-action="Details" asp-route-id="@item.AuId" title="Detalles">
+                        <img width="20px" src="~/assets/icons/documento.png" />
+                    </a>
+                    <a class="btn btn-sm" asp-action="Delete" asp-route-id="@item.AuId" title="Eliminar">
+                        <img width="20px" src="~/assets/icons/borrar.png" />
+                    </a>
+                </td>
         </tr>
 }
     </tbody>
