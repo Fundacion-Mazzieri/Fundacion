@@ -55,7 +55,7 @@
             <th>
                 Descripción
             </th>
-            <th></th>
+            <th width="70px"></th>
         </tr>
     </thead>
     <tbody>
@@ -71,9 +71,9 @@
                     <a class="btn btn-sm" asp-action="Details" asp-route-id="@item.AuId" title="Detalles">
                         <img width="20px" src="~/assets/icons/documento.png" />
                     </a>
-                    <a class="btn btn-sm" asp-action="Delete" asp-route-id="@item.AuId" title="Eliminar">
+                    @*<a class="btn btn-sm" asp-action="Delete" asp-route-id="@item.AuId" title="Eliminar">
                         <img width="20px" src="~/assets/icons/borrar.png" />
-                    </a>
+                    </a>*@
                 </td>
         </tr>
 }
