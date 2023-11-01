@@ -2,8 +2,7 @@
 .container-grid {
     height: 500px;
     width:90%;
-    margin-top: 20px;
-    margin:auto;
+    margin: -100px auto;
 }
 
 h3 {

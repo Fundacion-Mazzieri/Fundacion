@@ -44,11 +44,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-blackblack visually-hidden" asp-area="" asp-controller="Espacios" asp-action="Index">Espacios</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black visually-hidden " asp-area="" asp-controller="Turno" asp-action="Index">Turnos</a>
+                        <li class="nav-item " style="margin-right:20px">
+                            <a class="nav-link text-white btn-inicio" style=" width:80px;background-color:#03B8FF;border:none;text-decoration:none;color:aliceblue; text-align:center;border-radius:5px;margin:auto;" asp-area="" asp-controller="inicio" asp-action="Index">Inicio</a>
                         </li>
                         <li class="nav-item login">
-                            <div class="btn btn-danger text-black text-decoration-none btn-salir" style=" width:80px;background-color: #2B3954;border:none;"> <a asp-area="" asp-controller="Login" asp-action="Salir" style="text-decoration:none;color:aliceblue;">Cerrar sesión</a></div>
+                            <div class="btn btn-danger text-black text-decoration-none btn-salir" style=" width:120px;background-color: #2B3954;border:none;"> <a asp-area="" asp-controller="Login" asp-action="Salir" style="text-decoration:none;color:aliceblue;">Cerrar sesión</a></div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark visually-hidden" asp-area="" asp-controller="Asistencias" asp-action="Index">Asistencias</a>
@@ -66,10 +66,12 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="margin: -60px 0">
         <div class="container">
             <span id="datetime"></span> - Fundación Mazzieri &copy - 
                 <a asp-area="" asp-controller="Home" asp-action="SobreNosotros">Sobre nosotros</a>
+                - 
+            <a href="https://docs.google.com/document/d/1KwleTCddndIskYJ87cn0vSzD7JzHc3Vl9ICQ6y0mZQc/edit#heading=h.kcb8g7sa0fba" target="_blank">Manual de Usuario</a>
         </div>
        
     </footer>
