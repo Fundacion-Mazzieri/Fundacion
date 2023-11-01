@@ -56,20 +56,13 @@ h4{
     font-size:20px;
 }
 
-.btn-inicio {
-    width: 80px;
-    background-color: #03B8FF;
-    border: none;
-    text-decoration: none;
-    color: aliceblue;
-    text-align: center;
-    border-radius: 5px;
-    margin: auto;
+.btn-inicio:hover {
+    transform: scale(1.02);
+    transition: linear .2s;
 }
 
-    .btn-inicio:hover {
-        background-color: #2665d0;
-        transform: scale(1.05);
-        transition: linear .2s;
-    }
+.div-inicio {
+    display: flex;
+    align-items: flex-end;
+}
 
