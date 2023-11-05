@@ -22,7 +22,7 @@
     <div class="row mb-3">
         <label class="col-sm-4 col-form-label">Ingrese DNI *</label>
         <div class="col-sm-15">
-            <input type="text" placeholder="Ingrese su DNI" value="" asp-for="UsDni" class="form-control" required />
+            <input type="text" placeholder="Ingrese su DNI" value="" asp-for="UsDni" class="form-control" oninput="limitarDni(this)" required />
         </div>
     </div>
     <div class="row mb-3">
@@ -38,6 +38,7 @@
         <input type="submit" value="Ingresar" class="btn btn-primary submit" />
     </div>
 </form>
+<script src="~/js/site.js" asp-append-version="true"></script>
 <style>
     html {
         padding: 0;
