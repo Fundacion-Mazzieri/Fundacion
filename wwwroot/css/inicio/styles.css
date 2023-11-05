@@ -45,3 +45,36 @@ h3 {
         transition: linear 0.2s;
 }
 
+@media (width: 320px){
+    h4, .usuario {
+        font-size: 13px;
+        margin: 0px -50px;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+    .container-grid{
+        margin:0;
+    }
+    .row{
+        margin:0;
+    }
+    .col{
+        width:auto;
+    }
+}
+@media (max-width: 980px) {
+    .container-grid{
+        margin: -50px auto;
+    }
+    .col {
+        width: 80%;
+    }
+    .col1 {
+        width: auto;
+    }
+}
+
+

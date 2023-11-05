@@ -48,6 +48,7 @@ button.accept-policy {
     white-space: nowrap;
     line-height: 60px;
     background-color: transparent;
+    margin: -53px 0;
 }
 
 .nav-item{
@@ -65,12 +66,46 @@ button.accept-policy {
 }
 .login {
     border-radius: 10px;
-    background-color: #dcd24e;
-    visibility:visible;
+    justify-content: flex-end;
+    visibility: visible;
 }
 .login:hover {
         background-color: #9b9540;
 }
 
+.container-fluid {
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 992px) {
+
+
+    .container-fluid {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+    }
+
+    .nav-item {
+        justify-content: flex-end;
+    }
+}
+@media (width: 320px) {
+    
+    .footer {
+        margin:-120px 0;
+    }
+    footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    .navbar-collapse{
+        margin:auto;
+    }
+    .btn-inicio{
+        visibility:hidden;
+    }
+}
 
 

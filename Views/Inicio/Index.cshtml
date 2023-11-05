@@ -11,10 +11,10 @@
 
 <body>
     <br />
-    <h4> Usuario: <span class="usuario">@Model.UsNombre @Model.UsApellido</span></h4>
+    <h4 style="width:fit-content"> Usuario: <span class="usuario">@Model.UsNombre @Model.UsApellido</span></h4>
     <br />
     
-    <div class="container-grid text-center" style="margin: -100pxauto">
+    <div class="container-grid text-center">
         <div class="row row-cols-2">
             @if (User.IsInRole("Usuario") || User.IsInRole("Super Admin") || User.IsInRole("Admin"))
             {
