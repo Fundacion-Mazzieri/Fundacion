@@ -112,7 +112,8 @@ namespace Fundacion.Controllers
                 subespacio.SeCantHs = cantidadHoras;
                 _context.Add(subespacio);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(CreateByIdEspacio));
+                //return RedirectToAction(nameof(CreateByIdEspacio));
+                return RedirectToAction("Index", "Espacios");
             }
             ViewData["AuId"] = new SelectList(_context.Aulas, "AuId", "AuDescripcion", subespacio.AuId);
             ViewData["EsId"] = new SelectList(_context.Espacios.Where(espacio => espacio.EsId == id), "EsId", "EsDescripcion", subespacio.EsId);
