@@ -39,7 +39,7 @@ h2,h1 {
 
 
 
-.login:hover {
+.btn-salir:hover {
         background: #0D0F44;
         transform: scale(1.05);
         transition: linear .2s;

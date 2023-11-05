@@ -62,7 +62,7 @@ button.accept-policy {
 .nav-item:hover {
     border-radius: 10px;
 
-    cursor: pointer;
+   
 }
 .login {
     border-radius: 10px;
@@ -70,7 +70,7 @@ button.accept-policy {
     visibility: visible;
 }
 .login:hover {
-        background-color: #9b9540;
+        
 }
 
 .container-fluid {
