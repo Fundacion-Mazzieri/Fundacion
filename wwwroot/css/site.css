@@ -56,7 +56,11 @@ h4{
 .usuario{
     font-size:20px;
 }
-
+.btn-pass:hover {
+   
+    background-color: #d30505d9;
+    border: none;
+}
 .btn-inicio:hover {
     transform: scale(1.02);
     transition: linear .2s;
