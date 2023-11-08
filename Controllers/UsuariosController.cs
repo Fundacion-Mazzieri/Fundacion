@@ -219,5 +219,14 @@ namespace Fundacion.Controllers
 
             return Json(localidades);
         }
+        [HttpPost]
+        [Authorize(Roles = "Super Admin, Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CambiarContraseña(int id, [Bind("UsId,UsDni,UsApellido,UsNombre,UsDireccion,UsLocalidad,UsProvincia,UsEmail,UsTelefono,UsContrasena,RoId,UsActivo")] Usuario usuario)
+        {
+            return View();
+        }
+
     }
 }
+
