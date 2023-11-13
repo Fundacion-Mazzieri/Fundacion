@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Irony.Parsing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using Fundacion.Models.ViewModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fundacion.Models;
 
@@ -55,9 +58,14 @@ public partial class Usuario
     [Display(Name = "Activo")]
     public bool UsActivo { get; set; }
 
+    [Required]
+    public string? token_recovery { get; set; }
+    public DateTime date_created { get; set; }
+
     public virtual ICollection<Espacio> Espacios { get; set; } = new List<Espacio>();
 
     public virtual Role? Ro { get; set; } = null!;
     public virtual Localidad? Lc { get; set; } = null!;
     public virtual Provincia? Pv { get; set; } = null!;
+
 }

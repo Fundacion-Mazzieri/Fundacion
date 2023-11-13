@@ -1,0 +1,21 @@
+﻿@model Fundacion.Models.ViewModel.RecoveryViewModel
+@{
+    ViewBag.Title = "StartRecovery";
+}
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="form-style">
+            <form action="@Url.Content("~/AccessControler/StartRecovery")" method="post">
+                <p></p>
+                <center><label>Ingrese su email de recuperacion</label></center>
+                @Html.TextBoxFor(d => d.UsEmail, new{@class = "form-control"})
+                @Html.ValidationMessageFor(d => d.UsEmail, null, new {style = "color:red;"})
+                <br />
+                <div class="text-right">
+                    <center><button class="btn btn-primary">Recuperar</button></center>
+                </div>
+@*                <a target="_blank"  href="http://www.gmail.com">Acceso Directo a Gmail</a>*@
+            </form>
+        </div>
+    </div>
+</div>

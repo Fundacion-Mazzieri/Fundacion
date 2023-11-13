@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fundacion.Migrations
 {
     [DbContext(typeof(FundacionContext))]
-    [Migration("20230710235616_migration2")]
-    partial class migration2
+    [Migration("20231023225202_V1")]
+    partial class V1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,11 +34,15 @@ namespace Fundacion.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AsiId"));
 
-                    b.Property<DateTime?>("AsEgreso")
+                    b.Property<double>("AsCantHsRedondeo")
+                        .HasColumnType("float")
+                        .HasColumnName("asCantHsRedondeo");
+
+                    b.Property<DateTime>("AsEgreso")
                         .HasColumnType("datetime")
                         .HasColumnName("asEgreso");
 
-                    b.Property<DateTime?>("AsIngreso")
+                    b.Property<DateTime>("AsIngreso")
                         .HasColumnType("datetime")
                         .HasColumnName("asIngreso");
 
@@ -104,44 +108,24 @@ namespace Fundacion.Migrations
             modelBuilder.Entity("Fundacion.Models.Espacio", b =>
                 {
                     b.Property<int>("EsId")
-                        .HasColumnType("int")
-                        .HasColumnName("esId");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<int>("AuId")
-                        .HasColumnType("int")
-                        .HasColumnName("auId");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EsId"));
 
-                    b.Property<int?>("CaId")
+                    b.Property<int>("CaId")
                         .HasColumnType("int")
                         .HasColumnName("caId");
 
-                    b.Property<string>("EsActivo")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .HasColumnName("esActivo")
-                        .IsFixedLength();
-
-                    b.Property<double>("EsCantHs")
-                        .HasColumnType("float")
-                        .HasColumnName("esCantHs");
+                    b.Property<bool>("EsActivo")
+                        .HasColumnType("bit")
+                        .HasColumnName("esActivo");
 
                     b.Property<string>("EsDescripcion")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("esDescripcion");
-
-                    b.Property<string>("EsDia")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("esDia");
-
-                    b.Property<string>("EsHora")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("esHora");
 
                     b.Property<int>("TuId")
                         .HasColumnType("int")
@@ -153,8 +137,6 @@ namespace Fundacion.Migrations
 
                     b.HasKey("EsId");
 
-                    b.HasIndex("AuId");
-
                     b.HasIndex("CaId");
 
                     b.HasIndex("TuId");
@@ -162,6 +144,48 @@ namespace Fundacion.Migrations
                     b.HasIndex("UsId");
 
                     b.ToTable("Espacios");
+                });
+
+            modelBuilder.Entity("Fundacion.Models.Localidad", b =>
+                {
+                    b.Property<int>("LcId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("lcId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LcId"));
+
+                    b.Property<string>("LcDescripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("lcDescripcion");
+
+                    b.Property<int>("PvId")
+                        .HasColumnType("int")
+                        .HasColumnName("pvId");
+
+                    b.HasKey("LcId");
+
+                    b.HasIndex("PvId");
+
+                    b.ToTable("Localidades");
+                });
+
+            modelBuilder.Entity("Fundacion.Models.Provincia", b =>
+                {
+                    b.Property<int>("PvId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("pvId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PvId"));
+
+                    b.Property<string>("PvDescripcion")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("pvDescripcion");
+
+                    b.HasKey("PvId");
+
+                    b.ToTable("Provincias");
                 });
 
             modelBuilder.Entity("Fundacion.Models.Role", b =>
@@ -182,6 +206,47 @@ namespace Fundacion.Migrations
                     b.HasKey("RoId");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("Fundacion.Models.Subespacio", b =>
+                {
+                    b.Property<int>("SeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("seId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SeId"));
+
+                    b.Property<int>("AuId")
+                        .HasColumnType("int")
+                        .HasColumnName("auId");
+
+                    b.Property<int>("EsId")
+                        .HasColumnType("int")
+                        .HasColumnName("esId");
+
+                    b.Property<double>("SeCantHs")
+                        .HasColumnType("float")
+                        .HasColumnName("seCantHs");
+
+                    b.Property<string>("SeDia")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("seDia");
+
+                    b.Property<TimeSpan?>("SeHora")
+                        .HasMaxLength(10)
+                        .HasColumnType("time")
+                        .HasColumnName("seHora");
+
+                    b.HasKey("SeId");
+
+                    b.HasIndex("AuId");
+
+                    b.HasIndex("EsId");
+
+                    b.ToTable("Subespacios");
                 });
 
             modelBuilder.Entity("Fundacion.Models.Turno", b =>
@@ -218,7 +283,7 @@ namespace Fundacion.Migrations
                         .HasColumnType("int")
                         .HasColumnName("roId");
 
-                    b.Property<bool?>("UsActivo")
+                    b.Property<bool>("UsActivo")
                         .HasColumnType("bit")
                         .HasColumnName("usActivo");
 
@@ -248,9 +313,8 @@ namespace Fundacion.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("usEmail");
 
-                    b.Property<string>("UsLocalidad")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                    b.Property<int>("UsLocalidad")
+                        .HasColumnType("int")
                         .HasColumnName("usLocalidad");
 
                     b.Property<string>("UsNombre")
@@ -259,18 +323,28 @@ namespace Fundacion.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("usNombre");
 
-                    b.Property<string>("UsProvincia")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                    b.Property<int>("UsProvincia")
+                        .HasColumnType("int")
                         .HasColumnName("usProvincia");
 
                     b.Property<long?>("UsTelefono")
                         .HasColumnType("bigint")
                         .HasColumnName("usTelefono");
 
+                    b.Property<DateTime>("date_created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("token_recovery")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UsId");
 
                     b.HasIndex("RoId");
+
+                    b.HasIndex("UsLocalidad");
+
+                    b.HasIndex("UsProvincia");
 
                     b.ToTable("Usuarios");
                 });
@@ -288,15 +362,11 @@ namespace Fundacion.Migrations
 
             modelBuilder.Entity("Fundacion.Models.Espacio", b =>
                 {
-                    b.HasOne("Fundacion.Models.Aula", "Au")
-                        .WithMany("Espacios")
-                        .HasForeignKey("AuId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Espacios_Aulas");
-
                     b.HasOne("Fundacion.Models.Categoria", "Ca")
                         .WithMany("Espacios")
                         .HasForeignKey("CaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK_Espacios_Categorias");
 
                     b.HasOne("Fundacion.Models.Turno", "Tu")
@@ -311,13 +381,42 @@ namespace Fundacion.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Espacios_Usuarios");
 
-                    b.Navigation("Au");
-
                     b.Navigation("Ca");
 
                     b.Navigation("Tu");
 
                     b.Navigation("Us");
+                });
+
+            modelBuilder.Entity("Fundacion.Models.Localidad", b =>
+                {
+                    b.HasOne("Fundacion.Models.Provincia", "Pv")
+                        .WithMany("Localidades")
+                        .HasForeignKey("PvId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Localidades_Provincias");
+
+                    b.Navigation("Pv");
+                });
+
+            modelBuilder.Entity("Fundacion.Models.Subespacio", b =>
+                {
+                    b.HasOne("Fundacion.Models.Aula", "Au")
+                        .WithMany("Subespacios")
+                        .HasForeignKey("AuId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Subespacios_Aulas");
+
+                    b.HasOne("Fundacion.Models.Espacio", "Es")
+                        .WithMany("Subespacios")
+                        .HasForeignKey("EsId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Subespacios_Espacios");
+
+                    b.Navigation("Au");
+
+                    b.Navigation("Es");
                 });
 
             modelBuilder.Entity("Fundacion.Models.Usuario", b =>
@@ -328,12 +427,28 @@ namespace Fundacion.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Usuarios_Roles");
 
+                    b.HasOne("Fundacion.Models.Localidad", "Lc")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("UsLocalidad")
+                        .IsRequired()
+                        .HasConstraintName("FK_Usuarios_Localidades");
+
+                    b.HasOne("Fundacion.Models.Provincia", "Pv")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("UsProvincia")
+                        .IsRequired()
+                        .HasConstraintName("FK_Usuarios_Provincias");
+
+                    b.Navigation("Lc");
+
+                    b.Navigation("Pv");
+
                     b.Navigation("Ro");
                 });
 
             modelBuilder.Entity("Fundacion.Models.Aula", b =>
                 {
-                    b.Navigation("Espacios");
+                    b.Navigation("Subespacios");
                 });
 
             modelBuilder.Entity("Fundacion.Models.Categoria", b =>
@@ -344,6 +459,20 @@ namespace Fundacion.Migrations
             modelBuilder.Entity("Fundacion.Models.Espacio", b =>
                 {
                     b.Navigation("Asistencia");
+
+                    b.Navigation("Subespacios");
+                });
+
+            modelBuilder.Entity("Fundacion.Models.Localidad", b =>
+                {
+                    b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("Fundacion.Models.Provincia", b =>
+                {
+                    b.Navigation("Localidades");
+
+                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("Fundacion.Models.Role", b =>
