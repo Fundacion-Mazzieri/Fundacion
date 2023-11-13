@@ -23,7 +23,6 @@
         <label class="col-sm-4 col-form-label">Ingrese DNI *</label>
         <div class="col-sm-15">
             <input type="text" placeholder="Ingrese su DNI" value="" asp-for="UsDni" class="form-control" oninput="limitarDni(this)" required />
-            <input type="text" placeholder="Ingrese su DNI" value="" asp-for="UsDni" class="form-control" required oninput="this.value = this.value.replace(/[^0-9]/g,'')" />
         </div>
     </div>
     <div class="row mb-3">
