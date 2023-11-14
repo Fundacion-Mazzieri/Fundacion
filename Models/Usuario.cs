@@ -58,7 +58,7 @@ public partial class Usuario
     [Display(Name = "Activo")]
     public bool UsActivo { get; set; }
 
-    [Required]
+
     public string? token_recovery { get; set; }
     public DateTime date_created { get; set; }
 
