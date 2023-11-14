@@ -60,7 +60,7 @@ public partial class Usuario
 
 
     public string? token_recovery { get; set; }
-    public DateTime date_created { get; set; }
+    public DateTime date_created { get; set; } = DateTime.Now;
 
     public virtual ICollection<Espacio> Espacios { get; set; } = new List<Espacio>();
 
