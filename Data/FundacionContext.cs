@@ -206,6 +206,15 @@ public partial class FundacionContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("usEmail");
 
+            entity.Property(e => e.token_recovery)
+                .HasMaxLength(200)
+                .HasColumnName("token_recovery");
+
+            entity.Property(e => e.date_created)
+                .HasColumnType("datetime")
+                .HasColumnName("date_created");
+
+
             entity.Property(e => e.UsLocalidad).HasColumnName("usLocalidad");            
             entity.Property(e => e.UsProvincia).HasColumnName("usProvincia");
 

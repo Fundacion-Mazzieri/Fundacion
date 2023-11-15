@@ -15,14 +15,22 @@
 </head>
 
 
-<form asp-action="Ingresar" style="height:90%;">
+<form asp-action="Ingresar">
     <div class="titulo">
-        <center><img src="https://fundacionmazzieri.com.ar/wp-content/uploads/2019/04/fundacion-mazzieri-1.jpg" /></center>
+        <center></center><img src="https://fundacionmazzieri.com.ar/wp-content/uploads/2019/04/fundacion-mazzieri-1.jpg"/></center>               
     </div>
+    <center>
+        <div style="color:red;">
+            "Error de Token."
+        </div>
+        <div style="color:red;">
+            "Vuelva a pedir un token valido para recuperar su contraseña."
+        </div>
+    </center>
     <div class="row mb-3">
         <label class="col-sm-4 col-form-label">Ingrese DNI *</label>
         <div class="col-sm-15">
-            <input type="text" placeholder="Ingrese su DNI" value="" asp-for="UsDni" class="form-control" oninput="limitarDni(this)" required />
+            <input type="text" placeholder="Ingrese su DNI" value="" asp-for="UsDni" class="form-control" required oninput="this.value = this.value.replace(/[^0-9]/g,'')" />
         </div>
     </div>
     <div class="row mb-3">
@@ -31,32 +39,28 @@
             <input type="password" placeholder="Ingrese su clave" value="" asp-for="UsContrasena" class="form-control" required />
             <span asp-validation-for="UsContrasena" class="text-danger"></span>
         </div>
-    </div>
-    <p></p>
-    <div class="container">
-        <center><a asp-area="" asp-controller="AccessControler" asp-action="StartRecovery">Recuperar Contraseña</a></center>
-    </div>
-    <center><Font color="red" size="3">DNI o Contraseña incorrecta.</Font></center>
-    <center><Font color="red" size="3">Por favor reingrese sus datos y vuelva a intentar.</Font></center>
+        <p></p>
+        <div class="container">
+            <center><a asp-area="" asp-controller="AccessControler" asp-action="StartRecovery">Recuperar Contraseña</a></center>
+        </div>
+    </div>      
     <div class="form-group form-group-submit">
         <input type="submit" value="Ingresar" class="btn btn-primary submit" />
     </div>
 </form>
-<script src="~/js/site.js" asp-append-version="true"></script>
 <style>
-    html {
-        padding: 0;
+    html{
+        padding:0;
     }
-
-    body {
+    body{
         font-family: Mukta Mahee,sans-serif;
-        margin: 0;
+        margin:0;
         /*background-image: url("/assets/home/fundacion-mazzieri.png");*/
-        backdrop-filter: brightness(0.3);
+        backdrop-filter:brightness(0.3);
+            
         /* backdrop-filter: brightness(0.8); */
     }
-
-    img {
+    img{      
         display: flex;
         align-self: center;
         width: 250px;
@@ -64,34 +68,32 @@
         /* filter: invert(1); */
         /* border-radius: 20px; */
     }
-
-    .titulo {
+    .titulo{
         display: flex;
         justify-content: center;
-        flex-direction: column;
+        flex-direction:column;
+        
         /* margin: 50px; */
         margin-bottom: 0;
         margin-top: 50px;
-        width: 100%;
+        width:100%;
     }
-
-    h1 {
+    h1{
         display: flex;
-        justify-content: center;
+        justify-content:center;
         color: #0057af;
         font-weight: normal;
         font-style: normal;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family:Arial, Helvetica, sans-serif;
         line-height: 1.4;
         font-size: 20px;
         margin-bottom: 20px;
-        padding-left: 0px;
+        padding-left:0px;
     }
-
-    hr {
-        width: 50%;
-        margin: 0;
-        background-color: #0040C1;
+    hr{
+        width:50%;
+        margin:0;
+        background-color:#0040C1;
     }
 
     form {
@@ -104,54 +106,57 @@
         padding-top: 3px;
         padding-left: 4%;
         padding-right: 4%;
-        border-radius: 10px 10px 10px;
+        border-radius: 10px 10px 10px;       
         margin-top: 0;
         top: 5%;
     }
 
-    .form-group {
-        width: 60%;
+    .form-group{
+        width:60%;
         margin: auto;
         margin-top: 40px;
     }
-
-    .form-group-text:hover {
+    .form-group-text:hover{
+         
         border-bottom: 1.3px solid white;
+        
     }
-
-    .input-text:focus {
+    .input-text:focus{
         border-bottom: 2px solid #0040C1;
+        
     }
+     
+     input{
 
-    input {
         width: 100%;
         /* margin: 0;
-            border: none;
-            outline: black;
-            background: transparent;
-            border-bottom: 1px solid; */
-    }
-    /*  .form-group-submit{
-            position: absolute;
-            bottom: 30px;
-            border: 1.5px solid;
-            width: 50%;
-            padding:3px;
-            left:25%;
-            right:25%;
-            background-color: black;
-            border: 0.7px solid #F9FAC4;
-            border-radius: 5px;
-        } */
+        border: none;
+        outline: black;
+        background: transparent;
+        border-bottom: 1px solid; */
+        
+    } 
+   /*  .form-group-submit{
+        position: absolute;
+        bottom: 30px;
+        border: 1.5px solid;
+        width: 50%;
+        padding:3px;
+        left:25%;
+        right:25%;
+        background-color: black;
+        border: 0.7px solid #F9FAC4;
+        border-radius: 5px;        
+    } */
 
     /* .submit{
-            border: none;
-            font-size: 18px;
-            font-weight: bold;
-            letter-spacing: 1.2px;
-            font-stretch: ultra-expanded;
-            color: #F9FAC4;
-            cursor: pointer;
-        } */
-
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: 1.2px;
+        font-stretch: ultra-expanded;
+        color: #F9FAC4;
+        cursor: pointer;
+    } */
+    
 </style>

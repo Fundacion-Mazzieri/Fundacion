@@ -1,0 +1,25 @@
+﻿@model Fundacion.Models.ViewModel.RecoveryPasswordViewModel
+@{
+    ViewBag.Title = "Recovery";
+}
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="form-style">
+            <form action="@Url.Content("~/AccessControler/Recovery")" method="post">
+                @Html.HiddenFor(d => d.token)
+               <p></p>
+                <center><label>Escribe tu nueva contraseña</label></center>
+                @Html.PasswordFor(d => d.UsContrasena, new{@class = "form-control"})
+                @Html.ValidationMessageFor(d => d.UsContrasena, null, new {style = "color:red;"})
+
+                <center><label>Vuelve a escribir tu nueva contraseña</label></center>
+                @Html.PasswordFor(d => d.UsContrasena2, new{@class = "form-control"})
+                @Html.ValidationMessageFor(d => d.UsContrasena2, null, new {style = "color:red;"})
+                <br />
+                <div class="text-right">
+                    <center><button class="btn btn-primary">Recuperar</button></center>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

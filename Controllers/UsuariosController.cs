@@ -208,6 +208,8 @@ namespace Fundacion.Controllers
         {
           return (_context.Usuarios?.Any(e => e.UsId == id)).GetValueOrDefault();
         }
+
+
         [HttpGet]
         public IActionResult GetLocalidadesByProvincia(int provinciaId)
         {

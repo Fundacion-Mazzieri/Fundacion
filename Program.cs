@@ -45,7 +45,7 @@ app.MapControllerRoute(
 
 app.MapControllers();
 
-string wwwroot = app.Environment.WebRootPath;
+//string wwwroot = app.Environment.WebRootPath;
 
 
 IWebHostEnvironment env = app.Environment;
