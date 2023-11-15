@@ -59,7 +59,7 @@ public partial class Usuario
     public bool UsActivo { get; set; }
 
 
-    public string? token_recovery { get; set; }
+    public string? token_recovery { get; set; } = "tokenbloqueado";
     public DateTime date_created { get; set; } = DateTime.Now;
 
     public virtual ICollection<Espacio> Espacios { get; set; } = new List<Espacio>();
