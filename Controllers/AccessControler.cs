@@ -30,7 +30,7 @@ namespace Fundacion.Controllers
             _context = context;
         }
 
-        string urlDomain = "https://localhost:5000/";
+        string urlDomain = "http://localhost:5000/";
 
 
         public IActionResult Index()
