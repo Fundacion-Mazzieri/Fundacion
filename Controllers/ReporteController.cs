@@ -20,6 +20,9 @@ using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Rotativa;
 using Rotativa.AspNetCore;
 using Fundacion.Data.DTO;
+using DocumentFormat.OpenXml.Office2013.Excel;
+using Microsoft.VisualBasic;
+using System.ComponentModel;
 //using DocumentFormat.OpenXml.Spreadsheet;
 //using DocumentFormat.OpenXml.Office2010.Drawing.Charts;
 
@@ -144,6 +147,8 @@ namespace Fundacion.Controllers
             long Dni = 0;
             string ApellidoNombre = "";
             string Cargo = "";
+            DateTime Ingreso = DateTime.MinValue;
+            DateTime Egreso = DateTime.MinValue;
             double CantidadHoras = 0;
             double ValorHora = 0;
             double Subtotal = 0;
@@ -151,11 +156,13 @@ namespace Fundacion.Controllers
 
 
             DataTable dt = new DataTable("Asistencias");
-            dt.Columns.AddRange(new DataColumn[6]
+            dt.Columns.AddRange(new DataColumn[8]
             {
                 new DataColumn("DNI"),
                 new DataColumn("Apellido y Nombre"),
                 new DataColumn("Cargo"),
+                new DataColumn("Ingreso"),
+                new DataColumn("Egreso"),
                 new DataColumn("Cantidad Horas"),
                 new DataColumn("Valor Hora"),
                 new DataColumn("Subtotal")
@@ -168,12 +175,14 @@ namespace Fundacion.Controllers
             {
                 Dni = asistencia.Es.Us.UsDni;
                 ApellidoNombre = asistencia.Es.Us.UsApellido + ", " + asistencia.Es.Us.UsNombre;
-                Cargo = asistencia.Es.Ca.CaDescripcion + " " + asistencia.Es.EsDescripcion;                
+                Cargo = asistencia.Es.Ca.CaDescripcion + " " + asistencia.Es.EsDescripcion;
+                Ingreso = asistencia.AsIngreso;
+                Egreso = asistencia.AsEgreso;
                 CantidadHoras = asistencia.AsCantHsRedondeo;
                 ValorHora = asistencia.Es.Ca.CaValorHora;
                 Subtotal = asistencia.Es.Ca.CaValorHora * asistencia.AsCantHsRedondeo;
                 Total += Subtotal;
-                dt.Rows.Add(Dni, ApellidoNombre, Cargo, CantidadHoras, ValorHora, Subtotal);
+                dt.Rows.Add(Dni, ApellidoNombre, Cargo,Ingreso, Egreso, CantidadHoras, ValorHora, Subtotal);
             }
             dt.Rows.Add("","","","","Total:",Total);
             

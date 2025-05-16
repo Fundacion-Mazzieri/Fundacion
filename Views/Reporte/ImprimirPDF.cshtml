@@ -33,7 +33,7 @@
                 <th scope="col">Egreso</th>
                 <th scope="col">Cantidad Horas</th>
                 <th scope="col">Valor Hora</th>
-                <th scope="col">Subtotal</th>
+                @* <th scope="col">Subtotal</th> *@
             </tr>
         </thead>
         <tbody>
@@ -50,7 +50,7 @@
                     <td>@Html.DisplayFor(modelItem => item.AsEgreso)</td>
                     <td>@Html.DisplayFor(modelItem => item.AsCantHsRedondeo)</td>
                     <td>$ @Html.DisplayFor(modelItem => item.Es.Ca.CaValorHora)</td>
-                    <td>$ @(item.Es.Ca.CaValorHora * item.AsCantHsRedondeo)</td>                    
+                   @*  <td>$ @(item.Es.Ca.CaValorHora * item.AsCantHsRedondeo)</td>      *@               
                 </tr>
             }
      
